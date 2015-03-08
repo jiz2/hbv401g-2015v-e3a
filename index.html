@@ -13,34 +13,42 @@
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Entertainment system</a>
-		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<form class="navbar-form navbar-right">
-			<div class="form-group">
-				<input type="text" placeholder="Email" class="form-control">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Entertainment system</a>
 			</div>
-			<button type="submit" class="btn btn-success">Sign in</button>
-			</form>
-		</div><!--/.navbar-collapse -->
+			<div id="navbar" class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Email">
+					</div>
+				<button type="submit" class="btn btn-success">Sign in</button>
+				</form>
+			</div><!--/.navbar-collapse -->
 		</div>
 	</nav>
 
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Welcome</h1>
-			<form role="search">
+			<form class="searchForm" role="search">
 				<div class="input-group">
+					<div class="input-group-btn">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">All <span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">All</a></li>
+							<li><a href="#">Concerts</a></li>
+							<li><a href="#">TV programs</a></li>
+						</ul>
+					</div><!-- /btn-group -->
 					<input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
 					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit">
+						<button class="btn btn-default" id="btnSearch" type="submit">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
 					</div>
@@ -77,5 +85,6 @@
 	
 	<script src="assets/js/jquery-1.11.0.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/script.js"></script>
 </body>
 </html>
