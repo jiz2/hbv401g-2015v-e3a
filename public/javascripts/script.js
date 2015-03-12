@@ -4,13 +4,10 @@ $(document).ready(function(){
 	// ===========
 	var index = {
 
-		query: $("#searchString"),
-
 		init: function(){
 			// =================
 			// Search dropdown button
 			// =================
-
 			$(".dropdown-menu li a").click(function(){
 				var selText = $(this).text();
 				$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
@@ -21,7 +18,7 @@ $(document).ready(function(){
 			// =================
 			$("#searchForm").submit(function(e){
 				e.preventDefault();
-				query = $("#searchString");
+				query = $("#searchInput").val();
 				search.searchQuery(query);
 			});
 		},
@@ -51,9 +48,10 @@ $(document).ready(function(){
 	var search = {
 		
 		searchQuery: function(query){
-			if(query[0].value!==""){
+			if(query !== ""){
 				// Tell user what has been searched
-				alert('You searched for: \"'+query[0].value+'\", while choosing: \"'+$('#searchForm .btn').text().trim()+'\".');
+				alert('You searched for: \"' + query + 
+					'\", while choosing: \"' + $('#searchForm .btn').text().trim() + '\".');
 			}
 			
 			/* AJAX CODE:
