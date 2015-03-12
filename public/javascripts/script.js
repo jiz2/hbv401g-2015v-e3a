@@ -1,29 +1,52 @@
-// =================
-// Search dropdown button
-// =================
+// ===================
+// Example Index CLASS
+// ===================
+var index = {
+	
+	searchForm: document.getElementById("searchForm"),
 
-$(".dropdown-menu li a").click(function(){
-	var selText = $(this).text();
-	$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-});
+	init: function(){
+		
+		// =================
+		// Search dropdown button
+		// =================
 
-// =================
-// User text input HANDLING
-// =================
+		$(".dropdown-menu li a").click(function(){
+			var selText = $(this).text();
+			$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+		});
 
-document.addEventListener("DOMContentLoaded",function(){
-	document.getElementById("searchForm").addEventListener("submit", add, false);
-});
+		// =================
+		// User text input HANDLING
+		// =================
 
-function add(e){
-	e.preventDefault();
-	postSearch();
+		document.addEventListener("DOMContentLoaded", function(){
+			searchForm.addEventListener("submit", index.add, false);
+		});
+	},
+	
+	add: function(e){
+		e.preventDefault();
+		index.postSearch();
+	},
+
+	postSearch: function(){
+		var str = $("#searchString");
+		if(str[0].value!==""){
+			alert('You searched for: \"'+str[0].value+'\", while choosing: \"'+$('#searchForm .btn').text().trim()+'\".');
+			search.searchQuery(str);
+		}
+	}
 }
 
-function postSearch(){
-	var str = $("#searchString");
-	if(str[0].value!==""){
-		alert('You searched for: \"'+str[0].value+'\", while choosing: \"'+$('#searchForm .btn').text().trim()+'\".');
+index.init();
+
+// ====================
+// Example Search CLASS
+// ====================
+var search = {
+	
+	searchQuery: function(str){
 		/* AJAX CODE:
 		// We need to be running a server for this to work
 		var xmlhttp;
