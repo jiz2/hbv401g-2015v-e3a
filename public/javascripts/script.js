@@ -22,6 +22,13 @@ var index = {
 			query = $("#searchInput").val();
 			search.searchQuery(query);
 		});
+
+		$("#signinForm").submit(function(e){
+			e.preventDefault();
+			query = $("#emailInput").val();
+			if(query !== "")
+				alert('Your email is: \"' + query + '\".');
+		});
 	},
 	
 	update: function(){
