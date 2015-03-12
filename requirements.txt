@@ -2,7 +2,9 @@
 
 --Check if you have the newest versions:
 node -v
+--should return "v0.12.0"
 npm -v
+--should return "2.5.1"
 
 --http://expressjs.com/starter/installing.html says:
 --First, create a directory to hold your application, if you haven’t already done so, and make that your working directory.
