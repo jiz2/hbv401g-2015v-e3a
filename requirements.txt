@@ -6,8 +6,8 @@ npm -v
 
 --http://expressjs.com/starter/installing.html says:
 --First, create a directory to hold your application, if you haven’t already done so, and make that your working directory.
-mkdir myapp
-cd myapp
+mkdir hbv401g-2015v-e3a
+cd hbv401g-2015v-e3a
 
 --Create a package.json file in the directory of interest, if it does not exist already, with the npm init command.
 npm init
@@ -27,14 +27,14 @@ express -h
 ---------------------------------
 --I've already done this!
 ----Then install dependencies:
---cd myapp 
+--cd hbv401g-2015v-e3a 
 --npm install
 ----------------------------------
 
 --Run the app (on MacOS or Linux):
-$ DEBUG=myapp ./bin/www
+$ DEBUG=hbv401g-2015v-e3a ./bin/www
 
 --On Windows, use this command:
-set DEBUG=myapp & node .\bin\www
+set DEBUG=hbv401g-2015v-e3a & node .\bin\www
 
 --Then load http://localhost:3000/ in your browser to access the app.
