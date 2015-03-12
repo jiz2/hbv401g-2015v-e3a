@@ -1,10 +1,13 @@
-$(document).ready(function(){index.init();});
+// Initializing Main classes for Meta-Search Engine
+$(document).ready(function(){ index.init(); });
 
 // ===========
 // Index CLASS
 // ===========
 var index = {
 
+	query: $("#searchInput").val(),
+	
 	init: function(){
 		// =================
 		// Search dropdown button
@@ -22,7 +25,7 @@ var index = {
 			query = $("#searchInput").val();
 			search.searchQuery(query);
 		});
-
+		
 		$("#signinForm").submit(function(e){
 			e.preventDefault();
 			query = $("#emailInput").val();
@@ -56,8 +59,8 @@ var search = {
 	searchQuery: function(query){
 		if(query !== ""){
 			// Tell user what has been searched
-			alert('You searched for: \"' + query + 
-				'\", while choosing: \"' + $('#searchForm .btn').text().trim() + '\".');
+			alert('You searched for: \"' + query + '\", while choosing: \"'
+				+ $('#searchForm .btn').text().trim() + '\".');
 		}
 		
 		/* AJAX CODE:
@@ -75,4 +78,21 @@ var search = {
 		xmlhttp.send();
 		*/
 	}
+}
+
+// ===============================
+// Result CLASS (Constructor Only)
+// ===============================
+function Result(programmes, dlId, seats, bookNr) {
+	// Search results
+	if (programmes) this.programmes = programmes;
+	
+	// A TV download booking ID returned by TV Database Engine
+	if (dlId) this.dlId = dlId;
+	
+	// List of seats available when booking for a Concert
+	if (seats) this.seats = seats;
+	
+	// Booking number of a concert returned by Concert Database Engine
+	if (bookNr) this.bookNr = bookNr;
 }
