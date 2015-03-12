@@ -1,0 +1,40 @@
+--Install nodejs from nodejs.org
+
+--Check if you have the newest versions:
+node -v
+npm -v
+
+--http://expressjs.com/starter/installing.html says:
+--First, create a directory to hold your application, if you haven’t already done so, and make that your working directory.
+mkdir myapp
+cd myapp
+
+--Create a package.json file in the directory of interest, if it does not exist already, with the npm init command.
+npm init
+
+--Install Express in the app directory and save it in the dependencies list:
+npm install express --save
+
+--To install Express temporarily, and not add it to the dependencies list, omit the --save option:
+npm install express
+
+--install express-generator:
+npm install express-generator -g
+
+--get help
+express -h
+
+---------------------------------
+--I've already done this!
+----Then install dependencies:
+--cd myapp 
+--npm install
+----------------------------------
+
+--Run the app (on MacOS or Linux):
+$ DEBUG=myapp ./bin/www
+
+--On Windows, use this command:
+set DEBUG=myapp & node .\bin\www
+
+--Then load http://localhost:3000/ in your browser to access the app.
