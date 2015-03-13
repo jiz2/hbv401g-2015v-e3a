@@ -1,4 +1,4 @@
---Install nodejs from nodejs.org
+﻿--Install nodejs from nodejs.org
 
 --Check if you have the newest versions:
 node -v
@@ -34,9 +34,9 @@ express -h
 ----------------------------------
 
 --Run the app (on MacOS or Linux):
-$ DEBUG=hbv401g-2015v-e3a ./bin/www
+$ DEBUG=myapp node ./bin/www
 
 --On Windows, use this command:
-set DEBUG=hbv401g-2015v-e3a & node .\bin\www
+set DEBUG=myapp & node .\bin\www
 
 --Then load http://localhost:3000/ in your browser to access the app.
