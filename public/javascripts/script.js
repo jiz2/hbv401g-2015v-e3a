@@ -1,6 +1,9 @@
 // Initializing Main classes for Meta-Search Engine
 $(document).ready(function(){ index.init(); });
 
+// GLOBAL VARIABLES (for testing cache)
+var g_res = [];
+
 // ===========
 // Index CLASS
 // ===========
@@ -9,6 +12,9 @@ var index = {
 	query: $("#searchInput").val(),
 	
 	init: function(){
+		createRow();
+		ajaxTesting();
+
 		// =================
 		// Search dropdown button
 		// =================
@@ -31,6 +37,11 @@ var index = {
 			query = $("#emailInput").val();
 			if(query !== "")
 				alert('Your email is: \"' + query + '\".');
+		});
+
+		$("button#moreRows").click(function(){
+			createRow();
+			outputConcert(g_res);
 		});
 	},
 	
@@ -61,31 +72,8 @@ var search = {
 			// Tell user what has been searched
 			console.log('You searched for: \"' + query + '\", while choosing: \"'
 				+ $('#searchForm .btn').text().trim() + '\".');
-
-			//Showing off the Ajax power
-			$.ajax({
-				'url': 'http://apis.is/concerts',
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					var colH2 = $('.col-md-4 h2');
-					var colPDet = $('.col-md-4 p.details');
-					console.log(response);
-					var res = response.results;
-					console.log(colPDet);
-					for(var i=0;i<colH2.length;i++){
-						colH2.eq(i).text(res[i].eventDateName);
-						colPDet.eq(i).html(
-							'<img src="' + res[i].imageSource
-							+ '" alt="' + 'Pic of' + res[i].eventDateName + '">'
-							+ '<br>Name: \"' 						+ res[i].name
-							+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
-							+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
-							+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
-						);
-					}
-				}
-			});
+			//$('body' ).animate({"background": "red" }, "fast" );
+			ajaxTesting();
 		}
 	}
 }
@@ -105,4 +93,67 @@ function Result(programmes, dlId, seats, bookNr) {
 	
 	// Booking number of a concert returned by Concert Database Engine
 	if (bookNr) this.bookNr = bookNr;
+}
+
+function outputConcert(res){
+	var colImg = $('.col-md-4 img')
+	var colH2 = $('.col-md-4 h2');
+	var colPDet = $('.col-md-4 p.details');
+	for(var i = 0; i < colH2.length; i++){
+		colImg.eq(i).attr({
+			src: res[i].imageSource,
+			alt: 'Pic of' + res[i].eventDateName
+		});
+		colH2.eq(i).text(res[i].eventDateName);
+		colPDet.eq(i).html(
+			'Name: \"' 				+ res[i].name
+			+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
+			+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
+			+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
+		);
+	}
+}
+
+function ajaxTesting(){
+	//Showing off the Ajax power
+	$.ajax({
+		'url': 'http://apis.is/concerts',
+		'type': 'GET',
+		'dataType': 'json',
+		'success': function(response) {
+			console.log(response);
+			var res = response.results;
+			g_res = res; //temp solution!
+			outputConcert(res);
+		}
+	});
+}
+
+function createRow(){
+	var nrOfCols = 3;
+	var nrOfRows = 2;
+	for(var i = 0; i < nrOfRows; i++){
+		var diff = g_res.length - $('.concertDisplay .col-md-4').length;
+		// Only add more events if they exist in the array
+		if(diff < nrOfCols)
+			if(g_res.length > 0)
+				if(diff === 0)
+					return;
+				else
+					nrOfCols = diff;
+		var str = "";
+		for(var j = 0; j < nrOfCols; j++){
+			str += '<div class="col-xs-12 col-md-4">'
+				+'<img class="img-responsive"></img>'
+				+'<h2></h2>'
+				+'<p class="details"></p>'
+				+'<p class="viewMore">'
+					+'<a class="btn btn-default" href="#" role="button">'
+						+'View details &raquo;'
+					+'</a>'
+				+'</p>'
+			+'</div>';
+		}
+		$('.concertDisplay button#moreRows').before('<div class="row">'+str+'</div>');
+	}
 }

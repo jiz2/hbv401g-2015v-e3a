@@ -43,15 +43,9 @@ block content
 	
 	#output
 	
-	.container
-		.row
-		- for (var i = 0; i < 3; ++i)
-			.col-md-4
-				h2 Heading
-				p.details
-					| Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-				p.viewMore
-					a.btn.btn-default(href='#', role='button') View details &raquo;
+	.concertDisplay.container
+		button#moreRows.btn.btn-default.btn-block.btn-success
+			| See more
 		hr
 		footer
 			p &copy; E3a 2015
