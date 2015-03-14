@@ -62,7 +62,7 @@ var index = {
 				colH2.eq(i).text(res[i].eventDateName);
 				colPDet.eq(i).html(
 					'<img src="' + res[i].imageSource
-					+ '" alt="' + 'Pic of' + res[i].eventDateName + '">'
+					+ '" alt="' + 'Pic of ' + res[i].eventDateName + '">'
 					+ '<br>Name: \"' 						+ res[i].name
 					+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
 					+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
@@ -173,11 +173,11 @@ function createRow(){
 		var str = "";
 		for(var j = 0; j < nrOfCols; j++){
 			str += '<div class="col-xs-12 col-md-4">'
-				+'<img class="img-responsive"></img>'
+				+'<img class="resultImg img-responsive"></img>'
 				+'<h2></h2>'
 				+'<p class="details"></p>'
 				+'<p class="viewMore">'
-					+'<a class="btn btn-default" href="#" role="button">'
+					+'<a class="detailsButton btn btn-default" href="#" role="button">'
 						+'View details &raquo;'
 					+'</a>'
 				+'</p>'
@@ -186,3 +186,7 @@ function createRow(){
 		$('.concertDisplay button#moreRows').before('<div class="row">'+str+'</div>');
 	}
 }
+
+
+$('#list').click(function(event){event.preventDefault();$('.concertDisplay .col-xs-12').addClass('list-group-item');});
+$('#grid').click(function(event){event.preventDefault();$('.concertDisplay .col-xs-12').removeClass('list-group-item');});
