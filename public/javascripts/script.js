@@ -59,24 +59,34 @@ var search = {
 	searchQuery: function(query){
 		if(query !== ""){
 			// Tell user what has been searched
-			alert('You searched for: \"' + query + '\", while choosing: \"'
+			console.log('You searched for: \"' + query + '\", while choosing: \"'
 				+ $('#searchForm .btn').text().trim() + '\".');
+
+			//Showing off the Ajax power
+			$.ajax({
+				'url': 'http://apis.is/concerts',
+				'type': 'GET',
+				'dataType': 'json',
+				'success': function(response) {
+					var colH2 = $('.col-md-4 h2');
+					var colPDet = $('.col-md-4 p.details');
+					console.log(response);
+					var res = response.results;
+					console.log(colPDet);
+					for(var i=0;i<colH2.length;i++){
+						colH2.eq(i).text(res[i].eventDateName);
+						colPDet.eq(i).html(
+							'<img src="' + res[i].imageSource
+							+ '" alt="' + 'Pic of' + res[i].eventDateName + '">'
+							+ '<br>Name: \"' 						+ res[i].name
+							+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
+							+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
+							+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
+						);
+					}
+				}
+			});
 		}
-		
-		/* AJAX CODE:
-		// We need to be running a server for this to work
-		var xmlhttp;
-		if (window.XMLHttpRequest) xmlhttp=new XMLHttpRequest();
-		else xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		xmlhttp.onreadystatechange=function() {
-			if (xmlhttp.readyState==4 && xmlhttp.status==200){
-				$("#output").innerHTML = xmlhttp.responseText;
-				alert("You searched for: "+query[0].value+""+$('#searchForm .btn').text());
-			}
-		}
-		xmlhttp.open("POST","phplogic/handleUserInput.php?srch-term="+query.value,true); //this is how it's done in php
-		xmlhttp.send();
-		*/
 	}
 }
 
