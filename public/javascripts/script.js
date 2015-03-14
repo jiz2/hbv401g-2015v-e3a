@@ -22,8 +22,8 @@ var index = {
 		// =================
 		$("#searchForm").submit(function(e){
 			e.preventDefault();
-			query = $("#searchInput").val();
-			search.searchQuery(query);
+			index.query = $("#searchInput").val();
+			search.searchQuery(index.query);
 		});
 		
 		$("#signinForm").submit(function(e){
@@ -34,12 +34,31 @@ var index = {
 		});
 	},
 	
-	update: function(){
+	update: function(result){
 		// Get the newest stuff from both databases and call display
+		if(result) {
+			this.display(result);
+		} else alert("No result!");
 	},
 	
-	display: function(){
+	display: function(result){
 		// Display most recent programmes obtained from databases
+		if(result.programmes) {
+			var res = result.programmes;
+			var colH2 = $('.col-md-4 h2');
+			var colPDet = $('.col-md-4 p.details');
+			for(var i = 0; i < colH2.length; i++){
+				colH2.eq(i).text(res[i].eventDateName);
+				colPDet.eq(i).html(
+					'<img src="' + res[i].imageSource
+					+ '" alt="' + 'Pic of' + res[i].eventDateName + '">'
+					+ '<br>Name: \"' 						+ res[i].name
+					+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
+					+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
+					+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
+				);
+			}
+		}
 	},
 	
 	sortByTitle: function(){
@@ -68,22 +87,7 @@ var search = {
 				'type': 'GET',
 				'dataType': 'json',
 				'success': function(response) {
-					var colH2 = $('.col-md-4 h2');
-					var colPDet = $('.col-md-4 p.details');
-					console.log(response);
-					var res = response.results;
-					console.log(colPDet);
-					for(var i=0;i<colH2.length;i++){
-						colH2.eq(i).text(res[i].eventDateName);
-						colPDet.eq(i).html(
-							'<img src="' + res[i].imageSource
-							+ '" alt="' + 'Pic of' + res[i].eventDateName + '">'
-							+ '<br>Name: \"' 						+ res[i].name
-							+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
-							+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
-							+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
-						);
-					}
+					index.update(new Result(response.results));
 				}
 			});
 		}
@@ -94,6 +98,7 @@ var search = {
 // Result CLASS (Constructor Only)
 // ===============================
 function Result(programmes, dlId, seats, bookNr) {
+
 	// Search results
 	if (programmes) this.programmes = programmes;
 	
