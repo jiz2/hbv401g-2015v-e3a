@@ -1,7 +1,7 @@
 // ===========
-// Index CLASS
+// MainSite CLASS
 // ===========
-var index = {
+var MainSite = {
 
 	query: $("#searchInput").val(),
 	
@@ -22,8 +22,8 @@ var index = {
 		// ========================
 		$("#searchForm").submit(function(e){
 			e.preventDefault();
-			index.query = $("#searchInput").val();
-			search.searchQuery(index.query);
+			MainSite.query = $("#searchInput").val();
+			search.searchQuery(MainSite.query);
 		});
 		
 		$("#signinForm").submit(function(e){
@@ -36,8 +36,8 @@ var index = {
 		// Display Type Handling
 		// =====================
 		$("button#moreRows").click(function(){
-			index.addRows();
-			index.display();
+			MainSite.addRows();
+			MainSite.display();
 		});
 		
 		$('#list').click(function(event){

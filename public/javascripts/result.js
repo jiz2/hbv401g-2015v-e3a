@@ -1,7 +1,7 @@
 // ============
 // Result CLASS
 // ============
-var result = {
+var Result = {
 
 	// Search results
 	programmes: [],

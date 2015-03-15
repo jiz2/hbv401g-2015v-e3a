@@ -1,7 +1,7 @@
 // ============
 // Search CLASS
 // ============
-var search = {
+var Search = {
 	
 	searchQuery: function(query){
 		// User must be searching for something
@@ -16,19 +16,19 @@ var search = {
 
 		if(category === "All") {
 			if(isTesting)
-				uri = './mockObjects';
+				uri = './mockObjects.js';
 			else
 				category = "Concert";
 		}
 		if(category === "Concert") {
 			if(isTesting)
-				uri = './mockConcert';
+				uri = './mockConcert.js';
 			else
 				uri = 'http://apis.is/concerts';
 		}
 		if(category === "TV program") {
 			if(isTesting)
-				uri = './mockTV';
+				uri = './mockTV.js';
 			else
 				uri = 'http://apis.is/tv/ruv';
 		}
@@ -48,9 +48,9 @@ var search = {
 			'success': function(response) {
 				result.programmes = response.results;
 				if(isTesting)
-						index.display(isTesting);
+						MainSite.display(isTesting);
 				else
-					index.display();
+					MainSite.display();
 			}
 		});
 	}
