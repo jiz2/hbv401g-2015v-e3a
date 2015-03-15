@@ -55,7 +55,7 @@ var Search = {
 		});
 	},
 
-	function updateMockObject(){
+	updateMockObject: function(){
 		var MockObject;
 		$.getJSON(mockConcert, function(data) {
 			MockObject = data.contents;
