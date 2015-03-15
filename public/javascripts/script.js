@@ -64,12 +64,12 @@ var index = {
 	
 	display: function(test){
 		// Display most recent programmes obtained from databases
+		var res = result.programmes;
+		console.log(res);
+		var colImg = $('.col-md-4 img')
+		var colH2 = $('.col-md-4 h2');
+		var colPDet = $('.col-md-4 p.details');
 		if(test){
-			var res = result.programmes;
-			console.log(res);
-			var colImg = $('.col-md-4 img')
-			var colH2 = $('.col-md-4 h2');
-			var colPDet = $('.col-md-4 p.details');
 			for(var i = 0; i < res.length; i++){
 				colImg.eq(i).attr({
 					src: '',
@@ -88,11 +88,6 @@ var index = {
 				);
 			}
 		} else {
-			var res = result.programmes;
-			
-			var colImg = $('.col-md-4 img')
-			var colH2 = $('.col-md-4 h2');
-			var colPDet = $('.col-md-4 p.details');
 			for(var i = 0; i < colH2.length; i++){
 				colImg.eq(i).attr({
 					src: res[i].imageSource,
@@ -159,42 +154,32 @@ var index = {
 var search = {
 	
 	searchQuery: function(query){
-		if(query && query === "test"){
-			//Showing off the Ajax power
-			console.log("testing mock object");
+		var url = "";
+		var isTesting = false;
+		// Should not search if the searchquery is the empty string.
+		// Attention, we've not implemented an ereaser of results yet.
+		if(query !== ""){
+			if(query === "test"){
+				console.log("testing mock object");
+				url = './mockObjects';
+				isTesting = true;
+			}
+			else {
+				// Tell user what has been searched
+				console.log('You searched for: \"' + query + '\", while choosing: \"'
+					+ $('#searchForm .btn').text().trim() + '\".');
+				url = 'http://apis.is/concerts';
+			}
 			$.ajax({
-				'url': './mockObjects',
+				'url': url,
 				'type': 'GET',
 				'dataType': 'json',
 				'success': function(response) {
 					result.programmes = response.results;
-					index.display(query);
-				}
-			});
-		} else if(query && query !== ""){
-			// Tell user what has been searched
-			console.log('You searched for: \"' + query + '\", while choosing: \"'
-				+ $('#searchForm .btn').text().trim() + '\".');
-
-			//Showing off the Ajax power
-			$.ajax({
-				'url': 'http://apis.is/concerts',
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					result.programmes = response.results;
-					index.display();
-				}
-			});
-		} else {
-			// Default search
-			$.ajax({
-				'url': 'http://apis.is/concerts',
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					result.programmes = response.results;
-					index.display();
+					if(isTesting)
+						index.display(query);
+					else
+						index.display();
 				}
 			});
 		}
