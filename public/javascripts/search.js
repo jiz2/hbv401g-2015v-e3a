@@ -13,7 +13,7 @@ var search = {
 				'dataType': 'json',
 				'success': function(response) {
 					result.programmes = response.results;
-					index.display(query);
+					index.display(true);
 				}
 			});
 		} else if(query && query !== ""){
