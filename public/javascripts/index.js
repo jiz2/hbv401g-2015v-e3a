@@ -1,6 +1,3 @@
-// Initializing Main classes for Meta-Search Engine
-$(document).ready(function(){ index.init(); });
-
 // ===========
 // Index CLASS
 // ===========
@@ -153,68 +150,5 @@ var index = {
 	}
 }
 
-// ============
-// Search CLASS
-// ============
-var search = {
-	
-	searchQuery: function(query){
-		if(query && query === "test"){
-			//Showing off the Ajax power
-			console.log("testing mock object");
-			$.ajax({
-				'url': './mockObjects',
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					result.programmes = response.results;
-					index.display(query);
-				}
-			});
-		} else if(query && query !== ""){
-			// Tell user what has been searched
-			console.log('You searched for: \"' + query + '\", while choosing: \"'
-				+ $('#searchForm .btn').text().trim() + '\".');
-
-			//Showing off the Ajax power
-			$.ajax({
-				'url': 'http://apis.is/concerts',
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					result.programmes = response.results;
-					index.display();
-				}
-			});
-		} else {
-			// Default search
-			$.ajax({
-				'url': 'http://apis.is/concerts',
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					result.programmes = response.results;
-					index.display();
-				}
-			});
-		}
-	}
-}
-
-// ============
-// Result CLASS
-// ============
-var result = {
-
-	// Search results
-	programmes: [],
-	
-	// A TV download booking ID returned by TV Database Engine
-	dlId: undefined,
-	
-	// List of seats available when booking for a Concert
-	seats: undefined,
-	
-	// Booking number of a concert returned by Concert Database Engine
-	bookNr: undefined
-}
+// Initializing Main classes for Meta-Search Engine
+$(document).ready(function(){ index.init(); });
