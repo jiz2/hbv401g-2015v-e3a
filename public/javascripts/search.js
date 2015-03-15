@@ -33,30 +33,21 @@ var search = {
 		}
 		if(test) {
 			console.log("testing mock object");
-			$.ajax({
-				'url': uri,
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					result.programmes = response.results;
-					index.display(true);
-				}
-			});
 		}
 		else {
 			console.log(
 				["Searching for the", category, query+"."]
 				.join(' ')
 			);
-			$.ajax({
-				'url': uri,
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					result.programmes = response.results;
-					index.display();
-				}
-			});
 		}
+		$.ajax({
+			'url': uri,
+			'type': 'GET',
+			'dataType': 'json',
+			'success': function(response) {
+				result.programmes = response.results;
+				index.display(test);
+			}
+		});
 	}
 }
