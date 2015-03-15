@@ -8,7 +8,7 @@ h1,footer p {
 	text-align: center;
 }
 
-h2 {
+.row h2 {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -58,10 +58,6 @@ p {
 .list-group-item .caption
 {
 	padding: 9px 9px 0px 9px;
-}
-.list-group-item:nth-of-type(odd)
-{
-	background: #eeeeee;
 }
 
 .list-group-item:before, .list-group-item:after
