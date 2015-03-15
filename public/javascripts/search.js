@@ -46,7 +46,7 @@ var Search = {
 			'type': 'GET',
 			'dataType': 'json',
 			'success': function(response) {
-				result.programmes = response.results;
+				Result.programmes = response.results;
 				if(isTesting)
 						MainSite.display(isTesting);
 				else
