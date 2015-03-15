@@ -4,6 +4,8 @@
 var search = {
 	
 	searchQuery: function(query){
+		query = query.trim();
+		category = $('#searchForm .btn').text().trim();
 		if(query && query === "test"){
 			//Showing off the Ajax power
 			console.log("testing mock object");
@@ -18,8 +20,8 @@ var search = {
 			});
 		} else if(query && query !== ""){
 			// Tell user what has been searched
-			console.log('You searched for: \"' + query + '\", while choosing: \"'
-				+ $('#searchForm .btn').text().trim() + '\".');
+			console.log('You searched for: \"' + query
+			     + '\", in category: \"' + category + '\".');
 
 			//Showing off the Ajax power
 			$.ajax({
