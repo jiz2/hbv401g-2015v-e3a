@@ -4,11 +4,37 @@
 var search = {
 	
 	searchQuery: function(query){
-		if(query && query === "test"){
-			//Showing off the Ajax power
+		var category = $('#searchForm .btn').text().trim();
+		var uri = "";
+		var test = false;
+		if(query) {
+			var query = query.trim();
+			if(query === "test") {
+				test = true;
+			}
+		}
+		if(category === "All") {
+			if(test)
+				uri = './mockObjects';
+			else
+				category = "Concert";
+		}
+		if(category === "Concert") {
+			if(test)
+				uri = './mockConcert';
+			else
+				uri = 'http://apis.is/concerts';
+		}
+		if(category === "TV program") {
+			if(test)
+				uri = './mockTV';
+			else
+				uri = 'http://apis.is/tv/ruv';
+		}
+		if(test) {
 			console.log("testing mock object");
 			$.ajax({
-				'url': './mockObjects',
+				'url': uri,
 				'type': 'GET',
 				'dataType': 'json',
 				'success': function(response) {
@@ -16,25 +42,14 @@ var search = {
 					index.display(true);
 				}
 			});
-		} else if(query && query !== ""){
-			// Tell user what has been searched
-			console.log('You searched for: \"' + query + '\", while choosing: \"'
-				+ $('#searchForm .btn').text().trim() + '\".');
-
-			//Showing off the Ajax power
+		}
+		else {
+			console.log(
+				["Searching for the", category, query+"."]
+				.join(' ')
+			);
 			$.ajax({
-				'url': 'http://apis.is/concerts',
-				'type': 'GET',
-				'dataType': 'json',
-				'success': function(response) {
-					result.programmes = response.results;
-					index.display();
-				}
-			});
-		} else {
-			// Default search
-			$.ajax({
-				'url': 'http://apis.is/concerts',
+				'url': uri,
 				'type': 'GET',
 				'dataType': 'json',
 				'success': function(response) {
