@@ -23,7 +23,7 @@ var MainSite = {
 		$("#searchForm").submit(function(e){
 			e.preventDefault();
 			MainSite.query = $("#searchInput").val();
-			search.searchQuery(MainSite.query);
+			Search.searchQuery(MainSite.query);
 		});
 		
 		$("#signinForm").submit(function(e){
@@ -57,12 +57,12 @@ var MainSite = {
 	
 	update: function(){
 		// Get the newest stuff from both databases and call display
-		search.searchQuery("we must find a way to show all results when site loads first time");
+		Search.searchQuery("we must find a way to show all results when site loads first time");
 	},
 	
 	display: function(test){
 		// Display most recent programmes obtained from databases
-		var res = result.programmes;
+		var res = Result.programmes;
 		console.log(res);
 		var colImg = $('.col-md-4 img')
 		var colH2 = $('.col-md-4 h2');
@@ -117,9 +117,9 @@ var MainSite = {
 		
 		for(var i = 0; i < nrOfRows; i++){
 			// Only add more events if they exist in the array
-			var diff = result.programmes.length - $('.concertDisplay .col-md-4').length;
+			var diff = Result.programmes.length - $('.concertDisplay .col-md-4').length;
 			if(diff < nrOfCols)
-				if(result.programmes.length > 0)
+				if(Result.programmes.length > 0)
 					if(diff === 0)
 						return;
 					else
