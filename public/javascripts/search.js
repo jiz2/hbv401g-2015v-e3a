@@ -16,19 +16,19 @@ var Search = {
 
 		if(category === "All") {
 			if(isTesting)
-				uri = './mockObjects.js';
+				uri = updateMockObject;
 			else
 				category = "Concert";
 		}
 		if(category === "Concert") {
 			if(isTesting)
-				uri = './mockConcert.js';
+				uri = './mockConcert';
 			else
 				uri = 'http://apis.is/concerts';
 		}
 		if(category === "TV program") {
 			if(isTesting)
-				uri = './mockTV.js';
+				uri = './mockTV';
 			else
 				uri = 'http://apis.is/tv/ruv';
 		}
@@ -53,5 +53,16 @@ var Search = {
 					MainSite.display();
 			}
 		});
+	},
+
+	function updateMockObject(){
+		var MockObject;
+		$.getJSON(mockConcert, function(data) {
+			MockObject = data.contents;
+			$.getJSON(mockTV, function(data) {
+				$.extend(MockObject, data.contents);
+			});
+		});
+		return MockObject;
 	}
 }
