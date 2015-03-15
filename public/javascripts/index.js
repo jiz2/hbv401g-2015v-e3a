@@ -57,17 +57,17 @@ var index = {
 	
 	update: function(){
 		// Get the newest stuff from both databases and call display
-		search.searchQuery();
+		search.searchQuery("we must find a way to show all results when site loads first time");
 	},
 	
 	display: function(test){
 		// Display most recent programmes obtained from databases
+		var res = result.programmes;
+		console.log(res);
+		var colImg = $('.col-md-4 img')
+		var colH2 = $('.col-md-4 h2');
+		var colPDet = $('.col-md-4 p.details');
 		if(test){
-			var res = result.programmes;
-			console.log(res);
-			var colImg = $('.col-md-4 img')
-			var colH2 = $('.col-md-4 h2');
-			var colPDet = $('.col-md-4 p.details');
 			for(var i = 0; i < res.length; i++){
 				colImg.eq(i).attr({
 					src: '',
@@ -86,11 +86,6 @@ var index = {
 				);
 			}
 		} else {
-			var res = result.programmes;
-			
-			var colImg = $('.col-md-4 img')
-			var colH2 = $('.col-md-4 h2');
-			var colPDet = $('.col-md-4 p.details');
 			for(var i = 0; i < colH2.length; i++){
 				colImg.eq(i).attr({
 					src: res[i].imageSource,
@@ -150,6 +145,3 @@ var index = {
 		}
 	}
 }
-
-// Initializing Main classes for Meta-Search Engine
-$(document).ready(function(){ index.init(); });
