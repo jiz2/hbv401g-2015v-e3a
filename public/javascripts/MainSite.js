@@ -42,12 +42,12 @@ var MainSite = {
 		
 		$('#list').click(function(event){
 			event.preventDefault();
-			$('.concertDisplay .col-xs-12').addClass('list-group-item');
+			$('.concertDisplay .col-md-4').addClass('list-group-item');
 		});
 		
 		$('#grid').click(function(event){
 			event.preventDefault();
-			$('.concertDisplay .col-xs-12').removeClass('list-group-item');
+			$('.concertDisplay .col-md-4').removeClass('list-group-item');
 		});
 		
 		// Initialize default results
@@ -114,7 +114,10 @@ var MainSite = {
 		// Creates HTML container for programme display
 		var nrOfCols = 3; // Default number of columns
 		var nrOfRows = 2; // Default number of rows
-		
+		var listClass = "";
+		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
+			listClass = " list-group-item"
+
 		for(var i = 0; i < nrOfRows; i++){
 			// Only add more events if they exist in the array
 			var diff = Result.programmes.length - $('.concertDisplay .col-md-4').length;
@@ -128,7 +131,7 @@ var MainSite = {
 			// Generate corresponding HTML code
 			var str = "";
 			for(var j = 0; j < nrOfCols; j++){
-				str += '<div class="col-xs-12 col-md-4">'
+				str += '<div class="col-xs-12 col-md-4' + listClass + '">'
 					+'<img class="resultImg img-responsive"></img>'
 					+'<h2></h2>'
 					+'<p class="details"></p>'
