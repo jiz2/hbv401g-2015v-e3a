@@ -32,7 +32,9 @@ describe('search testing', function(){
     });
 	
 	it('search works', function(){
-		Search.searchQuery();
+		Search.searchQuery("test");
+		console.log(Search);
+		sinon.assert.calledOnce(console.log);
 		expect(Result.programmes.length).to.not.equal(0);
     });
 	
