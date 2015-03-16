@@ -2,17 +2,32 @@
 var chai = require("chai");
 var sinon = require("sinon");
 var sinonChai = require("sinon-chai");
-chai.should();
-var expect = chai.expect;
 chai.use(sinonChai);
+var expect = require("chai").expect;
+var assert = require('assert');
+var should = require('chai').should();
+//var index = require('./MainSite.js');
+var search = require('./Search.js');
+var result = require('./Result.js');
 
-describe('Array', function(){
-  describe('#indexOf()', function(){
-    it('should return -1 when the value is not present', function(){
-	  //Test numbers that are indeed not members ef [1,2,4]
-	  [0,3,5].map(function(n) {
-		  [1,2,4].indexOf(n).should.equal(-1);
-      });
+describe('search testing', function(){
+	before(function(){
+		result.programmes = undefined;
+	});
+
+	it('no programmes at start', function(){
+		expect(result.programmes).to.equal(undefined);
     });
-  })
-})
+	
+	it('search class exists', function(){
+		expect(search).to.not.equal(undefined);
+    });
+	
+	it('search can search', function(){
+		sinon.assert.calledOnce(search.searchQuery());
+    });
+	
+	after(function(){
+		result.programmes = undefined;
+	});
+});

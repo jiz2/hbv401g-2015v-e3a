@@ -1,0 +1,26 @@
+{
+   "results" : [
+      {
+         "id" : "03122015",
+         "channel" : "ruv",
+         "title" : "New Years",
+         "epNo" : "5",
+         "avgRatings" : "7",
+         "downloadNo" : "12",
+         "ratingNo" : "2",
+         "startTime" : "08:00:00",
+         "duration" : "3:00:00",
+         "seriesNo" : "1"
+      },
+      {
+         "seatsAvailable" : "10",
+         "eventDateName" : "Heyas",
+         "userGroupName" : "Idiots",
+         "dateShow" : "March 16, 2015",
+         "eventHallName" : "Harpa",
+         "concertId" : "15032015",
+         "price" : "5000",
+         "imageSource" : "some url",
+         "name" : "Test Show"
+      }
+}
