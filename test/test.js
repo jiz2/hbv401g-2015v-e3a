@@ -6,25 +6,17 @@ chai.use(sinonChai);
 var expect = require("chai").expect;
 var assert = require('assert');
 var should = require('chai').should();
-//var index = require('./MainSite.js');
-var search = require('./Search.js');
+//require('./MainSite.js');
+//require('./Search.js');
 var result = require('./Result.js');
 
 describe('search testing', function(){
 	before(function(){
-		result.programmes = undefined;
+		var r = result.get(result);
 	});
 
 	it('no programmes at start', function(){
 		expect(result.programmes).to.equal(undefined);
-    });
-	
-	it('search class exists', function(){
-		expect(search).to.not.equal(undefined);
-    });
-	
-	it('search can search', function(){
-		sinon.assert.calledOnce(search.searchQuery());
     });
 	
 	after(function(){
