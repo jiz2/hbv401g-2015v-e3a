@@ -1,0 +1,33 @@
+//Sætapantanir:
+
+//MainSite:
+
+sAS.click{
+	getSeats(cid)
+}
+
+order.click{
+	bookSeats(x)
+	(gluggi lokast)
+}
+
+displaySeats(){
+	(gluggi opnast)
+}
+
+//ConcertWrapper:
+
+getSeats(cid){
+	Seats = C.seatsAvaible()
+	displaySeats()
+}
+
+Seats:
+ boolískt tvívítt fylki sæta sem eru laus
+
+x:
+ row hefur indexa sem representa nr raðar: 
+ [null,null,[1,2,3],null,[2]] táknar 2.röð(sæti: 1,2,3) 
+				  og 4.röð(sæti2)
+search?q=leitarorð&startDate=dagur&endDate=dagur
+book?concertid=cid&seats[]=1& (verðum í bandi)
