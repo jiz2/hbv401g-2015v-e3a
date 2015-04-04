@@ -29,13 +29,13 @@ var MainSite = {
 			MainSite.display();
 		});
 		
-		$('#list').click(function(event){
-			event.preventDefault();
+		$('#list').click(function(e){
+			e.preventDefault();
 			$('.concertDisplay .col-md-4').addClass('list-group-item');
 		});
 		
-		$('#grid').click(function(event){
-			event.preventDefault();
+		$('#grid').click(function(e){
+			e.preventDefault();
 			$('.concertDisplay .col-md-4').removeClass('list-group-item');
 		});
 		
@@ -47,6 +47,7 @@ var MainSite = {
 		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
 			listClass = " list-group-item"
 
+		//Should really fix this, way too much code, should implement it in displayResults()
 		for(var i = 0; i < nrOfRows; i++){
 			// Only add more events if they exist in the array
 			var diff = Search.results.programmes.length - $('.concertDisplay .col-md-4').length;
@@ -60,13 +61,14 @@ var MainSite = {
 			// Generate corresponding HTML code
 			var str = "";
 			for(var j = 0; j < nrOfCols; j++){
-				str += '<div class="col-xs-12 col-md-4' + listClass + '">'
+				var cid = i*j; //just so we get different numbers, for now
+				str += '<div id=\"' + cid + '\" class="col-xs-12 col-md-4' + listClass + '">'
 					+'<img class="resultImg img-responsive"></img>'
 					+'<h2></h2>'
 					+'<p class="details"></p>'
 					+'<p class="viewMore">'
-						+'<a class="detailsButton btn btn-default" href="#" role="button">'
-							+'View details &raquo;'
+						+'<a class="showAvailableSeats btn btn-default" href="#" role="button">'
+							+'View seats &raquo;'
 						+'</a>'
 					+'</p>'
 				+'</div>';
@@ -75,6 +77,14 @@ var MainSite = {
 			// Attach the HTML code
 			$('.concertDisplay button#moreRows').before('<div class="row">'+str+'</div>');
 		}
+
+		//This example shows us which column our view seats button belonged to, when clicked
+		$('.showAvailableSeats').click(function(e){
+			e.preventDefault();
+			var cid = $(this).parent().attr('id');
+			ConcertWrapper.getSeats(cid);
+		});
+
 		// Get the newest stuff from both databases and call display
 		Search.searchQuery("we must find a way to show all results when site loads first time");
 	},
@@ -122,7 +132,19 @@ var MainSite = {
 		}
 	},
 
-	displaySeats: function(){},
+	displaySeats: function(){
+		//Draw a box on the screen with available seats for the user
+		//Remember to let them have a booking button, which we can
+		// make a handler like this:
+		/*
+		$('.bookAvailableSeats').click(function(e){
+			e.preventDefault();
+			var seats = [seats that the user picked];
+			ConcertWrapper.bookSeats(seats);
+		});
+		//Remeber to close the window, maybe error handling
+		*/
+	},
 
 	displayBnr: function(bnr){},
 
