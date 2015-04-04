@@ -25,8 +25,8 @@ var MainSite = {
 		// Display Type Handling
 		// =====================
 		$("button#moreRows").click(function(){
-			MainSite.addRows();
-			MainSite.display();
+			this.nrOfRows += 2;
+			MainSite.displayResults();
 		});
 		
 		// Display as List
@@ -45,28 +45,41 @@ var MainSite = {
 		
 		// Initialize default results
 		// Creates HTML container for programme display
-		var nrOfCols = 3; // Default number of columns
-		var nrOfRows = 2; // Default number of rows
-		var listClass = "";
+		this.nrOfCols = 3; // Default number of columns
+		this.nrOfRows = 2; // Default number of rows
+		this.listClass = "";
 		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
-			listClass = " list-group-item"
+			this.listClass = " list-group-item"
+		this.displayResults();
 
-		//Should really fix this, way too much code, should implement it in displayResults()
-		for(var i = 0; i < nrOfRows; i++){
+		//This example shows us which column our view seats button belonged to, when clicked
+		$('.showAvailableSeats').click(function(e){
+			e.preventDefault();
+			var cid = $(this).parent().attr('id');
+			ConcertWrapper.getSeats(cid);
+		});
+
+		// Get the newest stuff from both databases and call display
+		Search.searchQuery("we must find a way to show all results when site loads first time");
+	},
+
+	displayResults: function(){
+		// Set up result layout
+		for(var i = 0; i < this.nrOfRows; i++){
 			// Only add more events if they exist in the array
-			var diff = Search.results.programmes.length - $('.concertDisplay .col-md-4').length;
-			if(diff < nrOfCols)
-				if(Search.results.programmes.length > 0)
+			var diff = Search.results.length - $('.concertDisplay .col-md-4').length;
+			if(diff < this.nrOfCols)
+				if(Search.results.length > 0)
 					if(diff === 0)
 						return;
 					else
-						nrOfCols = diff;
+						this.nrOfCols = diff;
 			
 			// Generate corresponding HTML code
 			var str = "";
-			for(var j = 0; j < nrOfCols; j++){
+			for(var j = 0; j < this.nrOfCols; j++){
 				var cid = i*j; //just so we get different numbers, for now
-				str += '<div id=\"' + cid + '\" class="col-xs-12 col-md-4' + listClass + '">'
+				str += '<div id=\"' + cid + '\" class="col-xs-12 col-md-4' + this.listClass + '">'
 					+'<img class="resultImg img-responsive"></img>'
 					+'<h2></h2>'
 					+'<p class="details"></p>'
@@ -81,21 +94,9 @@ var MainSite = {
 			// Attach the HTML code
 			$('.concertDisplay button#moreRows').before('<div class="row">'+str+'</div>');
 		}
-
-		//This example shows us which column our view seats button belonged to, when clicked
-		$('.showAvailableSeats').click(function(e){
-			e.preventDefault();
-			var cid = $(this).parent().attr('id');
-			ConcertWrapper.getSeats(cid);
-		});
-
-		// Get the newest stuff from both databases and call display
-		Search.searchQuery("we must find a way to show all results when site loads first time");
-	},
-
-	displayResults: function(){
+		
 		// Display most recent programmes obtained from databases
-		var res = Search.results.programmes;
+		var res = Search.results;
 		console.log(res);
 		var colImg = $('.col-md-4 img')
 		var colH2 = $('.col-md-4 h2');
