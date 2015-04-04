@@ -29,11 +29,15 @@ var MainSite = {
 			MainSite.display();
 		});
 		
+		// Display as List
+		// ===============
 		$('#list').click(function(e){
 			e.preventDefault();
 			$('.concertDisplay .col-md-4').addClass('list-group-item');
 		});
 		
+		// Display as Grid
+		// ===============
 		$('#grid').click(function(e){
 			e.preventDefault();
 			$('.concertDisplay .col-md-4').removeClass('list-group-item');
@@ -146,10 +150,15 @@ var MainSite = {
 		*/
 	},
 
-	displayBnr: function(bnr){},
-
-	sortByName: function(){},
-
-	sortByDate: function(){}
+	displayBnr: function(bnr){
 	
+	},
+
+	sortByName: function(){
+	
+	},
+
+	sortByDate: function(){
+	
+	}
 }

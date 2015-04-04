@@ -2,19 +2,8 @@
 // Search CLASS
 // ============
 var Search = {
-	results: {
-		// Search results
-		programmes: [],
-		
-		// A TV download booking ID returned by TV Database Engine
-		dlId: undefined,
-		
-		// List of seats available when booking for a Concert
-		seats: undefined,
-		
-		// Booking number of a concert returned by Concert Database Engine
-		bookNr: undefined
-	},
+
+	results: [],
 
 	searchQuery: function(query, startDate, endDate){
 		// User must be searching for something

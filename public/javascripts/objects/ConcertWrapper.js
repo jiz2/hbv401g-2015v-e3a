@@ -1,9 +1,11 @@
-// ============
+// ====================
 // ConcertWrapper CLASS
-// ============
+// ====================
 var ConcertWrapper = {
+	
 	seats: [],
 	_cid: 0,
+	
 	getSeats: function(cid){
 		_cid = cid;
 		//ConcertWrapper.seats = getSeatsFromOtherGroup(cid)
@@ -14,7 +16,7 @@ var ConcertWrapper = {
 		/*
 		var bnr = 0;
 		//handle seat booking
-		displayBnr(bnr);
+		MainSite.displayBnr(bnr);
 		*/
 	},
 }
