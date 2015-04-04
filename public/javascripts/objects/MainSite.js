@@ -2,9 +2,6 @@
 // MainSite CLASS
 // ===========
 var MainSite = {
-
-	query: $("#searchInput").val(),
-	
 	init: function(){
 		// =====================
 		// Initialize JavaScript
@@ -22,17 +19,9 @@ var MainSite = {
 		// ========================
 		$("#searchForm").submit(function(e){
 			e.preventDefault();
-			MainSite.query = $("#searchInput").val();
-			Search.searchQuery(MainSite.query);
+			Search.searchQuery($("#searchInput").val());
 		});
 		
-		$("#signinForm").submit(function(e){
-			e.preventDefault();
-			query = $("#emailInput").val();
-			if(query !== "")
-				alert('Your email is: \"' + query + '\".');
-		});
-
 		// Display Type Handling
 		// =====================
 		$("button#moreRows").click(function(){
@@ -51,22 +40,53 @@ var MainSite = {
 		});
 		
 		// Initialize default results
-		this.addRows();
-		this.update();
-	},
-	
-	update: function(){
+		// Creates HTML container for programme display
+		var nrOfCols = 3; // Default number of columns
+		var nrOfRows = 2; // Default number of rows
+		var listClass = "";
+		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
+			listClass = " list-group-item"
+
+		for(var i = 0; i < nrOfRows; i++){
+			// Only add more events if they exist in the array
+			var diff = Search.results.programmes.length - $('.concertDisplay .col-md-4').length;
+			if(diff < nrOfCols)
+				if(Search.results.programmes.length > 0)
+					if(diff === 0)
+						return;
+					else
+						nrOfCols = diff;
+			
+			// Generate corresponding HTML code
+			var str = "";
+			for(var j = 0; j < nrOfCols; j++){
+				str += '<div class="col-xs-12 col-md-4' + listClass + '">'
+					+'<img class="resultImg img-responsive"></img>'
+					+'<h2></h2>'
+					+'<p class="details"></p>'
+					+'<p class="viewMore">'
+						+'<a class="detailsButton btn btn-default" href="#" role="button">'
+							+'View details &raquo;'
+						+'</a>'
+					+'</p>'
+				+'</div>';
+			}
+			
+			// Attach the HTML code
+			$('.concertDisplay button#moreRows').before('<div class="row">'+str+'</div>');
+		}
 		// Get the newest stuff from both databases and call display
 		Search.searchQuery("we must find a way to show all results when site loads first time");
 	},
-	
-	display: function(test){
+
+	displayResults: function(){
 		// Display most recent programmes obtained from databases
-		var res = Result.programmes;
+		var res = Search.results.programmes;
 		console.log(res);
 		var colImg = $('.col-md-4 img')
 		var colH2 = $('.col-md-4 h2');
 		var colPDet = $('.col-md-4 p.details');
+		var test = false;
 		if(test){
 			for(var i = 0; i < res.length; i++){
 				colImg.eq(i).attr({
@@ -101,50 +121,13 @@ var MainSite = {
 			}
 		}
 	},
-	
-	sortByTitle: function(){
-		// Self-explaining
-	},
-	
-	sortByDate: function(){
-		// Self-explaining
-	},
-	
-	addRows: function() {
-		// Creates HTML container for programme display
-		var nrOfCols = 3; // Default number of columns
-		var nrOfRows = 2; // Default number of rows
-		var listClass = "";
-		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
-			listClass = " list-group-item"
 
-		for(var i = 0; i < nrOfRows; i++){
-			// Only add more events if they exist in the array
-			var diff = Result.programmes.length - $('.concertDisplay .col-md-4').length;
-			if(diff < nrOfCols)
-				if(Result.programmes.length > 0)
-					if(diff === 0)
-						return;
-					else
-						nrOfCols = diff;
-			
-			// Generate corresponding HTML code
-			var str = "";
-			for(var j = 0; j < nrOfCols; j++){
-				str += '<div class="col-xs-12 col-md-4' + listClass + '">'
-					+'<img class="resultImg img-responsive"></img>'
-					+'<h2></h2>'
-					+'<p class="details"></p>'
-					+'<p class="viewMore">'
-						+'<a class="detailsButton btn btn-default" href="#" role="button">'
-							+'View details &raquo;'
-						+'</a>'
-					+'</p>'
-				+'</div>';
-			}
-			
-			// Attach the HTML code
-			$('.concertDisplay button#moreRows').before('<div class="row">'+str+'</div>');
-		}
-	}
+	displaySeats: function(){},
+
+	displayBnr: function(bnr){},
+
+	sortByName: function(){},
+
+	sortByDate: function(){}
+	
 }
