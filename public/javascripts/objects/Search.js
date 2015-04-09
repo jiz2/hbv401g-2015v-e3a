@@ -14,59 +14,27 @@ var Search = {
 
 		var category = $('#searchForm .btn').text().trim();
 		var uri = "";
-		var isTesting = (query === "test");
 
-		if(category === "All") {
-			if(isTesting)
-				uri = updateMockObject;
-			else
-				category = "Concert";
-		}
-		if(category === "Concert") {
-			if(isTesting)
-				uri = './mockConcert';
-			else
-				uri = 'http://apis.is/concerts';
-		}
-		if(category === "TV program") {
-			if(isTesting)
-				uri = './mockTV';
-			else
+		switch(category) {
+			case "All":
+			case "Concert": 
+			case "TV program":
+			default:
 				uri = 'http://apis.is/tv/ruv';
 		}
-		if(isTesting) {
-			console.log("testing mock object");
-		}
-		else {
-			console.log(
-				["Searching for the", category, query+"."].join(' ')
-			);
-		}
+
+		console.log(
+			["Searching for the", category, query+"."].join(' ')
+		);
 		
-		$.ajax({
+		/*$.ajax({
 			'url': uri,
 			'type': 'GET',
 			'dataType': 'json',
 			'success': function(response) {
 				Search.results.programmes = response.results;
-				if(isTesting)
-						MainSite.displayResults(isTesting);
-				else
-					MainSite.displayResults();
+				MainSite.displayResults();
 			}
-		});
+		});*/
 	}
-
-	/*
-	updateMockObject: function(){
-		var MockObject;
-		$.getJSON(mockConcert, function(data) {
-			MockObject = data.contents;
-			$.getJSON(mockTV, function(data) {
-				$.extend(MockObject, data.contents);
-			});
-		});
-		return MockObject;
-	}
-	*/
 }

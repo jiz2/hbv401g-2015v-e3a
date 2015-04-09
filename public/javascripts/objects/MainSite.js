@@ -101,39 +101,35 @@ var MainSite = {
 		var colImg = $('.col-md-4 img')
 		var colH2 = $('.col-md-4 h2');
 		var colPDet = $('.col-md-4 p.details');
-		var test = false;
-		if(test){
-			for(var i = 0; i < res.length; i++){
-				colImg.eq(i).attr({
-					src: '',
-					alt: ''
-				});
-				colH2.eq(i).text(res[i].title);
-				colPDet.eq(i).html(
-					'Series: \"' + res[i].seriesNo + '" Episode: \"' + res[i].epNo
-					+ '\"<br>Start Time: \"' + res[i].startTime
-					+ '\"<br>Duration: \"' + res[i].duration
-					+ '\"<br>Channel: \"' 	+ res[i].channel 
-					+ '\"<br>Number of Downloads: \"' + res[i].downloadNo
-					+ '\"<br>Ratings: \"' + res[i].avgRatings
-					+ '\"Rated by: \"' + res[i].ratingNo + '\".'
-					+ '\"<br><br>Programme ID: \"' + res[i].id
-				);
-			}
-		} else {
-			for(var i = 0; i < colH2.length; i++){
-				colImg.eq(i).attr({
-					src: res[i].imageSource,
-					alt: 'Pic of ' + res[i].eventDateName
-				});
-				colH2.eq(i).text(res[i].eventDateName);
-				colPDet.eq(i).html(
-					'Name: \"' 				+ res[i].name
-					+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
-					+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
-					+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
-				);
-			}
+		for(var i = 0; i < res.length; i++){
+			colImg.eq(i).attr({
+				src: '',
+				alt: ''
+			});
+			colH2.eq(i).text(res[i].title);
+			colPDet.eq(i).html(
+				'Series: \"' + res[i].seriesNo + '" Episode: \"' + res[i].epNo
+				+ '\"<br>Start Time: \"' + res[i].startTime
+				+ '\"<br>Duration: \"' + res[i].duration
+				+ '\"<br>Channel: \"' 	+ res[i].channel 
+				+ '\"<br>Number of Downloads: \"' + res[i].downloadNo
+				+ '\"<br>Ratings: \"' + res[i].avgRatings
+				+ '\"Rated by: \"' + res[i].ratingNo + '\".'
+				+ '\"<br><br>Programme ID: \"' + res[i].id
+			);
+		}
+		for(var i = 0; i < colH2.length; i++){
+			colImg.eq(i).attr({
+				src: res[i].imageSource,
+				alt: 'Pic of ' + res[i].eventDateName
+			});
+			colH2.eq(i).text(res[i].eventDateName);
+			colPDet.eq(i).html(
+				'Name: \"' 				+ res[i].name
+				+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
+				+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
+				+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
+			);
 		}
 	},
 
