@@ -1,2 +1,4 @@
 // Initializing Main classes for Meta-Search Engine
-$(document).ready(function(){ MainSite.init(); });
+var MainSite = require('./objects/MainSite');
+
+$(document).ready(function(){ MainSite.MainSite.init(); });
