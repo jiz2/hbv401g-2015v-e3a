@@ -1,7 +1,10 @@
 // ====================
 // ConcertWrapper CLASS
 // ====================
-var ConcertWrapper = {
+
+var MainSite = require('./MainSite');
+
+exports.ConcertWrapper = {
 	
 	seats: [],
 	_cid: 0,
@@ -9,7 +12,7 @@ var ConcertWrapper = {
 	getSeats: function(cid){
 		_cid = cid;
 		//ConcertWrapper.seats = getSeatsFromOtherGroup(cid)
-		MainSite.displaySeats();
+		MainSite.MainSite.displaySeats();
 	},
 
 	bookSeats: function(seats){

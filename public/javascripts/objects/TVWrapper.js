@@ -1,7 +1,8 @@
 // ===============
 // TVWrapper CLASS
 // ===============
-var TVWrapper = {
+
+exports.TVWrapper = {
 
 	download: function(id){
 	

@@ -1,12 +1,34 @@
-// ==============
-// MainSite CLASS
-// ==============
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// ====================
+// ConcertWrapper CLASS
+// ====================
+var MainSite = require('./MainSite');
+exports.ConcertWrapper = {
+	
+	seats: [],
+	_cid: 0,
+	
+	getSeats: function(cid){
+		_cid = cid;
+		//ConcertWrapper.seats = getSeatsFromOtherGroup(cid)
+		MainSite.MainSite.displaySeats();
+	},
 
-// Imports
+	bookSeats: function(seats){
+		/*
+		var bnr = 0;
+		//handle seat booking
+		MainSite.displayBnr(bnr);
+		*/
+	},
+}
+},{"./MainSite":2}],2:[function(require,module,exports){
+// ===========
+// MainSite CLASS
+// ===========
 var Search = require('./Search');
 var TVWrapper = require('./TVWrapper');
 var ConcertWrapper = require('./ConcertWrapper');
-
 exports.MainSite = {
 	init: function(){
 		// =====================
@@ -165,4 +187,66 @@ exports.MainSite = {
 	sortByDate: function(){
 	
 	}
+};
+},{"./ConcertWrapper":1,"./Search":3,"./TVWrapper":4}],3:[function(require,module,exports){
+// ============
+// Search CLASS
+// ============
+var MainSite = require('./MainSite');
+exports.Search = {
+
+	results: [],
+
+	searchQuery: function(query, startDate, endDate){
+		// User must be searching for something
+		if(!query || query==="")
+			return;
+		else
+			query = query.trim();
+
+		var category = $('#searchForm .btn').text().trim();
+		var uri = "";
+
+		switch(category) {
+			case "All":
+			case "Concert": 
+			case "TV program":
+			default:
+				uri = 'http://apis.is/tv/ruv';
+		}
+
+		console.log(
+			["Searching for the", category, query+"."].join(' ')
+		);
+		
+		/*$.ajax({
+			'url': uri,
+			'type': 'GET',
+			'dataType': 'json',
+			'success': function(response) {
+				Search.results.programmes = response.results;
+				MainSite.MainSite.displayResults();
+			}
+		});*/
+	}
 }
+},{"./MainSite":2}],4:[function(require,module,exports){
+// ===============
+// TVWrapper CLASS
+// ===============
+exports.TVWrapper = {
+
+	download: function(id){
+	
+	},
+	
+	rate: function(id, stars){
+	
+	}
+}
+},{}],5:[function(require,module,exports){
+// Initializing Main classes for Meta-Search Engine
+var MainSite = require('./objects/MainSite');
+
+$(document).ready(function(){ MainSite.MainSite.init(); });
+},{"./objects/MainSite":2}]},{},[5]);
