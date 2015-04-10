@@ -21,8 +21,12 @@ var Search = {
 
 		switch(category) {
 			case "All":
-			case "Concert":
+			case "Concert": 
+				uri = 'http://apis.is/concerts';
+				break;
 			case "TV program":
+				uri = 'http://apis.is/tv/ruv';
+				break;
 			default:
 				uri = 'http://apis.is/concerts';
 		}
