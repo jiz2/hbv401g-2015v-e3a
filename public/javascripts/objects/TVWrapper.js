@@ -2,7 +2,9 @@
 // TVWrapper CLASS
 // ===============
 
-exports.TVWrapper = {
+var MainSite = require('./MainSite');
+
+var TVWrapper = {
 
 	download: function(id){
 	
@@ -12,3 +14,5 @@ exports.TVWrapper = {
 	
 	}
 }
+
+exports.TVWrapper = TVWrapper;

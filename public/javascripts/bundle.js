@@ -2,8 +2,10 @@
 // ====================
 // ConcertWrapper CLASS
 // ====================
+
 var MainSite = require('./MainSite');
-exports.ConcertWrapper = {
+
+var ConcertWrapper = {
 	
 	seats: [],
 	_cid: 0,
@@ -22,14 +24,19 @@ exports.ConcertWrapper = {
 		*/
 	},
 }
+
+exports.ConcertWrapper = ConcertWrapper;
 },{"./MainSite":2}],2:[function(require,module,exports){
-// ===========
+// ==============
 // MainSite CLASS
-// ===========
+// ==============
+
+// Imports
 var Search = require('./Search');
 var TVWrapper = require('./TVWrapper');
 var ConcertWrapper = require('./ConcertWrapper');
-exports.MainSite = {
+
+var MainSite = {
 	init: function(){
 		// =====================
 		// Initialize JavaScript
@@ -92,12 +99,15 @@ exports.MainSite = {
 	},
 
 	displayResults: function(){
+		var res = Search.Search.results;
+		console.log(res);
+		
 		// Set up result layout
 		for(var i = 0; i < this.nrOfRows; i++){
 			// Only add more events if they exist in the array
-			var diff = Search.Search.results.length - $('.concertDisplay .col-md-4').length;
+			var diff = res.length - $('.concertDisplay .col-md-4').length;
 			if(diff < this.nrOfCols)
-				if(Search.Search.results.length > 0)
+				if(res.length > 0)
 					if(diff === 0)
 						return;
 					else
@@ -124,15 +134,13 @@ exports.MainSite = {
 		}
 		
 		// Display most recent programmes obtained from databases
-		var res = Search.Search.results;
-		console.log(res);
 		var colImg = $('.col-md-4 img')
 		var colH2 = $('.col-md-4 h2');
 		var colPDet = $('.col-md-4 p.details');
 		for(var i = 0; i < res.length; i++){
 			colImg.eq(i).attr({
-				src: '',
-				alt: ''
+				src: res[i].imageSource,
+				alt: 'Pic of ' + res[i].eventDateName
 			});
 			colH2.eq(i).text(res[i].title);
 			colPDet.eq(i).html(
@@ -187,13 +195,18 @@ exports.MainSite = {
 	sortByDate: function(){
 	
 	}
-};
+}
+
+exports.MainSite = MainSite;
 },{"./ConcertWrapper":1,"./Search":3,"./TVWrapper":4}],3:[function(require,module,exports){
 // ============
 // Search CLASS
 // ============
+
+// Imports
 var MainSite = require('./MainSite');
-exports.Search = {
+
+var Search = {
 
 	results: [],
 
@@ -209,32 +222,37 @@ exports.Search = {
 
 		switch(category) {
 			case "All":
-			case "Concert": 
+			case "Concert":
 			case "TV program":
 			default:
-				uri = 'http://apis.is/tv/ruv';
+				uri = 'http://apis.is/concerts';
 		}
 
 		console.log(
 			["Searching for the", category, query+"."].join(' ')
 		);
 		
-		/*$.ajax({
+		$.ajax({
 			'url': uri,
 			'type': 'GET',
 			'dataType': 'json',
 			'success': function(response) {
-				Search.results.programmes = response.results;
+				Search.results = response.results;
 				MainSite.MainSite.displayResults();
 			}
-		});*/
+		});
 	}
 }
+
+exports.Search = Search;
 },{"./MainSite":2}],4:[function(require,module,exports){
 // ===============
 // TVWrapper CLASS
 // ===============
-exports.TVWrapper = {
+
+var MainSite = require('./MainSite');
+
+var TVWrapper = {
 
 	download: function(id){
 	
@@ -244,7 +262,9 @@ exports.TVWrapper = {
 	
 	}
 }
-},{}],5:[function(require,module,exports){
+
+exports.TVWrapper = TVWrapper;
+},{"./MainSite":2}],5:[function(require,module,exports){
 // Initializing Main classes for Meta-Search Engine
 var MainSite = require('./objects/MainSite');
 

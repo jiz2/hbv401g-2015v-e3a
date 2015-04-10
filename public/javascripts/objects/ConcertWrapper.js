@@ -4,7 +4,7 @@
 
 var MainSite = require('./MainSite');
 
-exports.ConcertWrapper = {
+var ConcertWrapper = {
 	
 	seats: [],
 	_cid: 0,
@@ -23,3 +23,5 @@ exports.ConcertWrapper = {
 		*/
 	},
 }
+
+exports.ConcertWrapper = ConcertWrapper;

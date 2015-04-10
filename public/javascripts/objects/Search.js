@@ -5,7 +5,7 @@
 // Imports
 var MainSite = require('./MainSite');
 
-exports.Search = {
+var Search = {
 
 	results: [],
 
@@ -21,24 +21,26 @@ exports.Search = {
 
 		switch(category) {
 			case "All":
-			case "Concert": 
+			case "Concert":
 			case "TV program":
 			default:
-				uri = 'http://apis.is/tv/ruv';
+				uri = 'http://apis.is/concerts';
 		}
 
 		console.log(
 			["Searching for the", category, query+"."].join(' ')
 		);
 		
-		/*$.ajax({
+		$.ajax({
 			'url': uri,
 			'type': 'GET',
 			'dataType': 'json',
 			'success': function(response) {
-				Search.results.programmes = response.results;
+				Search.results = response.results;
 				MainSite.MainSite.displayResults();
 			}
-		});*/
+		});
 	}
 }
+
+exports.Search = Search;

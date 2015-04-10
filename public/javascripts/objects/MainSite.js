@@ -7,7 +7,7 @@ var Search = require('./Search');
 var TVWrapper = require('./TVWrapper');
 var ConcertWrapper = require('./ConcertWrapper');
 
-exports.MainSite = {
+var MainSite = {
 	init: function(){
 		// =====================
 		// Initialize JavaScript
@@ -70,12 +70,15 @@ exports.MainSite = {
 	},
 
 	displayResults: function(){
+		var res = Search.Search.results;
+		console.log(res);
+		
 		// Set up result layout
 		for(var i = 0; i < this.nrOfRows; i++){
 			// Only add more events if they exist in the array
-			var diff = Search.Search.results.length - $('.concertDisplay .col-md-4').length;
+			var diff = res.length - $('.concertDisplay .col-md-4').length;
 			if(diff < this.nrOfCols)
-				if(Search.Search.results.length > 0)
+				if(res.length > 0)
 					if(diff === 0)
 						return;
 					else
@@ -102,15 +105,13 @@ exports.MainSite = {
 		}
 		
 		// Display most recent programmes obtained from databases
-		var res = Search.Search.results;
-		console.log(res);
 		var colImg = $('.col-md-4 img')
 		var colH2 = $('.col-md-4 h2');
 		var colPDet = $('.col-md-4 p.details');
 		for(var i = 0; i < res.length; i++){
 			colImg.eq(i).attr({
-				src: '',
-				alt: ''
+				src: res[i].imageSource,
+				alt: 'Pic of ' + res[i].eventDateName
 			});
 			colH2.eq(i).text(res[i].title);
 			colPDet.eq(i).html(
@@ -166,3 +167,5 @@ exports.MainSite = {
 	
 	}
 }
+
+exports.MainSite = MainSite;
