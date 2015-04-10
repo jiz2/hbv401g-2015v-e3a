@@ -218,33 +218,25 @@ var Search = {
 			query = query.trim();
 
 		var category = $('#searchForm .btn').text().trim();
-		var uri = "";
 
+		// Call search in the search engine of the components
 		switch(category) {
-			case "All":
-			case "Concert": 
-				uri = 'http://apis.is/concerts';
+			case "Concert": // unknown yet
+				// search in concert
 				break;
 			case "TV program":
-				uri = 'http://apis.is/tv/ruv';
+				// Search.results = 
+				// first require apisMessenger then call queryTV();
+				// MainSite.MainSite.displayResults();
 				break;
-			default:
-				uri = 'http://apis.is/concerts';
+			default: // default is case All
+				MainSite.MainSite.displayResults();
 		}
 
+		// could put this logger into the event handler of query input (Jianfei)
 		console.log(
 			["Searching for the", category, query+"."].join(' ')
 		);
-		
-		$.ajax({
-			'url': uri,
-			'type': 'GET',
-			'dataType': 'json',
-			'success': function(response) {
-				Search.results = response.results;
-				MainSite.MainSite.displayResults();
-			}
-		});
 	}
 }
 
@@ -259,7 +251,7 @@ var MainSite = require('./MainSite');
 var TVWrapper = {
 
 	download: function(id){
-	
+		// call unfinished function in tv group
 	}
 }
 
