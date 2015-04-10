@@ -1,6 +1,10 @@
-// ===========
+// ==============
 // MainSite CLASS
-// ===========
+// ==============
+
+// Imports
+var Search = require('Search');
+
 var MainSite = {
 	init: function(){
 		// =====================

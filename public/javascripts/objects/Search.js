@@ -38,3 +38,6 @@ var Search = {
 		});*/
 	}
 }
+
+
+exports.Search = Search;
