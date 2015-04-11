@@ -61,6 +61,7 @@ var MainSite = {
 
 		// Get the newest stuff from both databases and call display
 		Search.searchQuery("");
+		loadDL();
 	},
 
 	displayResults: function(){
@@ -182,11 +183,15 @@ function eventHandler(title){
 	//if(!localStorage.count) localStorage.count = 0;
 	//else localStorage.count++;
 	localStorage.setItem(title, title);
+	loadDL();
+	console.log(localStorage);
+//});
+};
+
+function loadDL(){
 	var db = [];
 	for (var key in localStorage) {
 		db.push(String(localStorage.getItem(key)));
 	};
 	$("#dlPanel").html("Þú ert búinn að downloada: <br>"+db.join(', '));
-	console.log(localStorage);
-//});
-};
+}
