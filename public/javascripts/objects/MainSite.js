@@ -18,7 +18,7 @@ var MainSite = {
 		$(".dropdown-menu li a").click(function(){
 			var selText = $(this).text();
 			$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-			$("#searchForm").submit();
+			//$("#searchForm").submit();
 		});
 
 		// User text input Handling
@@ -51,8 +51,8 @@ var MainSite = {
 		
 		// Initialize default results
 		// Creates HTML container for programme display
-		this.nrOfCols = 3; // Default number of columns
-		this.nrOfRows = 2; // Default number of rows
+		this.nrOfCols = 2; // Default number of columns
+		this.nrOfRows = 4; // Default number of rows
 		this.listClass = "";
 		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
 			this.listClass = " list-group-item"
@@ -71,8 +71,10 @@ var MainSite = {
 
 	displayResults: function(){
 		var res = Search.Search.results;
+		var TVres = res[0];
 		console.log(res);
-		
+
+		/*
 		// Set up result layout
 		for(var i = 0; i < this.nrOfRows; i++){
 			// Only add more events if they exist in the array
@@ -132,13 +134,14 @@ var MainSite = {
 			});
 			//colH2.eq(i).text(res[i].eventDateName);
 			colPDet.eq(i).html(
-				/*'Name: \"' 				+ res[i].name
+				'Name: \"' 				+ res[i].name
 				+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
 				+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
 				+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
-				*/
+				
 			);
 		}
+		*/
 	},
 
 	displaySeats: function(){
