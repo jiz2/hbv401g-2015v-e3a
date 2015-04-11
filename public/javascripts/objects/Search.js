@@ -4,7 +4,7 @@
 
 // Imports
 var MainSite = require('./MainSite');
-var apM = require('../../../apisMessenger');
+var apM = require('./tv/apisMessenger');
 
 var Search = {
 
@@ -21,22 +21,12 @@ var Search = {
 
 		// Call search in the search engine of the components
 		switch(category) {
-<<<<<<< HEAD
 			case "Concert": // unknown yet
 				// search in concert
 				break;
 			case "TV program":
 				// Search.results = 
 				// first require apisMessenger then call queryTV();
-				// MainSite.MainSite.displayResults();
-				break;
-			default: // default is case All
-				MainSite.MainSite.displayResults();
-=======
-			case "Concert": 
-				uri = 'http://apis.is/concerts';
-				break;
-			case "TV program":
 				apM.queryTV({title: query, station: 'ruv', date: '2015-04-11'}, function(response){
 					//res is an array of javascript objects that represent the shows
 					//results is a string that looks like '[{show1}, {show2}, ...etc.]'
@@ -58,11 +48,10 @@ var Search = {
 					Search.results[0] = response;
 					return;
 				});
+				// MainSite.MainSite.displayResults();
 				break;
-			case "All":
-			default:
-				uri = 'http://apis.is/tv/ruv';
->>>>>>> origin/master
+			default: // default is case All
+				MainSite.MainSite.displayResults();
 		}
 
 		// could put this logger into the event handler of query input (Jianfei)
