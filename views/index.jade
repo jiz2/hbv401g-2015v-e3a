@@ -48,6 +48,22 @@ block content
 				span.glyphicon.glyphicon-th
 				| Grid
 
+
+	.container(role='main')
+		.row
+			.col-md-6
+				table.table.table-bordered
+					thead
+						tr
+							th Date and time
+							th Title
+							th #
+					tbody.TVPROGRAMS
+			.col-md-6
+				.panel.panel-default
+				#dlPanel.panel-body
+					| Load Downloads!
+
 	.concertDisplay.container
 		button#moreRows.btn.btn-default.btn-block.btn-success
 			| See more

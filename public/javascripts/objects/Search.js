@@ -7,11 +7,12 @@ var Search = {
 	results: [],
 
 	searchQuery: function(query, startDate, endDate){
-		// User must be searching for something
-		if(!query || query==="")
+		/* User must be searching for something
+		if(!query) // || query===""
 			return;
 		else
-			query = query.trim();
+		*/
+		query = query.trim();
 
 		var category = $('#searchForm .btn').text().trim();
 		var uri = "";
@@ -38,9 +39,8 @@ var Search = {
 			'data': {title: query, stations: 'ruv', date: '2015-04-11'},
 			'dataType': 'json',
 			'success': function(response) {
-				//Search.results = response.results;
-				//MainSite.displayResults();
-				console.log(response);
+				Search.results[0] = response;
+				MainSite.displayResults();
 			}
 		});
 	}

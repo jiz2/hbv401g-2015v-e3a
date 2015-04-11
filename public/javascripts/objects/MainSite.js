@@ -51,7 +51,6 @@ var MainSite = {
 		this.listClass = "";
 		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
 			this.listClass = " list-group-item"
-		this.displayResults();
 
 		//This example shows us which column our view seats button belonged to, when clicked
 		$('.showAvailableSeats').click(function(e){
@@ -61,21 +60,32 @@ var MainSite = {
 		});
 
 		// Get the newest stuff from both databases and call display
-		Search.searchQuery("cha");
+		Search.searchQuery("");
 	},
 
 	displayResults: function(){
 		var res = Search.results;
 		var TVres = res[0];
-		console.log(res);
+		console.log("TVres: ",TVres);
+		var str = "";
+		for(var i = 0; i < TVres.length; i++) {
+			str += '<tr><td>'
+				+TVres[i].startTime
+				+'</td><td>'
+				+TVres[i].title
+				+'</td><td><input type="submit" value="Download" onclick="eventHandler(\''
+				+TVres[i].title
+				+'\')"></td></tr>';
+		}
+		$('tbody.TVPROGRAMS').html(str);
 
 		/*
 		// Set up result layout
 		for(var i = 0; i < this.nrOfRows; i++){
 			// Only add more events if they exist in the array
-			var diff = res.length - $('.concertDisplay .col-md-4').length;
+			var diff = TVres.length - $('.concertDisplay .col-md-4').length;
 			if(diff < this.nrOfCols)
-				if(res.length > 0)
+				if(TVres.length > 0)
 					if(diff === 0)
 						return;
 					else
@@ -105,23 +115,24 @@ var MainSite = {
 		var colImg = $('.col-md-4 img')
 		var colH2 = $('.col-md-4 h2');
 		var colPDet = $('.col-md-4 p.details');
-		for(var i = 0; i < res.length; i++){
+		for(var i = 0; i < TVres.length; i++){
 			colImg.eq(i).attr({
-				src: res[i].imageSource,
-				alt: 'Pic of ' + res[i].eventDateName
+				src: TVres[i].imageSource,
+				alt: 'Pic of ' + TVres[i].eventDateName
 			});
-			colH2.eq(i).text(res[i].title);
+			colH2.eq(i).text(TVres[i].title);
 			colPDet.eq(i).html(
-				'Series: \"' + res[i].seriesNo + '" Episode: \"' + res[i].epNo
-				+ '\"<br>Start Time: \"' + res[i].startTime
-				+ '\"<br>Duration: \"' + res[i].duration
-				+ '\"<br>Channel: \"' 	+ res[i].channel 
-				+ '\"<br>Number of Downloads: \"' + res[i].downloadNo
-				+ '\"<br>Ratings: \"' + res[i].avgRatings
-				+ '\"Rated by: \"' + res[i].ratingNo + '\".'
-				+ '\"<br><br>Programme ID: \"' + res[i].id
+				'Series: \"' + TVres[i].seriesNo + '" Episode: \"' + TVres[i].epNo
+				+ '\"<br>Start Time: \"' + TVres[i].startTime
+				+ '\"<br>Duration: \"' + TVres[i].duration
+				+ '\"<br>Channel: \"' 	+ TVres[i].channel 
+				+ '\"<br>Number of Downloads: \"' + TVres[i].downloadNo
+				+ '\"<br>Ratings: \"' + TVres[i].avgRatings
+				+ '\"Rated by: \"' + TVres[i].ratingNo + '\".'
+				+ '\"<br><br>Programme ID: \"' + TVres[i].id
 			);
 		}
+		/*
 		for(var i = 0; i < colH2.length; i++){
 			colImg.eq(i).attr({
 				src: '',//res[i].imageSource,
@@ -165,3 +176,17 @@ var MainSite = {
 	
 	}
 }
+
+//$("#downloadButton").click(function(title){
+function eventHandler(title){
+	//if(!localStorage.count) localStorage.count = 0;
+	//else localStorage.count++;
+	localStorage.setItem(title, title);
+	var db = [];
+	for (var key in localStorage) {
+		db.push(String(localStorage.getItem(key)));
+	};
+	$("#dlPanel").html("Þú ert búinn að downloada: <br>"+db.join(', '));
+	console.log(localStorage);
+//});
+};
