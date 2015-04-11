@@ -2,9 +2,6 @@
 // Search CLASS
 // ============
 
-// Imports
-var MainSite = require('./MainSite');
-
 var Search = {
 
 	results: [],
@@ -42,11 +39,9 @@ var Search = {
 			'dataType': 'json',
 			'success': function(response) {
 				//Search.results = response.results;
-				//MainSite.MainSite.displayResults();
+				//MainSite.displayResults();
 				console.log(response);
 			}
 		});
 	}
 }
-
-exports.Search = Search;

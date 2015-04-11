@@ -2,11 +2,6 @@
 // MainSite CLASS
 // ==============
 
-// Imports
-var Search = require('./Search');
-var TVWrapper = require('./TVWrapper');
-var ConcertWrapper = require('./ConcertWrapper');
-
 var MainSite = {
 	init: function(){
 		// =====================
@@ -25,7 +20,7 @@ var MainSite = {
 		// ========================
 		$("#searchForm").submit(function(e){
 			e.preventDefault();
-			Search.Search.searchQuery($("#searchInput").val());
+			Search.searchQuery($("#searchInput").val());
 		});
 		
 		// Display Type Handling
@@ -62,15 +57,15 @@ var MainSite = {
 		$('.showAvailableSeats').click(function(e){
 			e.preventDefault();
 			var cid = $(this).parent().attr('id');
-			ConcertWrapper.ConcertWrapper.getSeats(cid);
+			ConcertWrapper.getSeats(cid);
 		});
 
 		// Get the newest stuff from both databases and call display
-		Search.Search.searchQuery("cha");
+		Search.searchQuery("cha");
 	},
 
 	displayResults: function(){
-		var res = Search.Search.results;
+		var res = Search.results;
 		var TVres = res[0];
 		console.log(res);
 
@@ -152,7 +147,7 @@ var MainSite = {
 		$('.bookAvailableSeats').click(function(e){
 			e.preventDefault();
 			var seats = [seats that the user picked];
-			ConcertWrapper.ConcertWrapper.bookSeats(seats);
+			ConcertWrapper.bookSeats(seats);
 		});
 		//Remeber to close the window, maybe error handling
 		*/
@@ -170,5 +165,3 @@ var MainSite = {
 	
 	}
 }
-
-exports.MainSite = MainSite;
