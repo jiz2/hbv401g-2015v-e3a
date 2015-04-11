@@ -12,7 +12,7 @@ var http = require('http');
 //=====================================
 
 var dataArray = [];
-var Gpath;
+var path;
 var Gcriteria= "";
 
 
@@ -42,7 +42,7 @@ var endpoints = ["ruv",
 var stationGetter = function(p){
   var options = {
   host: 'apis.is',
-  Gpath: '/tv/'+ p
+  path: '/tv/'+ p
   };
   return options;
 }
@@ -79,8 +79,8 @@ var fetchCallback = function(callback) {
 var queryTV = function(criteria, callback) {
   Gcriteria=criteria;
   var currentStation = Gcriteria.station;
-  var Gpath = currentStation;
-  http.request(stationGetter(Gpath), fetchCallback(callback)).end();
+  var path = currentStation;
+  http.request(stationGetter(path), fetchCallback(callback)).end();
 }
 
 //USE: findTitle(criteria, data, callback)
@@ -113,18 +113,22 @@ var findTitle = function(criteria, data, callback){
     {
       console.log('erum inni loopu og erum ad horfa a ' + currentDataBlock[j].title);
       var show = currentDataBlock[j];
+      var str = ".*"+criteria.title+".*";
+      console.log(str);
+      var showTitle = new RegExp(str, "i");
       var showDate = new Date (show.startTime);
+
       var showMonth = showDate.getMonth();
       var showDay = showDate.getDate();
       var showYear = showDate.getYear();
 
-      if(tSearch && !dSearch && criteria.title===show.title)
+      if(tSearch && !dSearch && showTitle.test(show.title))
       {
         results.push(show);
         continue;
       }
 
-      if(tSearch && dSearch && criteria.title===show.title && searchMonth===showMonth && searchDay===showDay && searchYear===showYear)
+      if(tSearch && dSearch && showTitle.test(show.title) && searchMonth===showMonth && searchDay===showDay && searchYear===showYear)
       {
         console.log('baetum titlinum: '+show.title+' vid!');
         results.push(show);

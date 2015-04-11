@@ -66,7 +66,7 @@ var MainSite = {
 		});
 
 		// Get the newest stuff from both databases and call display
-		Search.Search.searchQuery("we must find a way to show all results when site loads first time");
+		Search.Search.searchQuery("cha");
 	},
 
 	displayResults: function(){

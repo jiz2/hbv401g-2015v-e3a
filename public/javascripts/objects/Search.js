@@ -4,7 +4,6 @@
 
 // Imports
 var MainSite = require('./MainSite');
-var apM = require('../../../apisMessenger');
 
 var Search = {
 
@@ -25,31 +24,11 @@ var Search = {
 				uri = 'http://apis.is/concerts';
 				break;
 			case "TV program":
-				apM.queryTV({title: query, station: 'ruv', date: '2015-04-11'}, function(response){
-					//res is an array of javascript objects that represent the shows
-					//results is a string that looks like '[{show1}, {show2}, ...etc.]'
-					//i.e. a stringified res
-					//console.log(res);
-					////results = JSON.stringify(res);
-					//console.log(results); 
-					//In order to render the reponse with your ejs, just change the below
-					//to: reponse.render('process', {YOUR OPTIONS HERE})
-					//you can use res instead of results if you want to skip parsing it 
-					//back into an array:)
-					/*
-					response.render('process', {
-						title: 'Your results!',      
-						classname: 'results',
-						results: res 
-					});
-					*/
-					Search.results[0] = response;
-					return;
-				});
+				uri = 'http://apis.is/tv/ruv';
 				break;
 			case "All":
 			default:
-				uri = 'http://apis.is/tv/ruv';
+				uri = '/process'
 		}
 
 		console.log(
@@ -59,10 +38,12 @@ var Search = {
 		$.ajax({
 			'url': uri,
 			'type': 'GET',
+			'data': {title: query, stations: 'ruv', date: '2015-04-11'},
 			'dataType': 'json',
 			'success': function(response) {
-				Search.results = response.results;
-				MainSite.MainSite.displayResults();
+				//Search.results = response.results;
+				//MainSite.MainSite.displayResults();
+				console.log(response);
 			}
 		});
 	}
