@@ -67,14 +67,10 @@ var MainSite = {
 
 		// Sort by name
 		// ===========
-		$("th.sortByName").click(function(){
-			MainSite.sortByName();
-		});
-
-		// Sort by name
-		// ===========
-		$("th.sortByDate").click(function(){
-			MainSite.sortByDate();
+		$("th.sortable").click(function(){
+			var name = $(this).index();
+			var type = $(this).closest('table').attr('id');
+			MainSite.sortBy(name,type);
 		});
 	},
 
@@ -161,76 +157,6 @@ var MainSite = {
 		if(TVres.length <= MainSite.nrOfRows){
 			$("button#moreRows").hide();
 		} else $("button#moreRows").show();
-		
-		/*
-		// Set up result layout
-		for(var i = 0; i < MainSite.nrOfRows; i++){
-			// Only add more events if they exist in the array
-			var diff = TVres.length - $('.concertDisplay .col-md-4').length;
-			if(diff < MainSite.nrOfCols)
-				if(TVres.length > 0)
-					if(diff === 0)
-						return;
-					else
-						MainSite.nrOfCols = diff;
-			
-			// Generate corresponding HTML code
-			var str = "";
-			for(var j = 0; j < MainSite.nrOfCols; j++){
-				var cid = i*j; //just so we get different numbers, for now
-				str += '<div id=\"' + cid + '\" class="col-xs-12 col-md-4' + MainSite.listClass + '">'
-					+'<img class="resultImg img-responsive"></img>'
-					+'<h2></h2>'
-					+'<p class="details"></p>'
-					+'<p class="viewMore">'
-						+'<a class="showAvailableSeats btn btn-default" href="#" role="button">'
-							+'View seats &raquo;'
-						+'</a>'
-					+'</p>'
-				+'</div>';
-			}
-			
-			// Attach the HTML code
-			$('.concertDisplay button#moreRows').before('<div class="row">'+str+'</div>');
-		}
-		
-		// Display most recent programmes obtained from databases
-		var colImg = $('.col-md-4 img')
-		var colH2 = $('.col-md-4 h2');
-		var colPDet = $('.col-md-4 p.details');
-		for(var i = 0; i < TVres.length; i++){
-			colImg.eq(i).attr({
-				src: TVres[i].imageSource,
-				alt: 'Pic of ' + TVres[i].eventDateName
-			});
-			colH2.eq(i).text(TVres[i].title);
-			colPDet.eq(i).html(
-				'Series: \"' + TVres[i].seriesNo + '" Episode: \"' + TVres[i].epNo
-				+ '\"<br>Start Time: \"' + TVres[i].startTime
-				+ '\"<br>Duration: \"' + TVres[i].duration
-				+ '\"<br>Channel: \"' 	+ TVres[i].channel 
-				+ '\"<br>Number of Downloads: \"' + TVres[i].downloadNo
-				+ '\"<br>Ratings: \"' + TVres[i].avgRatings
-				+ '\"Rated by: \"' + TVres[i].ratingNo + '\".'
-				+ '\"<br><br>Programme ID: \"' + TVres[i].id
-			);
-		}
-		/*
-		for(var i = 0; i < colH2.length; i++){
-			colImg.eq(i).attr({
-				src: '',//res[i].imageSource,
-				alt: 'Pic of '// + res[i].eventDateName
-			});
-			//colH2.eq(i).text(res[i].eventDateName);
-			colPDet.eq(i).html(
-				'Name: \"' 				+ res[i].name
-				+ '\"<br>DateOfShow: \"' 		+ res[i].dateOfShow
-				+ '\"<br>UserGroupName: \"' 	+ res[i].userGroupName
-				+ '\"<br>EventHallName: \"' 	+ res[i].eventHallName + '\".'
-				
-			);
-		}
-		*/
 	},
 
 	displaySeats: function(){
@@ -251,31 +177,21 @@ var MainSite = {
 	
 	},
 
-	sortByName: function(){
-		var $tbody = $('table tbody.TVPROGRAMS');
-		$tbody.find('tr').sort(function(a,b){ 
-			var tda = $(a).find('td:eq(1)').text();
-			var tdb = $(b).find('td:eq(1)').text();
-			// if a < b return 1
-			return tda > tdb ? 1 
-				// else if a > b return -1
-				: tda < tdb ? -1 
-				// else they are equal - return 0
-				: 0;
+	sortBy: function(type,className){
+		var $tbody = $('table tbody.'+className);
+		$tbody.find('tr').sort(function(a,b){
+			var typeStr = 'td:eq('+type+')';
+			var tda = $(a).find(typeStr).text();
+			var tdb = $(b).find(typeStr).text();
+			// if a < b return 1, else if a > b return -1, else they are equal - return 0
+			return tda > tdb ? 1 : tda < tdb ? -1 : 0;
 		}).appendTo($tbody);
 	},
 
+	//We don't really need these...
+	sortByName: function(){
+	},
+
 	sortByDate: function(){
-		var $tbody = $('table tbody.TVPROGRAMS');
-		$tbody.find('tr').sort(function(a,b){ 
-			var tda = $(a).find('td:eq(0)').text();
-			var tdb = $(b).find('td:eq(0)').text();
-			// if a < b return 1
-			return tda > tdb ? 1 
-				// else if a > b return -1
-				: tda < tdb ? -1 
-				// else they are equal - return 0
-				: 0;
-		}).appendTo($tbody);
 	}
 }
