@@ -32,60 +32,20 @@ p {
 	/*width: 100%;*/
 }
 
-/*************************************************/
+tr th {width: 40%;}
+tr th:last-child {width: 20%;}
 
-.glyphicon { margin-right:5px; }
-.thumbnail
-{
-	margin-bottom: 20px;
-	padding: 0px;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	border-radius: 0px;
-}
+h2 .glyphicon { margin-right:5px; }
 
-.list-group-item
-{
-	float: none;
-	width: 100%;
-	background-color: #fff;
-	margin-bottom: 10px;
-}
-
-.list-group-item .list-group-image
-{
-	margin-right: 10px;
-}
-.list-group-item .thumbnail
-{
-	margin-bottom: 0px;
-}
-.list-group-item .caption
-{
-	padding: 9px 9px 0px 9px;
-}
-
-.list-group-item:before, .list-group-item:after
-{
-	display: table;
-	content: " ";
-}
-
-.list-group-item img
-{
-	float: left;
-}
-.list-group-item:after
-{
-	clear: both;
-}
-.list-group-item-text
-{
-	margin: 0 0 11px;
-}
-
+/*
 h2 {
 	text-overflow: clip;
 	white-space: normal;
 	overflow: normal;
 }
+*/
+
+
+/*Media queries
+@media only screen and (max-width: 992px) {}
+@media only screen and (max-width: 422px), (max-device-width : 400px) {}*/
