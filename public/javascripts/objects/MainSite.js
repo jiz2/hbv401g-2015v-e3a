@@ -3,10 +3,12 @@
 // ==============
 
 var MainSite = {
+	
 	init: function(){
-		// =====================
-		// Initialize JavaScript
-		// =====================
+		
+		// ======================
+		// Initialize Site Layout
+		// ======================
 		
 		// Initialize default results
 		// Creates HTML container for programme display
@@ -15,26 +17,15 @@ var MainSite = {
 		MainSite.listClass = "";
 		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
 			MainSite.listClass = " list-group-item"
-
-		//This example shows us which column our view seats button belonged to, when clicked
-		$('.showAvailableSeats').click(function(e){
-			e.preventDefault();
-			var cid = $(this).parent().attr('id');
-			ConcertWrapper.getSeats(cid);
-		});
-
+			
 		// Get the newest stuff from both databases and call display
 		Search.searchQuery("");
 		MainSite.loadDL();
-
-		// Search dropdown button
+		
 		// =================
-		$(".dropdown-menu li a").click(function(){
-			var selText = $(this).text();
-			$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-			//$("#searchForm").submit();
-		});
-
+		// Initialize Events
+		// =================
+		
 		// User text input Handling
 		// ========================
 		$("#searchForm").submit(function(e){
@@ -42,13 +33,39 @@ var MainSite = {
 			Search.searchQuery($("#searchInput").val());
 		});
 		
-		// Display Type Handling
-		// =====================
+		// View Seats for Concerts
+		// =======================
+		$(".showAvailableSeats").click(function(e){
+			e.preventDefault();
+			var cid = $(this).parent().attr('id');
+			ConcertWrapper.getSeats(cid);
+		});
+		/*
+		// Book A TV Download
+		// ==================
+		$(".showAvailableSeats").click(function(e){
+			e.preventDefault();
+			var id = $(this).parent().attr('id');
+			TVWrapper.download(id);
+		});
+		*/
+		// Search dropdown button
+		// =================
+		$(".dropdown-menu li a").click(function(){
+			var selText = $(this).text();
+			$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+			//$("#searchForm").submit();
+		});
+		
+		// Handle Display More Results
+		// ===========================
 		$("button#moreRows").click(function(){
-			MainSite.nrOfRows += 2;
+			MainSite.nrOfRows += 4;
 			MainSite.displayResults();
 		});
 
+		// Clear Cache
+		// ===========
 		$(".clearButton").click(function(title){
 			localStorage.clear();
 			MainSite.loadDL();
@@ -87,6 +104,7 @@ var MainSite = {
 				+TVres[i].title
 				+'" type="submit" value="Download"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
 		}
+		// shouldn't this be in the book a download event handler in init?
 		$('tbody.TVPROGRAMS').html(str);
 		$(".downloadButton").click(function(){
 			var title = $(this).attr('id');

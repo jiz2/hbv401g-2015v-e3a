@@ -24,8 +24,7 @@ var Search = {
 			case "TV program":
 				uri = 'http://apis.is/tv/ruv';
 				break;
-			case "All":
-			default:
+			default: // default is case All
 				uri = '/process'
 		}
 
@@ -33,7 +32,9 @@ var Search = {
 			["Searching for the category:", category, query+"."].join(' ')
 		);
 		
-		var date = new Date();
+		var date = new Date(); // what is this? don't we use startDate/endDate?
+		
+		// Get results
 		$.ajax({
 			'url': uri,
 			'type': 'GET',
