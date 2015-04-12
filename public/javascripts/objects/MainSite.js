@@ -69,14 +69,10 @@ var MainSite = {
 	loadDownloads: function(){
 		var db = [];
 		for(var key in localStorage) {
-			db.push(String(localStorage.getItem(key)));
+			var sel = String(localStorage.getItem(key));
+			db.push(sel);
 		};
 		console.log(db);
-		for(var i = 0; i < db.length; i++){
-			var sel = "#"+db[i];
-			//console.log($(sel));
-			$(sel).attr('value', 'Remove');
-		}
 		var str = "You've downloaded: <br>" + db.join('<br>');
 		$("#dlPanel").html(str);
 	},
@@ -101,15 +97,30 @@ var MainSite = {
 			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
 			
 		} else {
+			var db = [];
+			for(var key in localStorage) {
+				db.push(String(localStorage.getItem(key)));
+			};
 			for(var i = 0; i < TVres.length; i++) {
 				if(i >= MainSite.nrOfRows) break;
+				var btnCol = '', 
+					dOrR = 'Download';
+				console.log(TVres[i].title,db.indexOf(TVres[i].title));
+				if(db.indexOf(TVres[i].title)>=0){
+					btnCol = 'warning';
+					dOrR = 'Remove';
+				}
 				str += '<tr><td>'
 					+ TVres[i].startTime
 					+ '</td><td>'
 					+ TVres[i].title
-					+ '</td><td><button class="downloadButton btn btn-primary" id="'
+					+ '</td><td><button class="downloadButton btn btn-primary btn-'
+					+ btnCol
+					+ '" id="'
 					+ TVres[i].title
-					+ '" type="submit" value="Download"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
+					+ '" type="submit" value="'
+					+ dOrR
+					+'"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
 			}
 			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
 			// Attach Book A Download Event Handler
