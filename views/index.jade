@@ -2,6 +2,18 @@ extends layout
 
 block content
 
+	#aboutProject.modal.fade
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					h4.modal-title About the project
+				.modal-body
+					p
+						Some info about this project...
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') Close
+
 	#viewDownloads.modal.fade
 		.modal-dialog
 			.modal-content
@@ -13,6 +25,7 @@ block content
 				.modal-footer
 					button.btn.btn-default(type='button', data-dismiss='modal') Close
 					button.clearButton.btn.btn-danger(type='button' value='Clear all downloads') Clear All downloads
+
 	#advancedSearch.modal.fade
 		.modal-dialog
 			.modal-content
@@ -21,24 +34,24 @@ block content
 					h4.modal-title Advanced settings
 				.modal-body
 					form.form-horizontal
-									.form-group
-										label.col-sm-2.control-label(for='stations') Station:
-										.col-sm-10
-											select#stations.form-control(name='stations')
-												option(value='ruv', name='ruv') Rúv
-												option(value='ruvithrottir', name='ruvithrottir') Rúv-íþróttir
-												option(value='stod2', name='stod2') Stöð2
-												option(value='stod2sport', name='stod2sport') Stöð2-sport
-												option(value='stod2sport2', name='stod2sport2') Stöð2-sport2
-												option(value='stod2gull', name='stod2gull') Stöð2-gull
-												option(value='stod2bio', name='stod2bio') Stöð2-bio
-												option(value='stod3', name='stod3') Stöð3
-												option(value='skjar1', name='skjar1') Skjár1
-									.form-group
-										label.col-sm-2.control-label(for='date') Day:
-										.col-sm-10
-											#date.date-container
-												input.form-control(type='date', name='date')
+						.form-group
+							label.col-sm-2.control-label(for='stations') Station:
+							.col-sm-10
+								select#stations.form-control(name='stations')
+									option(value='ruv', name='ruv') Rúv
+									option(value='ruvithrottir', name='ruvithrottir') Rúv-íþróttir
+									option(value='stod2', name='stod2') Stöð2
+									option(value='stod2sport', name='stod2sport') Stöð2-sport
+									option(value='stod2sport2', name='stod2sport2') Stöð2-sport2
+									option(value='stod2gull', name='stod2gull') Stöð2-gull
+									option(value='stod2bio', name='stod2bio') Stöð2-bio
+									option(value='stod3', name='stod3') Stöð3
+									option(value='skjar1', name='skjar1') Skjár1
+						.form-group
+							label.col-sm-2.control-label(for='date') Day:
+							.col-sm-10
+								#date.date-container
+									input.form-control(type='date', name='date')
 				.modal-footer
 					button.btn.btn-default(type='button', data-dismiss='modal') Close
 
@@ -51,7 +64,7 @@ block content
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
-				a.navbar-brand(href='#') Entertainment System
+				a.navbar-brand(href='#', type='button', data-toggle='modal', data-target='#aboutProject') Entertainment System
 			#navbar.navbar-collapse.collapse
 				ul.nav.navbar-nav.navbar-left.btn-group
 					li
@@ -84,15 +97,17 @@ block content
 				table#ConcertPROGRAMS.table.table-bordered
 					thead
 						tr
-							th Date and time
-							th Title
+							th Date and time 
+								span.caret
+							th Title 
+								span.caret
 							th Book Seats
 					tbody.CONCERTPROGRAMS
 						tr
 							td 2015-04-12 07:00:00
 							td placeholder title
 							td
-								button.downloadButton.btn.btn-primary(type='submit', value='Download')
+								button.seatButton.btn.btn-primary(type='submit', value='Download')
 									span.glyphicon.glyphicon-th
 			.col-md-6
 				h2 TV programs
