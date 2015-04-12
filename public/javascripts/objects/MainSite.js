@@ -97,31 +97,41 @@ var MainSite = {
 		var TVres = res[0];
 		console.log("TVres: ",TVres);
 		var str = "";
-		for(var i = 0; i < TVres.length; i++) {
-			if(i >= MainSite.nrOfRows) break;
+		if(TVres.length === 0){
+			// No results
 			str += '<tr><td>'
-				+ TVres[i].startTime
+				+ '----.--.-- --:--:--'
 				+ '</td><td>'
-				+ TVres[i].title
-				+ '</td><td><button class="downloadButton btn btn-primary" id="'
-				+ TVres[i].title
-				+ '" type="submit" value="Download"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
+				+ 'No results'
+				+ '</td><td></td></tr>';
+			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
+		} else {
+			for(var i = 0; i < TVres.length; i++) {
+				if(i >= MainSite.nrOfRows) break;
+				str += '<tr><td>'
+					+ TVres[i].startTime
+					+ '</td><td>'
+					+ TVres[i].title
+					+ '</td><td><button class="downloadButton btn btn-primary" id="'
+					+ TVres[i].title
+					+ '" type="submit" value="Download"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
+			}
+			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
+			// Attach Book A Download Event Handler
+			$(".downloadButton").click(function(){
+				var title = $(this).attr('id');
+				if($(this).attr('value') === "Download"){
+					$(this).attr("value", "Remove");
+					localStorage.setItem(title, title);
+				}
+				else {
+					$(this).attr("value", "Download");
+					localStorage.removeItem(title);
+				}
+				$(this).toggleClass('btn-warning');
+				MainSite.loadDownloads();
+			});
 		}
-		$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
-		// Attach Book A Download Event Handler
-		$(".downloadButton").click(function(){
-			var title = $(this).attr('id');
-			if($(this).attr('value') === "Download"){
-				$(this).attr("value", "Remove");
-				localStorage.setItem(title, title);
-			}
-			else {
-				$(this).attr("value", "Download");
-				localStorage.removeItem(title);
-			}
-			$(this).toggleClass('btn-warning');
-			MainSite.loadDownloads();
-		});
 		
 		
 		// Concert results
