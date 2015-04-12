@@ -2,56 +2,72 @@ extends layout
 
 block content
 
-	nav.navbar.navbar-inverse.navbar-fixed-top
+	#myModal.modal.fade
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					h4.modal-title Your downloads
+				.modal-body
+					#dlPanel.panel-body
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') Close
+					button.clearButton.btn.btn-danger(type='button' value='Clear all downloads') Clear All downloads
+
+	nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
 		.container
 			.navbar-header
-				button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+				button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar')
 					span.sr-only Toggle navigation
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
-				a.navbar-brand(href='#') Entertainment system
-		//
+				a.navbar-brand(href='#') Entertainment System
 			#navbar.navbar-collapse.collapse
-				form#signinForm.navbar-form.navbar-right
-					.form-group
-						label.sr-only(for='emailInput') Email address
-						input#emailInput.form-control(type='text', placeholder='Email')
-					button.btn.btn-success(type='submit') Sign in
-
-	.jumbotron
-		.container
-			h1 Welcome
-			form#searchForm(role='search')
-				.input-group
-					.input-group-btn
-						button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-							| All 
-							span.caret
-						ul.dropdown-menu(role='menu')
-							li
-								a(href='#') All
-							li
-								a(href='#') Concert
-							li
-								a(href='#') TV program
-					input#searchInput.form-control(type='text', placeholder='Search', name='srch-term', autofocus='')
-				
-					.input-group-btn
-						button#btnSearch.btn.btn-default(type='submit')
-							i.glyphicon.glyphicon-search
-		.btn-group
-			a#list.btn.btn-default.btn-sm(href='#')
-				span.glyphicon.glyphicon-th-list
-				| List
-			a#grid.btn.btn-default.btn-sm(href='#')
-				span.glyphicon.glyphicon-th
-				| Grid
-
+				ul.nav.navbar-nav.navbar-left
+					li
+						a(href='#') Link 1
+				.navbar-form.navbar-right.btn-group
+					button.btn.btn-primary(type='button') View Bookings
+					button.btn.btn-primary(type='button', data-toggle='modal', data-target='#myModal') View downloads
+				form#searchForm.navbar-form(role='search')
+					.form-group(style='display:inline;')
+						.input-group(style='display:table;')
+							.input-group-btn(style="width: 1%;")
+								button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false') All 
+									span.caret
+								ul.dropdown-menu(role='menu')
+									li
+										a(href='#') All
+									li
+										a(href='#') Concert
+									li
+										a(href='#') TV program
+							input#searchInput.form-control(type='text', placeholder='Search', name='srch-term', autofocus='')
+							span.input-group-addon(style="width: 1%;")
+								span.glyphicon.glyphicon-search
 
 	.container(role='main')
 		.row
 			.col-md-6
+				h2 Concerts
+					span.glyphicon.glyphicon-music
+				table.table.table-bordered
+					thead
+						tr
+							th Date and time
+							th Title
+							th #
+					tbody.CONCERTPROGRAMS
+						tr
+							td 2015-04-12 07:00:00
+							td titill
+							td
+								button.downloadButton.btn.btn-primary(type='submit', value='Download')
+									span.glyphicon.glyphicon-th
+			.col-md-6
+				h2 TV programs
+					span.glyphicon.glyphicon-film
 				table.table.table-bordered
 					thead
 						tr
@@ -59,14 +75,10 @@ block content
 							th Title
 							th #
 					tbody.TVPROGRAMS
-			.col-md-6
-				.panel.panel-default
-				#dlPanel.panel-body
-					| Load Downloads!
 
 	.concertDisplay.container
-		button#moreRows.btn.btn-default.btn-block.btn-success
-			| See more
+		button#moreRows.btn.btn-primary.btn-block.btn-success See more 
+			span.caret
 		hr
 		footer
 			p &copy; E3a 2015

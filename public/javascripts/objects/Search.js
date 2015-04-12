@@ -30,13 +30,14 @@ var Search = {
 		}
 
 		console.log(
-			["Searching for the", category, query+"."].join(' ')
+			["Searching for the category:", category, query+"."].join(' ')
 		);
 		
+		var date = new Date();
 		$.ajax({
 			'url': uri,
 			'type': 'GET',
-			'data': {title: query, stations: 'ruv', date: '2015-04-11'},
+			'data': {title: query, stations: 'ruv', date: '2015-04-12'},
 			'dataType': 'json',
 			'success': function(response) {
 				Search.results[0] = response;

@@ -1,17 +1,22 @@
-form#searchForm {
+body {font-size: 16px; padding: 4.375em 0;}
+/*form#searchForm {
 	max-width: 800px; 
 	width: 100%; 
 	margin: 0 auto;
 }
-
-h1,footer p {
+*/
+h1,h2,footer p {
 	text-align: center;
 }
 
-.row h2 {
+.row h2, th {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+}
+
+span.glyphicon {
+	margin: 0 1em;
 }
 
 p {

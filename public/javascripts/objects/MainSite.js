@@ -8,6 +8,25 @@ var MainSite = {
 		// Initialize JavaScript
 		// =====================
 		
+		// Initialize default results
+		// Creates HTML container for programme display
+		MainSite.nrOfCols = 2; // Default number of columns
+		MainSite.nrOfRows = 4; // Default number of rows
+		MainSite.listClass = "";
+		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
+			MainSite.listClass = " list-group-item"
+
+		//This example shows us which column our view seats button belonged to, when clicked
+		$('.showAvailableSeats').click(function(e){
+			e.preventDefault();
+			var cid = $(this).parent().attr('id');
+			ConcertWrapper.getSeats(cid);
+		});
+
+		// Get the newest stuff from both databases and call display
+		Search.searchQuery("");
+		MainSite.loadDL();
+
 		// Search dropdown button
 		// =================
 		$(".dropdown-menu li a").click(function(){
@@ -26,42 +45,31 @@ var MainSite = {
 		// Display Type Handling
 		// =====================
 		$("button#moreRows").click(function(){
-			this.nrOfRows += 2;
+			MainSite.nrOfRows += 2;
 			MainSite.displayResults();
 		});
-		
-		// Display as List
-		// ===============
-		$('#list').click(function(e){
-			e.preventDefault();
-			$('.concertDisplay .col-md-4').addClass('list-group-item');
-		});
-		
-		// Display as Grid
-		// ===============
-		$('#grid').click(function(e){
-			e.preventDefault();
-			$('.concertDisplay .col-md-4').removeClass('list-group-item');
-		});
-		
-		// Initialize default results
-		// Creates HTML container for programme display
-		this.nrOfCols = 2; // Default number of columns
-		this.nrOfRows = 4; // Default number of rows
-		this.listClass = "";
-		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
-			this.listClass = " list-group-item"
 
-		//This example shows us which column our view seats button belonged to, when clicked
-		$('.showAvailableSeats').click(function(e){
-			e.preventDefault();
-			var cid = $(this).parent().attr('id');
-			ConcertWrapper.getSeats(cid);
+		$(".clearButton").click(function(title){
+			localStorage.clear();
+			MainSite.loadDL();
+			$("#dlPanel").append('Nothing yet, make sure you download something!');
+			$(".downloadButton").removeClass('btn-warning');
 		});
+	},
 
-		// Get the newest stuff from both databases and call display
-		Search.searchQuery("");
-		loadDL();
+	loadDL: function(){
+		var db = [];
+		for(var key in localStorage) {
+			db.push(String(localStorage.getItem(key)));
+		};
+		console.log(db);
+		for(var i = 0; i < db.length; i++){
+			var sel = "#"+db[i];
+			console.log($(sel));
+			$(sel).attr('value', 'Remove');
+		}
+		var str = "You've downloaded: <br>"+db.join(', ');
+		$("#dlPanel").html(str);
 	},
 
 	displayResults: function(){
@@ -70,33 +78,46 @@ var MainSite = {
 		console.log("TVres: ",TVres);
 		var str = "";
 		for(var i = 0; i < TVres.length; i++) {
+			if(i>=MainSite.nrOfRows) break;
 			str += '<tr><td>'
 				+TVres[i].startTime
 				+'</td><td>'
 				+TVres[i].title
-				+'</td><td><input type="submit" value="Download" onclick="eventHandler(\''
+				+'</td><td><button class="downloadButton btn btn-primary" id="'
 				+TVres[i].title
-				+'\')"></td></tr>';
+				+'" type="submit" value="Download"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
 		}
 		$('tbody.TVPROGRAMS').html(str);
-
+		$(".downloadButton").click(function(){
+			var title = $(this).attr('id');
+			if($(this).attr('value') === "Download"){
+				$(this).attr("value", "Remove");
+				localStorage.setItem(title, title);
+			}
+			else {
+				$(this).attr("value", "Download");
+				localStorage.removeItem(title);
+			}
+			$(this).toggleClass('btn-warning');
+			MainSite.loadDL();
+		});
 		/*
 		// Set up result layout
-		for(var i = 0; i < this.nrOfRows; i++){
+		for(var i = 0; i < MainSite.nrOfRows; i++){
 			// Only add more events if they exist in the array
 			var diff = TVres.length - $('.concertDisplay .col-md-4').length;
-			if(diff < this.nrOfCols)
+			if(diff < MainSite.nrOfCols)
 				if(TVres.length > 0)
 					if(diff === 0)
 						return;
 					else
-						this.nrOfCols = diff;
+						MainSite.nrOfCols = diff;
 			
 			// Generate corresponding HTML code
 			var str = "";
-			for(var j = 0; j < this.nrOfCols; j++){
+			for(var j = 0; j < MainSite.nrOfCols; j++){
 				var cid = i*j; //just so we get different numbers, for now
-				str += '<div id=\"' + cid + '\" class="col-xs-12 col-md-4' + this.listClass + '">'
+				str += '<div id=\"' + cid + '\" class="col-xs-12 col-md-4' + MainSite.listClass + '">'
 					+'<img class="resultImg img-responsive"></img>'
 					+'<h2></h2>'
 					+'<p class="details"></p>'
@@ -176,22 +197,4 @@ var MainSite = {
 	sortByDate: function(){
 	
 	}
-}
-
-//$("#downloadButton").click(function(title){
-function eventHandler(title){
-	//if(!localStorage.count) localStorage.count = 0;
-	//else localStorage.count++;
-	localStorage.setItem(title, title);
-	loadDL();
-	console.log(localStorage);
-//});
-};
-
-function loadDL(){
-	var db = [];
-	for (var key in localStorage) {
-		db.push(String(localStorage.getItem(key)));
-	};
-	$("#dlPanel").html("Þú ert búinn að downloada: <br>"+db.join(', '));
 }
