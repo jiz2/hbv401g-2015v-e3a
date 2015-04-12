@@ -20,7 +20,7 @@ var MainSite = {
 			
 		// Get the newest stuff from both databases and call display
 		Search.searchQuery("");
-		MainSite.loadDL();
+		MainSite.loadDownloads();
 		
 		// =================
 		// Initialize Events
@@ -68,13 +68,13 @@ var MainSite = {
 		// ===========
 		$(".clearButton").click(function(title){
 			localStorage.clear();
-			MainSite.loadDL();
+			MainSite.loadDownloads();
 			$("#dlPanel").append('Nothing yet, make sure you download something!');
 			$(".downloadButton").removeClass('btn-warning');
 		});
 	},
 
-	loadDL: function(){
+	loadDownloads: function(){
 		var db = [];
 		for(var key in localStorage) {
 			db.push(String(localStorage.getItem(key)));
@@ -82,30 +82,33 @@ var MainSite = {
 		console.log(db);
 		for(var i = 0; i < db.length; i++){
 			var sel = "#"+db[i];
-			console.log($(sel));
+			//console.log($(sel));
 			$(sel).attr('value', 'Remove');
 		}
-		var str = "You've downloaded: <br>"+db.join(', ');
+		var str = "You've downloaded: <br>" + db.join('<br>');
 		$("#dlPanel").html(str);
 	},
 
 	displayResults: function(){
 		var res = Search.results;
+		
+		// TV results
+		// ==========
 		var TVres = res[0];
 		console.log("TVres: ",TVres);
 		var str = "";
 		for(var i = 0; i < TVres.length; i++) {
-			if(i>=MainSite.nrOfRows) break;
+			if(i >= MainSite.nrOfRows) break;
 			str += '<tr><td>'
-				+TVres[i].startTime
-				+'</td><td>'
-				+TVres[i].title
-				+'</td><td><button class="downloadButton btn btn-primary" id="'
-				+TVres[i].title
-				+'" type="submit" value="Download"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
+				+ TVres[i].startTime
+				+ '</td><td>'
+				+ TVres[i].title
+				+ '</td><td><button class="downloadButton btn btn-primary" id="'
+				+ TVres[i].title
+				+ '" type="submit" value="Download"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
 		}
-		// shouldn't this be in the book a download event handler in init?
-		$('tbody.TVPROGRAMS').html(str);
+		$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
+		// Attach Book A Download Event Handler
 		$(".downloadButton").click(function(){
 			var title = $(this).attr('id');
 			if($(this).attr('value') === "Download"){
@@ -117,8 +120,14 @@ var MainSite = {
 				localStorage.removeItem(title);
 			}
 			$(this).toggleClass('btn-warning');
-			MainSite.loadDL();
+			MainSite.loadDownloads();
 		});
+		
+		
+		// Concert results
+		// ===============
+		
+		
 		/*
 		// Set up result layout
 		for(var i = 0; i < MainSite.nrOfRows; i++){
