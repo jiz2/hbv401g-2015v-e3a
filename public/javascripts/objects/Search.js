@@ -7,13 +7,8 @@ var Search = {
 	results: [],
 
 	searchQuery: function(query, startDate, endDate){
-		/* User must be searching for something
-		if(!query) // || query===""
-			return;
-		else
-		*/
-		query = query.trim();
 
+		var query = query.trim();
 		var category = $('#searchForm .btn').text().trim();
 		var uri = "";
 
@@ -34,7 +29,7 @@ var Search = {
 		
 		var date = new Date(); // what is this? don't we use startDate/endDate?
 		
-		// Get results
+		// Get results for TV
 		$.ajax({
 			'url': uri,
 			'type': 'GET',
