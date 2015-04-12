@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-	#myModal.modal.fade
+	#viewDownloads.modal.fade
 		.modal-dialog
 			.modal-content
 				.modal-header
@@ -58,7 +58,7 @@ block content
 						a(href='#', type='button', data-toggle='modal', data-target='#advancedSearch') Advanced
 				.navbar-form.navbar-right.btn-group
 					button.btn.btn-primary(type='button') View Bookings
-					button.btn.btn-primary(type='button', data-toggle='modal', data-target='#myModal') View downloads
+					button.btn.btn-primary(type='button', data-toggle='modal', data-target='#viewDownloads') View downloads
 				form#searchForm.navbar-form(role='search')
 					.form-group(style='display:inline;')
 						.input-group(style='display:table;')
@@ -110,7 +110,7 @@ block content
 			span.caret
 		hr
 		footer
-			p &copy; E3a 2015
+			p &copy; 2015 - The Entertainment Cluster A
 
 	script(src='/javascripts/libraries/jquery-1.11.0.min.js')
 	script(src='/javascripts/libraries/bootstrap.min.js')
