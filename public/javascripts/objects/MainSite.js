@@ -97,15 +97,19 @@ var MainSite = {
 		var TVres = res[0];
 		console.log("TVres: ",TVres);
 		var str = "";
-		if(TVres.length === 0){
-			// No results
+		
+		// No results
+		if(TVres.length === 0){ 
+			
 			str += '<tr><td>'
 				+ '----.--.-- --:--:--'
 				+ '</td><td>'
 				+ 'No results'
 				+ '</td><td></td></tr>';
 			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
+			
 		} else {
+		
 			for(var i = 0; i < TVres.length; i++) {
 				if(i >= MainSite.nrOfRows) break;
 				str += '<tr><td>'
