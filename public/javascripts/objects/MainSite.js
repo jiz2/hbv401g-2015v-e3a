@@ -40,15 +40,7 @@ var MainSite = {
 			var cid = $(this).parent().attr('id');
 			ConcertWrapper.getSeats(cid);
 		});
-		/*
-		// Book A TV Download
-		// ==================
-		$(".showAvailableSeats").click(function(e){
-			e.preventDefault();
-			var id = $(this).parent().attr('id');
-			TVWrapper.download(id);
-		});
-		*/
+		
 		// Search dropdown button
 		// =================
 		$(".dropdown-menu li a").click(function(){
@@ -109,7 +101,6 @@ var MainSite = {
 			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
 			
 		} else {
-		
 			for(var i = 0; i < TVres.length; i++) {
 				if(i >= MainSite.nrOfRows) break;
 				str += '<tr><td>'
@@ -141,6 +132,12 @@ var MainSite = {
 		// Concert results
 		// ===============
 		
+		
+		// Handle View More Button
+		// =======================
+		if(TVres.length <= MainSite.nrOfRows){
+			$("button#moreRows").hide();
+		} else $("button#moreRows").show();
 		
 		/*
 		// Set up result layout
