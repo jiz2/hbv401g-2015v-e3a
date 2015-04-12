@@ -64,6 +64,18 @@ var MainSite = {
 			$("#dlPanel").append('Nothing yet, make sure you download something!');
 			$(".downloadButton").removeClass('btn-warning');
 		});
+
+		// Sort by name
+		// ===========
+		$("th.sortByName").click(function(){
+			MainSite.sortByName();
+		});
+
+		// Sort by name
+		// ===========
+		$("th.sortByDate").click(function(){
+			MainSite.sortByDate();
+		});
 	},
 
 	loadDownloads: function(){
@@ -72,7 +84,7 @@ var MainSite = {
 			var sel = String(localStorage.getItem(key));
 			db.push(sel);
 		};
-		console.log(db);
+		//console.log(db);
 		var str = "You've downloaded: <br>" + db.join('<br>');
 		$("#dlPanel").html(str);
 	},
@@ -83,7 +95,7 @@ var MainSite = {
 		// TV results
 		// ==========
 		var TVres = res[0];
-		console.log("TVres: ",TVres);
+		//console.log("TVres: ",TVres);
 		var str = "";
 		
 		// No results
@@ -105,7 +117,7 @@ var MainSite = {
 				if(i >= MainSite.nrOfRows) break;
 				var btnCol = '', 
 					dOrR = 'Download';
-				console.log(TVres[i].title,db.indexOf(TVres[i].title));
+				//console.log(TVres[i].title,db.indexOf(TVres[i].title));
 				if(db.indexOf(TVres[i].title)>=0){
 					btnCol = 'warning';
 					dOrR = 'Remove';
@@ -240,10 +252,30 @@ var MainSite = {
 	},
 
 	sortByName: function(){
-	
+		var $tbody = $('table tbody.TVPROGRAMS');
+		$tbody.find('tr').sort(function(a,b){ 
+			var tda = $(a).find('td:eq(1)').text();
+			var tdb = $(b).find('td:eq(1)').text();
+			// if a < b return 1
+			return tda > tdb ? 1 
+				// else if a > b return -1
+				: tda < tdb ? -1 
+				// else they are equal - return 0
+				: 0;
+		}).appendTo($tbody);
 	},
 
 	sortByDate: function(){
-	
+		var $tbody = $('table tbody.TVPROGRAMS');
+		$tbody.find('tr').sort(function(a,b){ 
+			var tda = $(a).find('td:eq(0)').text();
+			var tdb = $(b).find('td:eq(0)').text();
+			// if a < b return 1
+			return tda > tdb ? 1 
+				// else if a > b return -1
+				: tda < tdb ? -1 
+				// else they are equal - return 0
+				: 0;
+		}).appendTo($tbody);
 	}
 }
