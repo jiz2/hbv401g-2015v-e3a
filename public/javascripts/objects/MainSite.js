@@ -45,8 +45,14 @@ var MainSite = {
 			//Next we can put it in an array which we'll use when user clicks "Book seats"
 			//ConcertWrapper.pickedSeats.push([row,col]);//Or something like that
 			$(this).toggleClass('btn-warning');
-			$(this).find('span').toggleClass('glyphicon-ok-circle');
-			$(this).find('span').toggleClass('glyphicon-remove-circle');
+			$(this).find('span')
+				.toggleClass('glyphicon-ok-circle')
+				.toggleClass('glyphicon-remove-circle');
+			var wasBooking = $(this).find('span').hasClass('glyphicon-remove-circle');
+			$('#nrOfSeats').text(function(i, oldval){
+				if(wasBooking) 	return ++oldval;
+				else 			return --oldval;
+			});
 		});
 
 		$('#bookSeats').click(function(){
@@ -135,7 +141,7 @@ var MainSite = {
 		var str = "";
 		
 		// No results
-		if(!tvRes){ 
+		if(!tvRes){
 			$("button#moreTVRows").hide();
 			str += '<tr><td>'
 				+ '----.--.-- --:--:--'

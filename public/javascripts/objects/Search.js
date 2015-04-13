@@ -4,7 +4,7 @@
 
 var Search = {
 
-	results: [[null],[null]],
+	results: [[],[]],
 	// results[0] is TV results
 
 	searchQuery: function(query, startDate, endDate){
