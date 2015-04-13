@@ -116,7 +116,7 @@ var MainSite = {
 		var concertRes = Search.results[0];
 		var str = "";
 		
-		if(!concertRes){
+		if(concertRes.length === 0){
 		
 			// No results
 			str += '<tr><td>'
@@ -132,7 +132,7 @@ var MainSite = {
 		
 		// Handle View More Button
 		// =======================
-		//if(!concertRes || concertRes.length <= MainSite.nrOfConcertRows){
+		//if(concertRes.length <= MainSite.nrOfConcertRows){
 			$("button#moreConcertRows").hide();
 		//} else $("button#moreConcertRows").show();
 	},
@@ -206,7 +206,7 @@ var MainSite = {
 		
 		// Handle View More Button
 		// =======================
-		if(!tvRes || tvRes.length <= MainSite.nrOfTVRows){
+		if(tvRes.length <= MainSite.nrOfTVRows){
 			$("button#moreTVRows").hide();
 		} else $("button#moreTVRows").show();
 	},
