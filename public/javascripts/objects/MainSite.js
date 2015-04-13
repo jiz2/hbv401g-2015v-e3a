@@ -12,6 +12,7 @@ var MainSite = {
 		
 		// Initialize default results
 		// Creates HTML container for programme display
+		MainSite.nrOfCols = 2;			// Default number of columns
 		MainSite.nrOfTVRows = 4; 		// Default number of TV rows
 		MainSite.nrOfConcertRows = 4; 	// Default number of Concert rows
 			
