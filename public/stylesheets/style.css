@@ -45,6 +45,10 @@ p {
 	/*width: 100%;
 }*/
 
+button#moreConcertRows, button#moreTVRows {
+	display: none;
+}
+
 table tbody td .btn {
 	display: block;
 	margin:auto;

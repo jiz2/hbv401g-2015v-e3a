@@ -65,7 +65,7 @@ var MainSite = {
 		$(".dropdown-menu li a").click(function(){
 			var selText = $(this).text();
 			$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-			//$("#searchForm").submit(); ??
+			//$("#searchForm").submit(); //Uncomment if you want it to search automatically when category is changed
 		});
 		
 		// Handle Display More Concert Results
