@@ -4,8 +4,9 @@
 
 var Search = {
 
-	results: [[null],[null]],
-	// results[0] is TV results
+	results: [],
+	// results[0] is Concert results
+	// results[1] is TV results
 
 	searchQuery: function(query, startDate, endDate){
 
@@ -17,7 +18,7 @@ var Search = {
 		if(category === "All" || category === "Concert"){
 			uri = 'http://apis.is/concerts';
 
-			// Get results for TV
+			// Get results for Concerts
 			$.ajax({
 				'url': uri,
 				'type': 'GET',
