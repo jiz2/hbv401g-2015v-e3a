@@ -120,10 +120,13 @@ var MainSite = {
 		
 			// No results
 			str += '<tr><td>'
-				+ '----.--.-- --:--:--'
+				+ '2015-04-12 07:00:00'
 				+ '</td><td>'
-				+ 'No results'
-				+ '</td><td></td></tr>';
+				+ 'placeholder title'
+				+ '</td><td>'
+				+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
+				+ '<span class="glyphicon glyphicon-th"></span></button>'
+				+ '</td></tr>';
 			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
 		
 		} else {
