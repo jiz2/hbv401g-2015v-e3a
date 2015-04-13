@@ -94,7 +94,6 @@ var findTitle = function(criteria, data, callback){
     var results = [];
     var tSearch= (criteria.title !== "");
     var dSearch= (criteria.date !== "");
-    console.log(criteria.date);
 
     if (dSearch) 
       { 
@@ -102,7 +101,6 @@ var findTitle = function(criteria, data, callback){
         var searchMonth = searchDate.getMonth();
         var searchDay = searchDate.getDate();
         var searchYear = searchDate.getYear();
-        console.log(searchDate);
       }
 
     //Lets extract the array with the show objects!
@@ -111,10 +109,8 @@ var findTitle = function(criteria, data, callback){
     
     for (j=0;j<currentDataBlock.length; j++)
     {
-      console.log('erum inni loopu og erum ad horfa a ' + currentDataBlock[j].title);
       var show = currentDataBlock[j];
       var str = ".*"+criteria.title+".*";
-      console.log(str);
       var showTitle = new RegExp(str, "i");
       var showDate = new Date (show.startTime);
 
@@ -130,14 +126,12 @@ var findTitle = function(criteria, data, callback){
 
       if(tSearch && dSearch && showTitle.test(show.title) && searchMonth===showMonth && searchDay===showDay && searchYear===showYear)
       {
-        console.log('baetum titlinum: '+show.title+' vid!');
         results.push(show);
         continue;
       }
 
       if(!tSearch && dSearch && searchMonth===showMonth && searchDay===showDay && searchYear===showYear)
       {
-        console.log('baetum vid showi: '+ show.title+'!;');
         results.push(show);
         continue;
       }
