@@ -13,10 +13,8 @@ var MainSite = {
 		// Initialize default results
 		// Creates HTML container for programme display
 		MainSite.nrOfCols = 2; // Default number of columns
-		MainSite.nrOfRows = 4; // Default number of rows
-		MainSite.listClass = "";
-		if($('.concertDisplay .col-md-4').hasClass('list-group-item'))
-			MainSite.listClass = " list-group-item"
+		MainSite.nrOfTVRows = 4; // Default number of TV rows
+		MainSite.nrOfConcertRows = 4; // Default number of TV rows
 			
 		// Get the newest stuff from both databases and call display
 		Search.searchQuery("");
@@ -35,8 +33,9 @@ var MainSite = {
 		
 		// View Seats for Concerts
 		// =======================
-		$(".showAvailableSeats").click(function(e){
+		$(".seatButton").click(function(e){
 			e.preventDefault();
+			console.log(1);
 			var cid = $(this).parent().attr('id');
 			ConcertWrapper.getSeats(cid);
 		});
@@ -49,13 +48,20 @@ var MainSite = {
 			//$("#searchForm").submit();
 		});
 		
-		// Handle Display More Results
+		// Handle Display More Concert Results
 		// ===========================
-		$("button#moreRows").click(function(){
-			MainSite.nrOfRows += 4;
-			MainSite.displayResults();
+		$("button#moreConcertRows").click(function(){
+			MainSite.nrOfConcertRows += 4;
+			MainSite.displayConcertResults();
 		});
 
+		// Handle Display More TV Results
+		// ===========================
+		$("button#moreTVRows").click(function(){
+			MainSite.nrOfTVRows += 4;
+			MainSite.displayTVResults();
+		});
+		
 		// Clear Cache
 		// ===========
 		$(".clearButton").click(function(title){
@@ -85,52 +91,74 @@ var MainSite = {
 		$("#dlPanel").html(str);
 	},
 
-	displayResults: function(){
-		var res = Search.results;
+	displayResults: function(){		
+		// Concert results
+		// ===============
+		MainSite.displayConcertResults();		
 		
 		// TV results
+		// ===============
+		MainSite.displayTVResults();
+	},
+
+	displayConcertResults: function(){
+		var concertRes = Search.results[0];
+		if(!concertRes || concertRes.results){
+			$("button#moreConcertRows").hide();
+			return;
+		}
+		// Handle View More Button
+		// =======================
+		if(concertRes.length <= MainSite.nrOfConcertRows){
+			$("button#moreConcertRows").hide();
+		} else $("button#moreConcertRows").show();
+	},
+
+	displayTVResults: function(){
+		// TV results
 		// ==========
-		var TVres = res[0];
-		//console.log("TVres: ",TVres);
+		var tvRes = Search.results[1];
+		//console.log("tvRes: ",tvRes);
 		var str = "";
 		
 		// No results
-		if(TVres.length === 0){ 
-			
+		if(!tvRes){ 
+			$("button#moreTVRows").hide();
 			str += '<tr><td>'
 				+ '----.--.-- --:--:--'
 				+ '</td><td>'
 				+ 'No results'
 				+ '</td><td></td></tr>';
 			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
-			
+			return;
 		} else {
 			var db = [];
 			for(var key in localStorage) {
 				db.push(String(localStorage.getItem(key)));
 			};
-			for(var i = 0; i < TVres.length; i++) {
-				if(i >= MainSite.nrOfRows) break;
+			for(var i = 0; i < tvRes.length; i++) {
+				if(i >= MainSite.nrOfTVRows) break;
 				var btnCol = '', 
 					dOrR = 'Download';
-				//console.log(TVres[i].title,db.indexOf(TVres[i].title));
-				if(db.indexOf(TVres[i].title)>=0){
+				//console.log(tvRes[i].title,db.indexOf(tvRes[i].title));
+				if(db.indexOf(tvRes[i].title)>=0){
 					btnCol = 'warning';
 					dOrR = 'Remove';
 				}
 				str += '<tr><td>'
-					+ TVres[i].startTime
+					+ tvRes[i].startTime
 					+ '</td><td>'
-					+ TVres[i].title
+					+ tvRes[i].title
 					+ '</td><td><button class="downloadButton btn btn-primary btn-'
 					+ btnCol
 					+ '" id="'
-					+ TVres[i].title
+					+ tvRes[i].title
 					+ '" type="submit" value="'
 					+ dOrR
 					+'"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
 			}
 			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
+
 			// Attach Book A Download Event Handler
 			$(".downloadButton").click(function(){
 				var title = $(this).attr('id');
@@ -145,18 +173,13 @@ var MainSite = {
 				$(this).toggleClass('btn-warning');
 				MainSite.loadDownloads();
 			});
+
+			// Handle View More Button
+			// =======================
+			if(!tvRes && tvRes.length <= MainSite.nrOfTVRows){
+				$("button#moreTVRows").hide();
+			} else $("button#moreTVRows").show();
 		}
-		
-		
-		// Concert results
-		// ===============
-		
-		
-		// Handle View More Button
-		// =======================
-		if(TVres.length <= MainSite.nrOfRows){
-			$("button#moreRows").hide();
-		} else $("button#moreRows").show();
 	},
 
 	displaySeats: function(){
@@ -164,7 +187,7 @@ var MainSite = {
 		//Remember to let them have a booking button, which we can
 		// make a handler like this:
 		/*
-		$('.bookAvailableSeats').click(function(e){
+		$('.bookSeats').click(function(e){
 			e.preventDefault();
 			var seats = [seats that the user picked];
 			ConcertWrapper.bookSeats(seats);

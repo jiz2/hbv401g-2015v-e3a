@@ -1,0 +1,35 @@
+.row
+	.col-md-6
+		h2 Concerts
+			span.glyphicon.glyphicon-music
+		table#ConcertPROGRAMS.table.table-bordered
+			thead
+				tr
+					th Date and time 
+						span.caret
+					th Title 
+						span.caret
+					th Book Seats
+			tbody.CONCERTPROGRAMS
+				tr
+					td 2015-04-12 07:00:00
+					td placeholder title
+					td
+						button.btn.btn-primary(type='button', data-toggle='modal', data-target='#viewSeats')
+							span.glyphicon.glyphicon-th
+		button#moreConcertRows.btn.btn-primary.btn-block See more 
+			span.caret
+	.col-md-6
+		h2 TV programs
+			span.glyphicon.glyphicon-film
+		table#TVPROGRAMS.table.table-bordered
+			thead
+				tr
+					th.sortable Date and time 
+						span.caret
+					th.sortable Title 
+						span.caret
+					th Download
+			tbody.TVPROGRAMS
+		button#moreTVRows.btn.btn-primary.btn-block See more 
+			span.caret

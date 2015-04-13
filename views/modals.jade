@@ -1,0 +1,88 @@
+//MODALS
+#aboutProject.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+				h4.modal-title About the project
+			.modal-body
+				p
+					Some info about this project...
+			.modal-footer
+				button.btn.btn-default(type='button', data-dismiss='modal') Close
+
+#viewSeats.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+				h4.modal-title Pick available seats
+			.modal-body
+				p Hér mun vera fylki þar sem hægt er að velja sæti
+				table.table.table-bordered
+					thead
+						th.col-md-1 #
+						th A
+						th B
+						th C
+					tbody
+						tr
+							td 1
+							td
+							td
+							td
+						tr
+							td 2
+							td
+							td
+							td
+						tr
+							td 3
+							td
+							td
+							td
+
+			.modal-footer
+				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button.bookSeats.btn.btn-success(type='button' value='Book seats') Book seats
+
+#viewDownloads.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+				h4.modal-title Your downloads
+			.modal-body
+				#dlPanel.panel-body
+			.modal-footer
+				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button.clearButton.btn.btn-danger(type='button' value='Clear all downloads') Clear All downloads
+
+#advancedSearch.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+				h4.modal-title Advanced settings
+			.modal-body
+				form.form-horizontal
+					.form-group
+						label.col-sm-2.control-label(for='stations') Station:
+						.col-sm-10
+							select#stations.form-control(name='stations')
+								option(value='ruv', name='ruv') Rúv
+								option(value='ruvithrottir', name='ruvithrottir') Rúv-íþróttir
+								option(value='stod2', name='stod2') Stöð2
+								option(value='stod2sport', name='stod2sport') Stöð2-sport
+								option(value='stod2sport2', name='stod2sport2') Stöð2-sport2
+								option(value='stod2gull', name='stod2gull') Stöð2-gull
+								option(value='stod2bio', name='stod2bio') Stöð2-bio
+								option(value='stod3', name='stod3') Stöð3
+								option(value='skjar1', name='skjar1') Skjár1
+					.form-group
+						label.col-sm-2.control-label(for='date') Day:
+						.col-sm-10
+							#date.date-container
+								input.form-control(type='date', name='date')
+			.modal-footer
+				button.btn.btn-default(type='button', data-dismiss='modal') Close
