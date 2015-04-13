@@ -4,14 +4,9 @@
 
 var Search = {
 
-<<<<<<< HEAD
 	results: [[],[]],
-	// results[0] is TV results
-=======
-	results: [],
 	// results[0] is Concert results
 	// results[1] is TV results
->>>>>>> origin/master
 
 	searchQuery: function(query, startDate, endDate){
 
