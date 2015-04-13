@@ -4,20 +4,21 @@
 
 var ConcertWrapper = {
 	
-	seats: [],
+	availableSeats: [],
+	pickedSeats: [],
 	_cid: 0,
 	
 	getSeats: function(cid){
 		_cid = cid;
-		//ConcertWrapper.seats = getSeatsFromOtherGroup(cid)
+		//ConcertWrapper.availableSeats = getSeatsFromOtherGroup(cid)
 		MainSite.displaySeats();
 	},
 
-	bookSeats: function(seats){
+	bookSeats: function(){
 		/*
 		var bnr = 0;
 		//handle seat booking
 		MainSite.displayBnr(bnr);
 		*/
-	},
+	}
 }

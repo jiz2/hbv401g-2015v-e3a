@@ -27,7 +27,7 @@
 							th= val
 					tbody
 						- var i = 1
-						while i < 5
+						while i < 6
 							tr
 								td= i++
 								-var j = 0
@@ -39,7 +39,7 @@
 
 			.modal-footer
 				button.btn.btn-default(type='button', data-dismiss='modal') Close
-				button.bookSeats.btn.btn-success(type='button' value='Book seats') Book seats
+				button#bookSeats.btn.btn-success(type='button' value='Book seats') Book seats
 
 #viewDownloads.modal.fade
 	.modal-dialog

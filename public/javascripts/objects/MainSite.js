@@ -33,11 +33,24 @@ var MainSite = {
 		
 		// View Seats for Concerts
 		// =======================
-		$(".seatButton").click(function(e){
-			e.preventDefault();
-			console.log(1);
+		$(".viewSeats").click(function(){
 			var cid = $(this).parent().attr('id');
 			ConcertWrapper.getSeats(cid);
+		});
+
+		$("#viewSeats .seatBtn").click(function(){
+			var row = $(this).parent().parent().index();
+			var col = $(this).parent().index()-1;
+			//console.log(row, col);
+			//Next we can put it in an array which we'll use when user clicks "Book seats"
+			//ConcertWrapper.pickedSeats.push([row,col]);//Or something like that
+			$(this).toggleClass('btn-warning');
+			$(this).find('span').toggleClass('glyphicon-ok-circle');
+			$(this).find('span').toggleClass('glyphicon-remove-circle');
+		});
+
+		$('#bookSeats').click(function(){
+			ConcertWrapper.bookSeats();
 		});
 		
 		// Search dropdown button
@@ -183,17 +196,8 @@ var MainSite = {
 	},
 
 	displaySeats: function(){
-		//Draw a box on the screen with available seats for the user
-		//Remember to let them have a booking button, which we can
-		// make a handler like this:
-		/*
-		$('.bookSeats').click(function(e){
-			e.preventDefault();
-			var seats = [seats that the user picked];
-			ConcertWrapper.bookSeats(seats);
-		});
+		//Make seats that are not available red, not clickable and switch the glyphicon to ban-circle
 		//Remeber to close the window, maybe error handling
-		*/
 	},
 
 	displayBnr: function(bnr){
