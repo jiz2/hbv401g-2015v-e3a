@@ -8,9 +8,5 @@ html(lang='en')
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 	body
-		include modals
-		include navbar
-		.container(role='main')
-			include results
-			include footer
+		block index
 		include scripts
