@@ -4,7 +4,7 @@
 
 var Search = {
 
-	results: [[],[]],
+	results: [],
 	// results[0] is Concert results
 	// results[1] is TV results
 
