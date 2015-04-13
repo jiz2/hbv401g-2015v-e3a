@@ -18,7 +18,7 @@ var MainSite = {
 			
 		// Get the newest stuff from both databases and display
 		Search.searchQuery("");
-		MainSite.loadDownloads();
+		MainSite.displayDownloads();
 		
 		
 		// =================
@@ -80,7 +80,7 @@ var MainSite = {
 		// ===============
 		$(".clearButton").click(function(title){
 			localStorage.clear();
-			MainSite.loadDownloads();
+			MainSite.displayDownloads();
 			$("#dlPanel").append('Nothing yet, make sure you download something!');
 			$(".downloadButton").removeClass('btn-warning');
 		});
@@ -92,17 +92,6 @@ var MainSite = {
 			var className = $(this).closest('table').attr('id');
 			MainSite.sortBy(type,className);
 		});
-	},
-
-	loadDownloads: function(){
-		var db = [];
-		for(var key in localStorage) {
-			var sel = String(localStorage.getItem(key));
-			db.push(sel);
-		};
-		//console.log(db);
-		var str = "You've downloaded: <br>" + db.join('<br>');
-		$("#dlPanel").html(str);
 	},
 
 	displayResults: function(){
@@ -205,7 +194,7 @@ var MainSite = {
 					localStorage.removeItem(title);
 				}
 				$(this).toggleClass('btn-warning');
-				MainSite.loadDownloads();
+				MainSite.displayDownloads();
 			});
 		}
 		
@@ -214,6 +203,17 @@ var MainSite = {
 		if(!tvRes || tvRes.length <= MainSite.nrOfTVRows){
 			$("button#moreTVRows").hide();
 		} else $("button#moreTVRows").show();
+	},
+
+	displayDownloads: function(){
+		var db = [];
+		for(var key in localStorage) {
+			var sel = String(localStorage.getItem(key));
+			db.push(sel);
+		};
+		//console.log(db);
+		var str = "You've downloaded: <br>" + db.join('<br>');
+		$("#dlPanel").html(str);
 	},
 
 	displaySeats: function(){
