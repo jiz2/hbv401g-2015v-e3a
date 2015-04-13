@@ -45,6 +45,20 @@ p {
 	/*width: 100%;
 }*/
 
+table tbody td .btn {
+	display: block;
+	margin:auto;
+} 
+
+#viewSeats th, #viewSeats tr {
+	text-align: center;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+#viewSeats tbody td:not(:first-child) {
+	
+}
 
 .container tr th {width: 40%;}
 .container tr th:last-child {width: 20%;}

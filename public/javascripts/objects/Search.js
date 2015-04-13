@@ -40,7 +40,7 @@ var Search = {
 			$.ajax({
 				'url': uri,
 				'type': 'GET',
-				'data': {title: query, stations: 'ruv', date: '2015-04-12'},
+				'data': {title: query, stations: 'ruv', date: date},
 				'dataType': 'json',
 				'success': function(response) {
 					Search.results[1] = response;

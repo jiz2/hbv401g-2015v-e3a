@@ -18,29 +18,24 @@
 				button.close(type='button', data-dismiss='modal', aria-label='Close')
 				h4.modal-title Pick available seats
 			.modal-body
-				p Hér mun vera fylki þar sem hægt er að velja sæti
-				table.table.table-bordered
+				p Number of seats picked:
+					span#nrOfSeats
+				table.table.table-bordered(data-toggle='buttons-checkbox' style='width: 100%;')
 					thead
 						th.col-md-1 #
-						th A
-						th B
-						th C
+						each val in ['A','B','C','D','E']
+							th= val
 					tbody
-						tr
-							td 1
-							td
-							td
-							td
-						tr
-							td 2
-							td
-							td
-							td
-						tr
-							td 3
-							td
-							td
-							td
+						- var i = 1
+						while i < 5
+							tr
+								td= i++
+								-var j = 0
+								while j < 5
+									- j++
+									td
+										.btn.btn-block.btn-primary.seatBtn
+											span.glyphicon.glyphicon-ok-circle
 
 			.modal-footer
 				button.btn.btn-default(type='button', data-dismiss='modal') Close

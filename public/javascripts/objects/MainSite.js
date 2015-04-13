@@ -74,9 +74,9 @@ var MainSite = {
 		// Sort by name
 		// ===========
 		$("th.sortable").click(function(){
-			var name = $(this).index();
-			var type = $(this).closest('table').attr('id');
-			MainSite.sortBy(name,type);
+			var type = $(this).index();
+			var className = $(this).closest('table').attr('id');
+			MainSite.sortBy(type,className);
 		});
 	},
 
@@ -142,14 +142,14 @@ var MainSite = {
 					dOrR = 'Download';
 				//console.log(tvRes[i].title,db.indexOf(tvRes[i].title));
 				if(db.indexOf(tvRes[i].title)>=0){
-					btnCol = 'warning';
+					btnCol = 'btn-warning';
 					dOrR = 'Remove';
 				}
 				str += '<tr><td>'
 					+ tvRes[i].startTime
 					+ '</td><td>'
 					+ tvRes[i].title
-					+ '</td><td><button class="downloadButton btn btn-primary btn-'
+					+ '</td><td><button class="downloadButton btn btn-primary '
 					+ btnCol
 					+ '" id="'
 					+ tvRes[i].title
@@ -209,12 +209,5 @@ var MainSite = {
 			// if a < b return 1, else if a > b return -1, else they are equal - return 0
 			return tda > tdb ? 1 : tda < tdb ? -1 : 0;
 		}).appendTo($tbody);
-	},
-
-	//We don't really need these...
-	sortByName: function(){
-	},
-
-	sortByDate: function(){
 	}
 }

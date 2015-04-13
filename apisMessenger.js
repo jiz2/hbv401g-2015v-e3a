@@ -117,7 +117,7 @@ var findTitle = function(criteria, data, callback){
       var showMonth = showDate.getMonth();
       var showDay = showDate.getDate();
       var showYear = showDate.getYear();
-
+      
       if(tSearch && !dSearch && showTitle.test(show.title))
       {
         results.push(show);
@@ -140,7 +140,6 @@ var findTitle = function(criteria, data, callback){
       {
         results.push(show);
       }
-
     }
     callback(results);
 }
