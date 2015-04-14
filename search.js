@@ -34,23 +34,3 @@ exports.search = function(query, callback) {
 		db.db.driver.execQuery(searchTerm, callback);
 	}
 };
-
-
-db.onReady(function() {
-		console.log('calling back');
-		dbReady = true;
-
-		concertsDB = db.Concerts;
-		seatsDB = db.Seats;
-
-		exports.search({id: 2}, function(err, results) {
-			if(err)
-				console.log(err);
-			else {
-				console.log(results);
-				//console.log('eventHalName:'+ results[0].eventHallName);
-			}
-		});
-
-	}
-);
