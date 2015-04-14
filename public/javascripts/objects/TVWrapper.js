@@ -11,8 +11,7 @@ var TVWrapper = {
 			'data': {id: id},
 			'dataType': 'json',
 			'success': function(response) {
-				//Search.results = response.results;
-				//MainSite.displayResults();
+				// doesn't doesnt do any callback afaik
 				console.log(response);
 			}
 		});

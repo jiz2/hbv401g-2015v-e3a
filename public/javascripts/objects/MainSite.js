@@ -243,7 +243,7 @@ var MainSite = {
 	},
 
 	displayBnr: function(bnr){
-	
+		// Do something with bnr like show it
 	},
 
 	sortBy: function(type,className){

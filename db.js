@@ -23,7 +23,7 @@ exports.db = db;
 
 exports.onReady = function (callback) {
 	//var callback = callback;
-	console.log('onReady');
+	//console.log('onReady');
 
 	db.on('connect', function(err, db) {
 		if (err) return printError(err);
@@ -33,8 +33,8 @@ exports.onReady = function (callback) {
 
 function setUp(err, db, callback) {
 	if (err) return printError(err);
-	console.log('Raungefni í gagnagrunni.');
-	console.log('Ný tenging hafin, ' + new Date());
+	//console.log('Raungefni í gagnagrunni.');
+	//console.log('Ný tenging hafin, ' + new Date());
 
 	/*****************
 	 *               *
