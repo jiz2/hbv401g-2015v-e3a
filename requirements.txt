@@ -1,4 +1,4 @@
-﻿--Install nodejs from nodejs.org
+--Install nodejs from nodejs.org
 
 --Check if you have the newest versions:
 node -v
