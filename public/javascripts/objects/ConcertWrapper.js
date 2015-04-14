@@ -10,9 +10,9 @@ var ConcertWrapper = {
 	
 	getSeats: function(cid){
 		this._cid = cid;
-		// var uri = '/book'; this need to be the getseats process
+		var uri = '/book/available';
 		
-		// Book Seats Concert
+		// Get Seats
 		$.ajax({
 			'url': uri,
 			'type': 'GET',
@@ -28,9 +28,9 @@ var ConcertWrapper = {
 	bookSeats: function(){
 		var cid = this._cid;
 		var seats = this.pickedSeats;
-		var uri = '/book';
+		var uri = '/book/book';
 		
-		// Book Seats Concert
+		// Book Seats
 		$.ajax({
 			'url': uri,
 			'type': 'GET',
