@@ -100,19 +100,17 @@ exports.bookSeats = function(concertId, seatArr, callback) {
 }
 
 db.onReady(function() {
-		console.log('calling back');
 		dbReady = true;
 
 		concertsDB = db.Concerts;
 		seatsDB = db.Seats;
 
-		qArr = [[1, 1, 1]
-				[2, 3, 4]];
+		//qArr = [[1, 1, 1]
+		//		[2, 3, 4]];
 
 		/*exports.getAvailableSeats(2, function(err, results) {
 			if(err) console.log(err);
 			console.log(results[0].available);
 		});*/
-		exports.book('','',function(bookingNumber){console.log(bookingNumber);});
 	}
 );

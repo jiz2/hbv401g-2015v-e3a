@@ -8,14 +8,13 @@ router.get('/', function(req, res, next) {
 	console.log("Processing Concert search:", term,date, ". Please be patient!");
 	var testCriteria = {term: term, date: date};
 	*/
-	var doneFetching = function(err, response){
-		var results;
-		if(err) results = err;
-		else results = response;
+	var doneFetching = function(bookingNumber){
+		var results = bookingNumber;
 		results = JSON.stringify(results);
 		res.send(results);
 	}
-
+	//book = function(concertId, seatArr, callback)
+	book.book('','',doneFetching);
 	//concert.search(testCriteria, doneFetching);
 });
 
