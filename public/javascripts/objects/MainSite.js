@@ -36,13 +36,6 @@ var MainSite = {
 			e.preventDefault();
 			Search.searchQuery($("#searchInput").val());
 		});
-		
-		// View Seats for Concerts
-		// =======================
-		$(".viewSeats").click(function(){
-			var cid = $(this).parent().attr('id');
-			ConcertWrapper.getSeats(cid);
-		});
 
 		$("#viewSeats .seatBtn").click(function(){
 			var row = $(this).parent().parent().index();
@@ -116,28 +109,47 @@ var MainSite = {
 		var concertRes = Search.results[0];
 		var str = "";
 		
-		//if(concertRes.length === 0){
-		
-			// No results
+		// No results
+		if(!concertRes){
+			$("button#moreConcertRows").hide();
 			str += '<tr><td>'
-				+ '2015-04-12 07:00:00'
+				+ '----.--.-- --:--:--'
 				+ '</td><td>'
-				+ 'placeholder title'
+				+ 'No results'
+				+ '</td><td></td></tr>';
+			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
+			
+		} else { 
+			
+			for(var i = 0; i < concertRes.length; i++) {
+				
+				// Early quit if displayed all results
+				if(i >= MainSite.nrOfConcertRows) break;
+				
+				str += '<tr><td>'
+				+ concertRes[i].dateofshow
+				+ '</td><td>'
+				+ concertRes[i].eventdatename
 				+ '</td><td>'
 				+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
 				+ '<span class="glyphicon glyphicon-th"></span></button>'
 				+ '</td></tr>';
+			}
 			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
-		
-		//} else {
-			// Display concert results
-		//}
-		
+
+			// Attach Book A Download Event Handler
+			$(".viewSeats").click(function(){
+				var cid = $(this).parent().attr('id');
+				ConcertWrapper.getSeats(cid);
+			});
+		}
+
 		// Handle View More Button
 		// =======================
-		//if(concertRes.length <= MainSite.nrOfConcertRows){
-			//$("button#moreConcertRows").hide();
-		//} else $("button#moreConcertRows").show();
+		if(concertRes.length <= MainSite.nrOfConcertRows){
+			$("button#moreConcertRows").hide();
+		} else $("button#moreConcertRows").show();
+		
 	},
 
 	displayTVResults: function(){

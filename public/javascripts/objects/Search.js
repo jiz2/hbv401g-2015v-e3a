@@ -30,7 +30,6 @@ var Search = {
 				'dataType': 'json',
 				'success': function(response) {
 					Search.results[0] = response;
-					console.log(response);
 					MainSite.displayConcertResults();
 				}
 			});
