@@ -5,7 +5,7 @@ var concert = require('../search');
 router.get('/', function(req, res, next) {
   var term = req.query['term'];
   var date = req.query['date'];
-  console.log(term,date,"we are prcessing! Please be patient :*");
+  console.log(term,date,"Processing Concert search! Please be patient :*");
   var testCriteria = {term: term, date: date};
 
   var doneFetching = function(response){
@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     res.send(results);
   }
 
-  apM.queryTV(testCriteria, doneFetching);
+  concert.search(testCriteria, doneFetching);
 });
 
 
