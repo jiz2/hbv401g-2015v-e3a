@@ -24,10 +24,11 @@ var Search = {
 			$.ajax({
 				'url': uri,
 				'type': 'GET',
-				'data': {term: query, date: '2015-04-12'},
+				'data': {term: query, date: date},
 				'dataType': 'json',
 				'success': function(response) {
 					Search.results[0] = response;
+					console.log(response);
 					MainSite.displayConcertResults();
 				}
 			});
