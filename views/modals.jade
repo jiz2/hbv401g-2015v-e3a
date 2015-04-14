@@ -41,6 +41,18 @@
 				button.btn.btn-default(type='button', data-dismiss='modal') Close
 				button#bookSeats.btn.btn-success(type='button' value='Book seats') Book seats
 
+#viewBookings.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+				h4.modal-title Your bookings
+			.modal-body
+				#bPanel.panel-body
+			.modal-footer
+				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button#clearBookingsButton.btn.btn-danger(type='button' value='Clear all bookings') Clear all bookings
+
 #viewDownloads.modal.fade
 	.modal-dialog
 		.modal-content
@@ -51,7 +63,7 @@
 				#dlPanel.panel-body
 			.modal-footer
 				button.btn.btn-default(type='button', data-dismiss='modal') Close
-				button.clearButton.btn.btn-danger(type='button' value='Clear all downloads') Clear All downloads
+				button#clearDownloadsButton.btn.btn-danger(type='button' value='Clear all downloads') Clear all downloads
 
 #advancedSearch.modal.fade
 	.modal-dialog

@@ -84,7 +84,7 @@ var MainSite = {
 		
 		// Clear Downloads
 		// ===============
-		$(".clearButton").click(function(title){
+		$("#clearDownloadsButton").click(function(title){
 			localStorage.clear();
 			MainSite.displayDownloads();
 			$("#dlPanel").append('Nothing yet, make sure you download something!');
