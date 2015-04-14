@@ -11,7 +11,6 @@ var dbReady = false;
 
 
 exports.search = function(query, callback) {
-	console.log("QUERY: ",query)
 	var searchTerm = "SELECT * FROM concerts WHERE";
 	if(dbReady)
 	{
