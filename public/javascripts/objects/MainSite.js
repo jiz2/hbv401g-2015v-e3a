@@ -121,23 +121,24 @@ var MainSite = {
 			
 		} else { 
 			
+			// Display Concert results
 			for(var i = 0; i < concertRes.length; i++) {
 				
 				// Early quit if displayed all results
 				if(i >= MainSite.nrOfConcertRows) break;
 				
 				str += '<tr><td>'
-				+ concertRes[i].dateofshow
-				+ '</td><td>'
-				+ concertRes[i].eventdatename
-				+ '</td><td>'
-				+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
-				+ '<span class="glyphicon glyphicon-th"></span></button>'
-				+ '</td></tr>';
+					+ concertRes[i].dateofshow.split('T').join(' ')
+					+ '</td><td>'
+					+ concertRes[i].eventdatename
+					+ '</td><td>'
+					+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
+					+ '<span class="glyphicon glyphicon-th"></span></button>'
+					+ '</td></tr>';
 			}
 			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
 
-			// Attach Book A Download Event Handler
+			// Attach View Seats Event Handler
 			$(".viewSeats").click(function(){
 				var cid = $(this).parent().attr('id');
 				ConcertWrapper.getSeats(cid);
@@ -149,7 +150,6 @@ var MainSite = {
 		if(concertRes.length <= MainSite.nrOfConcertRows){
 			$("button#moreConcertRows").hide();
 		} else $("button#moreConcertRows").show();
-		
 	},
 
 	displayTVResults: function(){
