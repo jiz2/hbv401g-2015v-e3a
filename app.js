@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var processTV = require('./routes/processTV');
 var processConcert = require('./routes/processConcert');
+var book = require('./routes/book');
 
 var app = express();
 // view engine setup
@@ -27,6 +28,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/processTV', processTV);
 app.use('/processConcert', processConcert);
+app.use('/book', book);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
