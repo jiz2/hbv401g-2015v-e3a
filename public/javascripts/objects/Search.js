@@ -19,7 +19,9 @@ var Search = {
 		if(category === "All" || category === "Concert"){
 			uri = '/processConcert';
 			var date = $('#advancedSearch #date').val();
-
+			var now = new Date();
+			date += 'T' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+			
 			// Get results for Concerts
 			$.ajax({
 				'url': uri,

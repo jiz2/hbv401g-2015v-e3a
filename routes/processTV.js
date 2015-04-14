@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   var title = req.query['title'];
   var station = req.query['stations'];
   var date = req.query['date'];
-  console.log("Processing TV search:", title,station,date, ". Please be patient!");
+  console.log("Processing TV search:", title,station,date, "Please be patient!");
   var testCriteria = {title: title, station: station, date: date};
 
   var doneFetching = function(response){
