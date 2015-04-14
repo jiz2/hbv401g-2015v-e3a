@@ -28,32 +28,33 @@ exports.getAvailableSeats = function(concertId, callback)
 
 		function returnBuilder(callback)
 		{
-			console.log('returnBuilder: '+ hallSize);
+			//console.log('returnBuilder: '+ hallSize);
 
 			return function(err, result) {
 				if(err) callback(err, '');
-				console.log('return function: '+result.length+ hallSize);
-				console.log(result);
+				//console.log('return function: ',result.length);
+				//console.log(result);
 
 				if(result) {
 					console.log(result.length);
 					for (var i = 0; i < result.length; i++)
 					{
-						console.log("result[i]"+result[i].available);
+						//console.log("result[i]"+result[i].available);
 						//console.log('result.seat: '+result[i].seatno + ' row: '+result[i].rowno);
-						console.log("seatno "+ result[i].seatno + " rowno "+ result[i].rowno);
+						//console.log("seatno "+ result[i].seatno + " rowno "+ result[i].rowno);
 
 						if(result[i].available) {
-							console.log("i " + i);
-							returnArray[i%5][Math.floor(i/5)] = true;
+							//console.log("i " + i);
+							returnArray[i%hallSize][Math.floor(i/hallSize)] = true;
 						}
-						console.log(returnArray);
+						//console.log(returnArray);
 						seatCount++;
 						if(seatCount === hallSize*hallSize) {
 							callback(returnArray);
+							break;
 						}
-
 					}
+					callback(returnArray);
 
 				} else {
 					callback('No concert found by that id', '');
