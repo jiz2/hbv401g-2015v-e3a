@@ -15,14 +15,16 @@ var Search = {
 		var uri = "";
 
 		// Search for Concerts
+		// ===================
 		if(category === "All" || category === "Concert"){
 			uri = '/processConcert';
+			var date = $('#advancedSearch #date').val();
 
 			// Get results for Concerts
 			$.ajax({
 				'url': uri,
 				'type': 'GET',
-				//'data': {title: query, stations: 'ruv', date: '2015-04-12'},
+				'data': {term: query, date: '2015-04-12'},
 				'dataType': 'json',
 				'success': function(response) {
 					Search.results[0] = response;
@@ -32,10 +34,12 @@ var Search = {
 		}
 		
 		// Search for TV programs
+		// ======================
 		if(category === "All" || category === "TV program"){
 			uri = '/processTV';
 			var station = $('#advancedSearch #stations option:selected').val();
 			var date = $('#advancedSearch #date').val();
+			
 			// Get results for TV
 			$.ajax({
 				'url': uri,
