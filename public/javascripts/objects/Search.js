@@ -35,7 +35,7 @@ var Search = {
 		if(category === "All" || category === "TV program"){
 			uri = '/process';
 			var station = $('#advancedSearch #stations option:selected').val();
-			var date = new Date();
+			var date = $('#advancedSearch #date').val();
 			// Get results for TV
 			$.ajax({
 				'url': uri,

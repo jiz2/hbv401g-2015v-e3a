@@ -15,6 +15,11 @@ var MainSite = {
 		MainSite.nrOfCols = 2;			// Default number of columns
 		MainSite.nrOfTVRows = 4; 		// Default number of TV rows
 		MainSite.nrOfConcertRows = 4; 	// Default number of Concert rows
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+		$('#advancedSearch #date').val(today);
 			
 		// Get the newest stuff from both databases and display
 		Search.searchQuery("");
