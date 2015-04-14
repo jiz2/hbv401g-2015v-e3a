@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 	console.log("Processing Concert search:", term,date, ". Please be patient!");
 	var testCriteria = {term: term, date: date};
 
-	var customCallback = function(err, response){
+	var doneFetching = function(err, response){
 		var results;
 		if(err) results = err;
 		else results = response;
@@ -16,8 +16,7 @@ router.get('/', function(req, res, next) {
 		res.send(results);
 	}
 
-	concert.search(testCriteria, customCallback);
-
+	concert.search(testCriteria, doneFetching);
 });
 
 
