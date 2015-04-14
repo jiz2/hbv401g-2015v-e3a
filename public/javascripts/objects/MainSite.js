@@ -116,7 +116,7 @@ var MainSite = {
 		var concertRes = Search.results[0];
 		var str = "";
 		
-		//if(concertRes.length === 0){
+		if(concertRes.length === 0){
 		
 			// No results
 			str += '<tr><td>'
@@ -129,9 +129,40 @@ var MainSite = {
 				+ '</td></tr>';
 			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
 		
-		//} else {
+		} else {
+			
 			// Display concert results
-		//}
+			for(var i = 0; i < concertRes.length; i++) {
+				
+				// Early quit if displayed all results
+				if(i >= MainSite.nrOfConcertRows) break;
+				
+				str += '<tr><td>'
+					+ concertRes[i].dateofshow.split('T')
+					+ '</td><td>'
+					+ concertRes[i].eventdatename
+					+ '</td><td>'
+					+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
+					+ '<span class="glyphicon glyphicon-th"></span></button>'
+					+ '</td></tr>';
+			}
+			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
+
+			// Attach View Seats Event Handler
+			/* $(".viewSeats").click(function(){
+				var title = $(this).attr('id');
+				if($(this).attr('value') === "Download"){
+					$(this).attr("value", "Remove");
+					localStorage.setItem(title, title);
+				}
+				else {
+					$(this).attr("value", "Download");
+					localStorage.removeItem(title);
+				}
+				$(this).toggleClass('btn-warning');
+				MainSite.displayDownloads();
+			}); */
+		}
 		
 		// Handle View More Button
 		// =======================
