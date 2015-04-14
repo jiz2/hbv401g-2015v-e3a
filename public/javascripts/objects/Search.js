@@ -16,7 +16,7 @@ var Search = {
 
 		// Search for Concerts
 		if(category === "All" || category === "Concert"){
-			uri = 'http://apis.is/concerts'; //We'll need to fetch straight from Concert group
+			uri = '/processConcert';
 
 			// Get results for Concerts
 			$.ajax({
@@ -33,7 +33,7 @@ var Search = {
 		
 		// Search for TV programs
 		if(category === "All" || category === "TV program"){
-			uri = '/process';
+			uri = '/processTV';
 			var station = $('#advancedSearch #stations option:selected').val();
 			var date = $('#advancedSearch #date').val();
 			// Get results for TV
