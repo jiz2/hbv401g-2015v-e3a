@@ -27,8 +27,6 @@ exports.onReady = function (callback) {
 
 	db.on('connect', function(err, db) {
 		if (err) return printError(err);
-		console.log('Raungefni í gagnagrunni.');
-		console.log('Ný tenging hafin, ' + new Date());
 		setUp(err, db, callback);
 	});
 };
