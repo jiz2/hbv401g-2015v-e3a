@@ -15,8 +15,6 @@ exports.search = function(query, callback) {
 	var searchTerm = "SELECT * FROM concerts WHERE";
 	if(dbReady)
 	{
-		query.term = "Harpa";
-		query.date = "2015-04-15T21:00:00";
 		if (query.date)
 		{
 			searchTerm += " dateofshow LIKE '%"+query.date+"%'";
