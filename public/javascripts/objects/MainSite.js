@@ -67,6 +67,10 @@ var MainSite = {
 			$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
 			//$("#searchForm").submit(); //Uncomment if you want it to search automatically when category is changed
 		});
+
+		$(".searchBtn").click(function(){
+			$("#searchForm").submit();
+		});
 		
 		// Handle Display More Concert Results
 		// ===================================
@@ -100,15 +104,6 @@ var MainSite = {
 		});
 	},
 
-	displayResults: function(){
-		
-		// Display results according to category
-		var category = $('#searchForm .btn').text().trim();
-
-		if(category === "All" || category === "Concert") MainSite.displayConcertResults();
-		if(category === "All" || category === "TV program") MainSite.displayTVResults();
-	},
-
 	displayConcertResults: function(){
 		
 		// Concert results
@@ -116,7 +111,7 @@ var MainSite = {
 		var concertRes = Search.results[0];
 		var str = "";
 		
-		if(concertRes.length === 0){
+		//if(concertRes.length === 0){
 		
 			// No results
 			str += '<tr><td>'
@@ -129,14 +124,14 @@ var MainSite = {
 				+ '</td></tr>';
 			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
 		
-		} else {
+		//} else {
 			// Display concert results
-		}
+		//}
 		
 		// Handle View More Button
 		// =======================
 		//if(concertRes.length <= MainSite.nrOfConcertRows){
-			$("button#moreConcertRows").hide();
+			//$("button#moreConcertRows").hide();
 		//} else $("button#moreConcertRows").show();
 	},
 

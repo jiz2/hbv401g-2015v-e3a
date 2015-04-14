@@ -3,19 +3,17 @@
 	.modal-dialog
 		.modal-content
 			.modal-header
-				button.close(type='button', data-dismiss='modal', aria-label='Close')
 				h4.modal-title About the project
 			.modal-body
 				p
 					Some info about this project...
 			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
 
 #viewSeats.modal.fade
 	.modal-dialog
 		.modal-content
 			.modal-header
-				button.close(type='button', data-dismiss='modal', aria-label='Close')
 				h4.modal-title Pick available seats
 			.modal-body
 				p Number of seats picked: 
@@ -38,38 +36,35 @@
 											span.glyphicon.glyphicon-ok-circle
 
 			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
 				button#bookSeats.btn.btn-success(type='button' value='Book seats') Book seats
 
 #viewBookings.modal.fade
 	.modal-dialog
 		.modal-content
 			.modal-header
-				button.close(type='button', data-dismiss='modal', aria-label='Close')
 				h4.modal-title Your bookings
 			.modal-body
 				#bPanel.panel-body
 			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
 				button#clearBookingsButton.btn.btn-danger(type='button' value='Clear all bookings') Clear all bookings
 
 #viewDownloads.modal.fade
 	.modal-dialog
 		.modal-content
 			.modal-header
-				button.close(type='button', data-dismiss='modal', aria-label='Close')
 				h4.modal-title Your downloads
 			.modal-body
 				#dlPanel.panel-body
 			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
 				button#clearDownloadsButton.btn.btn-danger(type='button' value='Clear all downloads') Clear all downloads
 
 #advancedSearch.modal.fade
 	.modal-dialog
 		.modal-content
 			.modal-header
-				button.close(type='button', data-dismiss='modal', aria-label='Close')
 				h4.modal-title Advanced settings
 			.modal-body
 				form.form-horizontal
@@ -89,7 +84,8 @@
 					.form-group
 						label.col-sm-2.control-label(for='date') Day:
 						.col-sm-10
-							#date.date-container
-								input.form-control(type='date', name='date')
+							.date-container
+								input#date.form-control(type='date', name='date')
 			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
+				button.searchBtn.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Search
