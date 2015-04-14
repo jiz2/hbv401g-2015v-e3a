@@ -11,6 +11,7 @@ var dbReady = false;
 
 
 exports.search = function(query, callback) {
+	console.log("QUERY: ",query)
 	var searchTerm = "SELECT * FROM concerts WHERE";
 	if(dbReady)
 	{
@@ -33,9 +34,12 @@ exports.search = function(query, callback) {
 		//console.log(searchTerm);
 		db.db.driver.execQuery(searchTerm, callback);
 	}
+	else {
+        callback('Database not started','');
+    }
 };
 
-
+/*
 db.onReady(function() {
 		console.log('calling back');
 		dbReady = true;
@@ -54,3 +58,5 @@ db.onReady(function() {
 
 	}
 );
+*/
+db.onReady(function() { dbReady = true; });

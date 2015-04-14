@@ -95,7 +95,7 @@ function setUp(err, db, callback) {
 			}
 		});
 	};*/
-
+	
 	callback();
 
 }
