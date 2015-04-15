@@ -27,6 +27,10 @@ var Search = {
 				'data': {term: query, date: date},
 				'dataType': 'json',
 				'success': function(response) {
+					if(response==="Database not started"){
+						Search.searchQuery(query);
+						return;
+					}
 					Search.results[0] = response;
 					MainSite.displayConcertResults();
 				}

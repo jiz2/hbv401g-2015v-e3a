@@ -24,7 +24,7 @@
 						th.col-md-1 #
 						each val in ['A','B','C','D','E']
 							th= val
-					tbody
+					tbody#seatTable
 						- var i = 1
 						while i < 6
 							tr
@@ -35,6 +35,7 @@
 									td
 										.btn.btn-block.btn-primary.seatBtn
 											span.glyphicon.glyphicon-ok-circle
+				p#bnr
 
 			.modal-footer
 				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
@@ -47,6 +48,8 @@
 				h4.modal-title Your bookings
 			.modal-body
 				#bPanel.panel-body
+					p Your booking numbers are: 
+						br
 			.modal-footer
 				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
 				button#clearBookingsButton.btn.btn-danger(type='button' value='Clear all bookings') Clear all bookings

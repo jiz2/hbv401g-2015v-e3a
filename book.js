@@ -37,7 +37,7 @@ exports.getAvailableSeats = function(concertId, callback)
 							returnArray[i%hallSize][Math.floor(i/hallSize)] = true;
 						}
 						seatCount++;
-						console.log(i,seatCount,result.length);
+						//console.log(i,seatCount,result.length);
 					}
 					if(seatCount === result.length) {
 						callback('', returnArray);

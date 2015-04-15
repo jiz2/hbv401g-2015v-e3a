@@ -42,9 +42,7 @@ var MainSite = {
 			var col = $(this).parent().index()-1;
 			//console.log(row, col);
 			//Next we can put it in an array which we'll use when user clicks "Book seats"
-			//ConcertWrapper.pickedSeats.push([row,col]);//Or something like that
-			$(this).toggleClass('btn-warning');
-			$(this).find('span')
+			$(this).toggleClass('btn-warning').find('span')
 				.toggleClass('glyphicon-ok-circle')
 				.toggleClass('glyphicon-remove-circle');
 			var wasBooking = $(this).find('span').hasClass('glyphicon-remove-circle');
@@ -52,9 +50,12 @@ var MainSite = {
 				if(wasBooking) 	return ++oldval;
 				else 			return --oldval;
 			});
+			if(wasBooking) ConcertWrapper.pickedSeats.push([row,col]);//Or something like that
+			else $.grep(ConcertWrapper.pickedSeats, function(val){return val != [row,col];});
 		});
 
 		$('#bookSeats').click(function(){
+			$("#bnr").html("Generating your booking number...");
 			ConcertWrapper.bookSeats();
 		});
 		
@@ -131,7 +132,9 @@ var MainSite = {
 					+ concertRes[i].dateofshow.split('T').join(' ')
 					+ '</td><td>'
 					+ concertRes[i].eventdatename
-					+ '</td><td>'
+					+ '</td><td id="'
+					+ i
+					+ '">'
 					+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
 					+ '<span class="glyphicon glyphicon-th"></span></button>'
 					+ '</td></tr>';
@@ -140,8 +143,8 @@ var MainSite = {
 
 			// Attach View Seats Event Handler
 			$(".viewSeats").click(function(){
-				var cid = $(this).parent().attr('id');
-				ConcertWrapper.getSeats(cid);
+				ConcertWrapper.cid = $(this).parent().attr('id');
+				ConcertWrapper.getSeats();
 			});
 		}
 
@@ -239,11 +242,41 @@ var MainSite = {
 
 	displaySeats: function(){
 		//Make seats that are not available red, not clickable and switch the glyphicon to ban-circle
-		//Remeber to close the window, maybe error handling
+		var aSeats = ConcertWrapper.availableSeats;
+		aSeats[0][0] = true; //For testing, remember to comment out!
+		aSeats[0][2] = true; //For testing, remember to comment out!
+		aSeats[0][4] = true; //For testing, remember to comment out!
+		var tbody = $("#seatTable > tr").each(function(){
+			var rowNr = $(this).index();
+			//console.log("rw",rowNr,$(this));
+			$(this).children('td:not(:first-child)').each(function(){
+				var colNr = $(this).index()-1;
+				//console.log("cl",colNr);
+				if(!aSeats[rowNr][colNr]){
+					$(this).find('span')
+						.removeClass('glyphicon-ok-circle')
+						.removeClass('glyphicon-remove-circle')
+						.addClass('glyphicon-ban-circle')
+						.parent().addClass('btn-danger')
+							.attr("disabled", true);
+				}
+			});
+		});
+		//Remember to close the window, maybe error handling
 	},
 
-	displayBnr: function(bnr){
-		// Do something with bnr like show it
+	displayBnr: function(){
+		var bnr = ConcertWrapper.bnr;
+
+		var tbody = $("#seatTable tr td").find('.glyphicon-remove-circle')
+			.removeClass('glyphicon-remove-circle')
+			.addClass('glyphicon-ban-circle')
+			.parent().addClass('btn-danger')
+				.attr("disabled", true);
+
+		//Remember: We could store them in a localstorage like we do with the TV downloads
+		$("#bPanel p").append(bnr);
+		$("#bnr").html("Your booking number is: <br>"+bnr);
 	},
 
 	sortBy: function(type,className){

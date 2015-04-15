@@ -45,7 +45,7 @@ p {
 	/*width: 100%;
 }*/
 
-button#moreConcertRows, button#moreTVRows {
+.hidden {
 	display: none;
 }
 
