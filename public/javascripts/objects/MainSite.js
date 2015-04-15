@@ -143,11 +143,15 @@ var MainSite = {
 				
 				// Early quit if displayed all results
 				if(i >= MainSite.nrOfConcertRows) break;
+
+				var title = concertRes[i].eventdatename.slice(0,19);
+				if(concertRes[i].eventdatename.length>title.length)
+					 title += '...';
 				
 				str += '<tr><td>'
 					+ concertRes[i].dateofshow.split('T').join(' ')
 					+ '</td><td>'
-					+ concertRes[i].eventdatename
+					+ title
 					+ '</td><td id="'
 					+ i
 					+ '">'
@@ -223,10 +227,14 @@ var MainSite = {
 					dOrR = 'Remove';
 				}
 				
+				var title = tvRes[i].title.slice(0,19);
+				if(tvRes[i].title.length>title.length)
+					 title += '...';
+
 				str += '<tr><td>'
 					+ tvRes[i].startTime
 					+ '</td><td>'
-					+ tvRes[i].title
+					+ title
 					+ '</td><td><button class="downloadButton btn btn-primary '
 					+ btnCol
 					+ '" id="'
