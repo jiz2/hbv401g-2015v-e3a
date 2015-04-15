@@ -159,6 +159,14 @@ var MainSite = {
 
 			// Attach View Seats Event Handler
 			$(".viewSeats").click(function(){
+				$("#seatTable").find('td .seatBtn span')
+					.removeClass('glyphicon-ban-circle')
+					.removeClass('glyphicon-remove-circle')
+					.addClass('glyphicon-ok-circle')
+					.parent()
+						.addClass('brn-primative')
+						.removeClass('btn-danger')
+						.attr("disabled", false);
 				ConcertWrapper.cid = $(this).parent().attr('id');
 				ConcertWrapper.getSeats();
 			});
