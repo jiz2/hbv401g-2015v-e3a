@@ -8,13 +8,16 @@ router.get('/book', function(req, res, next) {
 	console.log("Processing Concert search:", term,date, ". Please be patient!");
 	var testCriteria = {term: term, date: date};
 	*/
-	var doneFetching = function(bookingNumber){
-		var results = bookingNumber;
+	var doneFetching = function(err,response){
+		var results;
+		if(err) results = err;
+		else results = response.available;
 		results = JSON.stringify(results);
 		res.send(results);
 	}
+	//THIS DOESN'T WORK
 	//book = function(concertId, seatArr, callback)
-	book.book('','',doneFetching);
+	//book.book(1,[[2,3]],doneFetching);
 });
 
 router.get('/available', function(req, res, next) {
@@ -24,10 +27,9 @@ router.get('/available', function(req, res, next) {
 	var testCriteria = {term: term, date: date};
 	*/
 	var doneFetching = function(err, response){
-		console.log("IT WORKS");
 		var results;
 		if(err) results = err;
-		else results = response[0].available;
+		else results = response;
 		results = JSON.stringify(results);
 		res.send(results);
 	}
