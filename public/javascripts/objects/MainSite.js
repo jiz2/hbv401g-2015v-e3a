@@ -249,6 +249,8 @@ var MainSite = {
 			// Attach Book A Download Event Handler
 			$(".downloadButton").click(function(){
 				var title = $(this).attr('id');
+				//There's nothing happening in the TVWrapper
+				//TVWrapper.download(title);//Or something??
 				if($(this).attr('value') === "Download"){
 					$(this).attr("value", "Remove");
 					localStorage.setItem(title, title);
