@@ -100,7 +100,7 @@ var findTitle = function(criteria, data, callback){
         var searchDate = new Date (criteria.date);
         var searchMonth = searchDate.getMonth();
         var searchDay = searchDate.getDate();
-        var searchYear = searchDate.getYear();
+        var searchYear = searchDate.getFullYear();
       }
 
     //Lets extract the array with the show objects!
@@ -116,7 +116,7 @@ var findTitle = function(criteria, data, callback){
 
       var showMonth = showDate.getMonth();
       var showDay = showDate.getDate();
-      var showYear = showDate.getYear();
+      var showYear = showDate.getFullYear();
       
       if(tSearch && !dSearch && showTitle.test(show.title))
       {

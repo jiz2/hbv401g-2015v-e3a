@@ -12,7 +12,6 @@ var MainSite = {
 		
 		// Initialize default results
 		// Creates HTML container for programme display
-		MainSite.nrOfCols = 2;			// Default number of columns
 		MainSite.nrOfTVRows = 4; 		// Default number of TV rows
 		MainSite.nrOfConcertRows = 4; 	// Default number of Concert rows
 		var now = new Date();
@@ -97,6 +96,8 @@ var MainSite = {
 		// Sort by Date and Time / Title
 		// =============================
 		$("th.sortable").click(function(){
+			$(this).parent().children('.sorted').removeClass('sorted');
+			$(this).addClass('sorted');
 			var type = $(this).index();
 			var className = $(this).closest('table').attr('id');
 			MainSite.sortBy(type,className);
@@ -150,9 +151,19 @@ var MainSite = {
 
 		// Handle View More Button
 		// =======================
-		if(concertRes.length <= MainSite.nrOfConcertRows){
-			$("button#moreConcertRows").hide();
-		} else $("button#moreConcertRows").show();
+		if(!concertRes || concertRes.length <= MainSite.nrOfConcertRows){
+			$("button#moreConcertRows").addClass('hidden');
+		} else $("button#moreConcertRows").removeClass('hidden');
+
+		var $sortable = $('tbody.CONCERTPROGRAMS').parents().find('th.sortable');
+		//var $unsorted = $sortable.parent().children(':not(.sorted)');
+		var $sorted = $sortable.parent().children('.sorted');
+		console.log($sortable, $unsorted, $sorted);
+
+		var type = $sorted.index();
+		var className = $sorted.closest('table').attr('id');
+		console.log(type,className);
+		MainSite.sortBy(type,className);
 	},
 
 	displayTVResults: function(){
@@ -171,16 +182,13 @@ var MainSite = {
 				+ 'No results'
 				+ '</td><td></td></tr>';
 			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
-			
 		} else { 
-			
 			// Display TV results
 			var db = [];
 			for(var key in localStorage) {
 				db.push(String(localStorage.getItem(key)));
 			};
 			for(var i = 0; i < tvRes.length; i++) {
-				
 				// Early quit if displayed all results
 				if(i >= MainSite.nrOfTVRows) break;
 				
@@ -224,9 +232,20 @@ var MainSite = {
 		
 		// Handle View More Button
 		// =======================
-		if(tvRes.length <= MainSite.nrOfTVRows){
-			$("button#moreTVRows").hide();
-		} else $("button#moreTVRows").show();
+		
+		if(!tvRes || tvRes.length <= MainSite.nrOfTVRows){
+			$("button#moreTVRows").addClass('hidden');
+		} else $("button#moreTVRows").removeClass('hidden');
+
+		var $sortable = $('tbody.TVPROGRAMS').parents().find('th.sortable');
+		//var $unsorted = $sortable.parent().children(':not(.sorted)');
+		var $sorted = $sortable.parent().children('.sorted');
+		console.log($sortable, $unsorted, $sorted);
+
+		var type = $sorted.index();
+		var className = $sorted.closest('table').attr('id');
+		console.log(type,className);
+		MainSite.sortBy(type,className);
 	},
 
 	displayDownloads: function(){
