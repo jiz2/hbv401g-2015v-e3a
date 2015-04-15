@@ -5,7 +5,7 @@ var book = require('../book');
 router.get('/book', function(req, res, next) {
 	var cid = req.query['cid'].trim();
 
-	cid = parseInt(cid,10)+1; //their id starts at 1, not 0
+	cid = parseInt(cid,10);
 	var seats = req.query['seats'];
 	var temp = seats;
 	seats = strToArr(seats);
@@ -28,7 +28,7 @@ router.get('/book', function(req, res, next) {
 
 router.get('/available', function(req, res, next) {
 	var cid = req.query['cid'].trim();
-	cid = parseInt(cid,10)+1; //their id starts at 1, not 0
+	cid = parseInt(cid,10);
 	console.log("Processing Available:", cid, ". Please be patient!");
 
 	var doneFetching = function(err, response){

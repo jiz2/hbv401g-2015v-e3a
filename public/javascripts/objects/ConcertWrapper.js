@@ -26,12 +26,13 @@ var ConcertWrapper = {
 
 	bookSeats: function(){
 		var cid = ConcertWrapper.cid;
+		Console.log("Previously the cid was: " + ConcertWrapper.cid + ". Now it is " + this.cid);
 		var seats = ConcertWrapper.pickedSeats;
 		// Book Seats
 		$.ajax({
 			'url': '/book/book',
 			'type': 'GET',
-			'data': {cid: cid, seats: seats},
+			'data': {cid: this.cid, seats: seats},
 			'success': function(response) {
 				ConcertWrapper.pickedSeats = [];
 				MainSite.displayBnr(response);
