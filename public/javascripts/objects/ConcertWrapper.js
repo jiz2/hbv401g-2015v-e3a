@@ -26,7 +26,7 @@ var ConcertWrapper = {
 
 	bookSeats: function(){
 		var cid = ConcertWrapper.cid;
-		Console.log("Previously the cid was: " + ConcertWrapper.cid + ". Now it is " + this.cid);
+		console.log("Previously the cid was: " + ConcertWrapper.cid + ". Now it is " + this.cid);
 		var seats = ConcertWrapper.pickedSeats;
 		// Book Seats
 		$.ajax({
