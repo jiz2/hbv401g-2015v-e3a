@@ -115,6 +115,7 @@ var MainSite = {
 			$(this).addClass('sorted');
 			var type = $(this).index();
 			var className = $(this).closest('table').attr('id');
+			//console.log(type,className);
 			MainSite.sortBy(type,className);
 		});
 	},
@@ -192,7 +193,7 @@ var MainSite = {
 		//console.log($sortable, $unsorted, $sorted);
 
 		var type = $sorted.index();
-		var className = $sorted.closest('table').attr('id');
+		var className = "CONCERTPROGRAMS";
 		//console.log(type,className);
 		MainSite.sortBy(type,className);
 	},
@@ -278,7 +279,7 @@ var MainSite = {
 		//console.log($sortable, $unsorted, $sorted);
 
 		var type = $sorted.index();
-		var className = $sorted.closest('table').attr('id');
+		var className = "TVPROGRAMS";//$sorted.closest('table').attr('id');
 		//console.log(type,className);
 		MainSite.sortBy(type,className);
 	},
