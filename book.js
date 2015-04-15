@@ -82,6 +82,8 @@ exports.book = function(concertId, seatArr, callback)
 exports.book = function(concertId, seatArr, callback) {
 	//console.log('seatArr', seatArr);
 	if(dbReady) {
+		concertsDB = db.Concerts;
+		seatsDB = db.Seats;
 		var bookingNumber = generateBookingNumber();
 		var count = 0;
 		function bookInDb(callback) {
@@ -89,6 +91,7 @@ exports.book = function(concertId, seatArr, callback) {
 				result[0].save({available:  bookingNumber}, function (err) {
 					if(err) callback(err,'');
 					count++;
+					//console.log(count===seatArr.length);
 					if(count===seatArr.length){
 						callback('', bookingNumber);
 					}

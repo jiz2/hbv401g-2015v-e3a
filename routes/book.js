@@ -11,13 +11,13 @@ router.get('/book', function(req, res, next) {
 	var doneFetching = function(err,response){
 		var results;
 		if(err) results = err;
-		else results = response.available;
+		else results = response;
 		results = JSON.stringify(results);
 		res.send(results);
 	}
 	//THIS DOESN'T WORK
 	//book = function(concertId, seatArr, callback)
-	//book.book(1,[[2,3]],doneFetching);
+	book.book(1,[[0,0],[0,1],[1,3]],doneFetching);
 });
 
 router.get('/available', function(req, res, next) {
