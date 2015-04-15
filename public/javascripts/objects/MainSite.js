@@ -169,8 +169,12 @@ var MainSite = {
 					.addClass('glyphicon-ok-circle')
 					.parent()
 						.addClass('brn-primative')
+						.removeClass('btn-warning')
 						.removeClass('btn-danger')
+						.removeClass("active")
 						.attr("disabled", false);
+				$('#nrOfSeats').text(0);
+				ConcertWrapper.pickedSeats = [];
 				ConcertWrapper.cid = $(this).parent().attr('id');
 				ConcertWrapper.getSeats();
 			});
