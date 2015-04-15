@@ -273,7 +273,7 @@ var MainSite = {
 			.addClass('glyphicon-ban-circle')
 			.parent().addClass('btn-danger')
 				.attr("disabled", true);
-
+		$('#nrOfSeats').text(0);
 		//Remember: We could store them in a localstorage like we do with the TV downloads
 		$("#bPanel p").append(bnr);
 		$("#bnr").html("Your booking number is: <br>"+bnr);
