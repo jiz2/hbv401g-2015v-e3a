@@ -6,7 +6,7 @@ var ConcertWrapper = {
 	
 	availableSeats: [], //5x5 array
 	pickedSeats: [],
-	cid: 0,
+	cid: undefined,
 	
 	getSeats: function(cid){
 		this.cid = cid;

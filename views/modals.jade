@@ -1,95 +1,97 @@
 //MODALS
 #aboutProject.modal.fade
-	.modal-dialog
-		.modal-content
-			.modal-header
-				h4.modal-title About the project
-			.modal-body
-				p
-					Some This project is about making a Meta-search engine for Concerts and TV in Iceland. The user can search for TV and Concerts and book a download or a seat/seats.
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title About the project
+            .modal-body
+                p
+                    Some This project is about making a Meta-search engine for Concerts and TV in Iceland. The user can search for TV and Concerts and book a download or a seat/seats.
 
-			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
+
+
+            .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
 
 #viewSeats.modal.fade
-	.modal-dialog
-		.modal-content
-			.modal-header
-				h4.modal-title Pick available seats
-			.modal-body
-				p Number of seats picked:
-					span#nrOfSeats 0
-				table.table.table-bordered(data-toggle='buttons-checkbox')
-					thead
-						th.col-md-1 #
-						each val in ['A','B','C','D','E']
-							th= val
-					tbody#seatTable
-						- var i = 1
-						while i < 6
-							tr
-								td= i++
-								-var j = 0
-								while j < 5
-									- j++
-									td
-										.seatBtn.btn.btn-block.btn-primary
-											span.glyphicon.glyphicon-ok-circle
-				p#bnr
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title Pick available seats
+            .modal-body
+                p Number of seats picked:
+                    span#nrOfSeats 0
+                table.table.table-bordered(data-toggle='buttons-checkbox')
+                    thead
+                        th.col-md-1 #
+                        each val in ['A','B','C','D','E']
+                            th= val
+                    tbody#seatTable
+                        - var i = 1
+                        while i < 6
+                            tr
+                                td= i++
+                                -var j = 0
+                                while j < 5
+                                    - j++
+                                    td
+                                        .seatBtn.btn.btn-block.btn-primary
+                                            span.glyphicon.glyphicon-ok-circle
+                p#bnr
 
-			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
-				button#bookSeats.btn.btn-success(type='button' value='Book seats' disabled='') Book seats
+            .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
+                button#bookSeats.btn.btn-success(type='button' value='Book seats' disabled='') Book seats
 
 #viewBookings.modal.fade
-	.modal-dialog
-		.modal-content
-			.modal-header
-				h4.modal-title Your bookings
-			.modal-body
-				#bPanel.panel-body
-					p Your booking numbers are: 
-						br
-			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
-				//button#clearBookingsButton.btn.btn-danger(type='button' value='Clear all bookings') Clear all bookings
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title Your bookings
+            .modal-body
+                #bPanel.panel-body
+                    p Your booking numbers are:
+                        br
+            .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
+                //button#clearBookingsButton.btn.btn-danger(type='button' value='Clear all bookings') Clear all bookings
 
 #viewDownloads.modal.fade
-	.modal-dialog
-		.modal-content
-			.modal-header
-				h4.modal-title Your downloads
-			.modal-body
-				#dlPanel.panel-body
-			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
-				button#clearDownloadsButton.btn.btn-danger(type='button' value='Clear all downloads') Clear all downloads
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title Your downloads
+            .modal-body
+                #dlPanel.panel-body
+            .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
+                button#clearDownloadsButton.btn.btn-danger(type='button' value='Clear all downloads') Clear all downloads
 
 #advancedSearch.modal.fade
-	.modal-dialog
-		.modal-content
-			.modal-header
-				h4.modal-title Advanced settings
-			.modal-body
-				form.form-horizontal
-					.form-group
-						label.col-sm-2.control-label(for='stations') Station:
-						.col-sm-10
-							select#stations.form-control(name='stations')
-								option(value='ruv', name='ruv') Rúv
-								option(value='ruvithrottir', name='ruvithrottir') Rúv-íþróttir
-								option(value='stod2', name='stod2') Stöð2
-								option(value='stod2sport', name='stod2sport') Stöð2-sport
-								option(value='stod2sport2', name='stod2sport2') Stöð2-sport2
-								option(value='stod2gull', name='stod2gull') Stöð2-gull
-								option(value='stod2bio', name='stod2bio') Stöð2-bio
-								option(value='stod3', name='stod3') Stöð3
-								option(value='skjar1', name='skjar1') Skjár1
-					.form-group
-						label.col-sm-2.control-label(for='date') Day:
-						.col-sm-10
-							.date-container
-								input#date.form-control(type='date', name='date')
-			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
-				button.searchBtn.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Search
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title Advanced settings
+            .modal-body
+                form.form-horizontal
+                    .form-group
+                        label.col-sm-2.control-label(for='stations') Station:
+                        .col-sm-10
+                            select#stations.form-control(name='stations')
+                                option(value='ruv', name='ruv') Rúv
+                                option(value='ruvithrottir', name='ruvithrottir') Rúv-íþróttir
+                                option(value='stod2', name='stod2') Stöð2
+                                option(value='stod2sport', name='stod2sport') Stöð2-sport
+                                option(value='stod2sport2', name='stod2sport2') Stöð2-sport2
+                                option(value='stod2gull', name='stod2gull') Stöð2-gull
+                                option(value='stod2bio', name='stod2bio') Stöð2-bio
+                                option(value='stod3', name='stod3') Stöð3
+                                option(value='skjar1', name='skjar1') Skjár1
+                    .form-group
+                        label.col-sm-2.control-label(for='date') Day:
+                        .col-sm-10
+                            .date-container
+                                input#date.form-control(type='date', name='date')
+            .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Close
+                button.searchBtn.btn.btn-default(type='button', data-dismiss='modal', aria-label='Close') Search

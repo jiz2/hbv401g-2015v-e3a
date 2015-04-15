@@ -214,3 +214,25 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+.idea/.name
+
+.idea/encodings.xml
+
+.idea/hbv401g-2015v-e3a.iml
+
+.idea/inspectionProfiles/profiles_settings.xml
+
+.idea/inspectionProfiles/Project_Default.xml
+
+.idea/jsLibraryMappings.xml
+
+.idea/libraries/hbv401g_2015v_e3a_node_modules.xml
+
+.idea/modules.xml
+
+.idea/scopes/scope_settings.xml
+
+.idea/vcs.xml
+
+.idea/workspace.xml

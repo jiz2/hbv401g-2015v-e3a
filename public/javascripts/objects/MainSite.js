@@ -154,7 +154,7 @@ var MainSite = {
 					+ '</td><td>'
 					+ title
 					+ '</td><td id="'
-					+ i
+					+ concertRes[i].id
 					+ '">'
 					+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
 					+ '<span class="glyphicon glyphicon-th"></span></button>'
