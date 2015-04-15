@@ -277,9 +277,7 @@ var MainSite = {
 	displaySeats: function(){
 		//Make seats that are not available red, not clickable and switch the glyphicon to ban-circle
 		var aSeats = ConcertWrapper.availableSeats;
-		aSeats[0][0] = true; //For testing, remember to comment out!
-		aSeats[0][2] = true; //For testing, remember to comment out!
-		aSeats[0][4] = true; //For testing, remember to comment out!
+		//aSeats[0][0] = true; //For testing, remember to comment out!
 		var tbody = $("#seatTable > tr").each(function(){
 			var rowNr = $(this).index();
 			//console.log("rw",rowNr,$(this));

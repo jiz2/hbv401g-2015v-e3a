@@ -30,7 +30,7 @@ var Search = {
 			'dataType': 'json',
 			'success': function(response) {
 				if(response==="Database not started"){
-					Search.searchQuery(query);
+					Search.searchConcert(query);
 					return;
 				}
 				Search.results[0] = response;

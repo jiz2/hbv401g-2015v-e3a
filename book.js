@@ -13,6 +13,8 @@ exports.getAvailableSeats = function(concertId, callback)
 {
 	if (dbReady)
 	{
+		concertsDB = db.Concerts;
+		seatsDB = db.Seats;
 		var hallSize = 5;
 		var returnArray = [];
 		for (var i = 0; i < hallSize; i++)
