@@ -175,7 +175,9 @@ var MainSite = {
 						.removeClass("active")
 						.attr("disabled", false);
 				$('#nrOfSeats').text(0);
-				ConcertWrapper.getSeats($(this).parent().attr('id'));
+				ConcertWrapper.pickedSeats = [];
+				ConcertWrapper.cid = $(this).parent().attr('id');
+				ConcertWrapper.getSeats();
 			});
 		}
 
@@ -188,9 +190,11 @@ var MainSite = {
 		var $sortable = $('tbody.CONCERTPROGRAMS').parents().find('th.sortable');
 		//var $unsorted = $sortable.parent().children(':not(.sorted)');
 		var $sorted = $sortable.parent().children('.sorted');
+		//console.log($sortable, $unsorted, $sorted);
 
 		var type = $sorted.index();
 		var className = "CONCERTPROGRAMS";
+		//console.log(type,className);
 		MainSite.sortBy(type,className);
 	},
 
@@ -274,9 +278,11 @@ var MainSite = {
 		var $sortable = $('tbody.TVPROGRAMS').parents().find('th.sortable');
 		//var $unsorted = $sortable.parent().children(':not(.sorted)');
 		var $sorted = $sortable.parent().children('.sorted');
+		//console.log($sortable, $unsorted, $sorted);
 
 		var type = $sorted.index();
-		var className = "TVPROGRAMS";
+		var className = "TVPROGRAMS";//$sorted.closest('table').attr('id');
+		//console.log(type,className);
 		MainSite.sortBy(type,className);
 	},
 
@@ -286,6 +292,7 @@ var MainSite = {
 			var sel = String(localStorage.getItem(key));
 			db.push(sel);
 		};
+		//console.log(db);
 		var str = "You've downloaded: <br>" + db.join('<br>');
 		$("#dlPanel").html(str);
 	},
@@ -293,6 +300,7 @@ var MainSite = {
 	displaySeats: function(){
 		//Make seats that are not available red, not clickable and switch the glyphicon to ban-circle
 		var aSeats = ConcertWrapper.availableSeats;
+		//aSeats[0][0] = true; //For testing, remember to comment out!
 		var tbody = $("#seatTable > tr").each(function(){
 			var rowNr = $(this).index();
 			//console.log("rw",rowNr,$(this));
@@ -312,7 +320,8 @@ var MainSite = {
 		//Remember to close the window, maybe error handling
 	},
 
-	displayBnr: function(bnr){
+	displayBnr: function(){
+		var bnr = ConcertWrapper.bnr;
 
 		var tbody = $("#seatTable tr td").find('.glyphicon-remove-circle')
 			.removeClass('glyphicon-remove-circle')
