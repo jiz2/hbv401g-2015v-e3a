@@ -49,12 +49,27 @@ var MainSite = {
 				if(wasBooking) 	return ++oldval;
 				else 			return --oldval;
 			});
-			if(wasBooking) ConcertWrapper.pickedSeats.push([row,col]);//Or something like that
-			else $.grep(ConcertWrapper.pickedSeats, function(val){return val != [row,col];});
+			if(wasBooking){
+				ConcertWrapper.pickedSeats.push([row,col]);
+				//console.table(ConcertWrapper.pickedSeats);
+			}
+			else {
+				var ps = ConcertWrapper.pickedSeats;
+				for(var i = 0; i < ps.length; i++){
+					if(ps[i][0] === row && ps[i][1] === col){
+						ConcertWrapper.pickedSeats.splice(i,1);
+						//console.table(ConcertWrapper.pickedSeats);
+					}
+				}
+			}
+
+			$('#bookSeats').attr("disabled", (ConcertWrapper.pickedSeats.length === 0));
 		});
 
 		$('#bookSeats').click(function(){
+			//console.table(ConcertWrapper.pickedSeats);
 			$("#bnr").html("Generating your booking number...");
+			$(this).attr("disabled", true);
 			ConcertWrapper.bookSeats();
 		});
 		
@@ -158,11 +173,11 @@ var MainSite = {
 		var $sortable = $('tbody.CONCERTPROGRAMS').parents().find('th.sortable');
 		//var $unsorted = $sortable.parent().children(':not(.sorted)');
 		var $sorted = $sortable.parent().children('.sorted');
-		console.log($sortable, $unsorted, $sorted);
+		//console.log($sortable, $unsorted, $sorted);
 
 		var type = $sorted.index();
 		var className = $sorted.closest('table').attr('id');
-		console.log(type,className);
+		//console.log(type,className);
 		MainSite.sortBy(type,className);
 	},
 
@@ -240,11 +255,11 @@ var MainSite = {
 		var $sortable = $('tbody.TVPROGRAMS').parents().find('th.sortable');
 		//var $unsorted = $sortable.parent().children(':not(.sorted)');
 		var $sorted = $sortable.parent().children('.sorted');
-		console.log($sortable, $unsorted, $sorted);
+		//console.log($sortable, $unsorted, $sorted);
 
 		var type = $sorted.index();
 		var className = $sorted.closest('table').attr('id');
-		console.log(type,className);
+		//console.log(type,className);
 		MainSite.sortBy(type,className);
 	},
 

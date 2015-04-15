@@ -27,8 +27,6 @@ var ConcertWrapper = {
 	bookSeats: function(){
 		var cid = ConcertWrapper.cid;
 		var seats = ConcertWrapper.pickedSeats;
-		if(seats.length===0) return;
-		console.log(cid, seats);
 		// Book Seats
 		$.ajax({
 			'url': '/book/book',
@@ -37,6 +35,7 @@ var ConcertWrapper = {
 			'success': function(response) {
 				console.log(response);
 				ConcertWrapper.bnr = response;
+				ConcertWrapper.pickedSeats = [];
 				MainSite.displayBnr();
 			}
 		});
