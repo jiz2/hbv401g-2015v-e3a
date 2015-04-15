@@ -54,6 +54,10 @@ table tbody td .btn {
 	margin:auto;
 } 
 
+table.table.table-bordered {
+	width: 100%;
+}
+
 #viewSeats th, #viewSeats tr {
 	text-align: center;
 	vertical-align: middle;

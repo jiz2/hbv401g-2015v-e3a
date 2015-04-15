@@ -21,7 +21,12 @@ var Search = {
 	},
 
 	searchConcert: function(query){
-		var date = $('#advancedSearch #date').val();
+		//"2015-04-17T20:30:00"
+		var date = new Date($('#advancedSearch #date').val());
+		var thisMonth = ""+(date.getMonth()+1);
+		if(thisMonth.length===1)
+			thisMonth = '0'+thisMonth;
+		date = date.getFullYear() + '-' + thisMonth;
 		// Get results for Concerts
 		$.ajax({
 			'url': '/processConcert',
@@ -42,7 +47,6 @@ var Search = {
 	searchTV: function(query){
 		var station = $('#advancedSearch #stations option:selected').val();
 		var date = new Date($('#advancedSearch #date').val());
-		console.log(date,new Date());
 		// Get results for TV
 		$.ajax({
 			'url': '/processTV',
