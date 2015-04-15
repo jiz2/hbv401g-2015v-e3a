@@ -17,7 +17,7 @@ var ConcertWrapper = {
 			'data': {cid: ConcertWrapper.cid},
 			'dataType': 'json',
 			'success': function(response) {
-				console.table(response);
+				//console.table(response);
 				ConcertWrapper.availableSeats = response;
 				MainSite.displaySeats();
 			}
@@ -33,7 +33,7 @@ var ConcertWrapper = {
 			'type': 'GET',
 			'data': {cid: cid, seats: seats},
 			'success': function(response) {
-				console.log(response);
+				//console.log(response);
 				ConcertWrapper.bnr = response;
 				ConcertWrapper.pickedSeats = [];
 				MainSite.displayBnr();
