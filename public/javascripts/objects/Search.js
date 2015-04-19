@@ -28,7 +28,7 @@ var Search = {
 			'type': 'GET',
 			'dataType': 'json',
 			'success': function(response) {
-				Search.results[0] = response;
+				Search.results[0] = response.results;
 				MainSite.displayConcertResults();
 			}
 		});
@@ -42,7 +42,7 @@ var Search = {
 			'type': 'GET',
 			'dataType': 'json',
 			'success': function(response) {
-				Search.results[1] = response;
+				Search.results[1] = response.results;
 				MainSite.displayTVResults();
 			}
 		});

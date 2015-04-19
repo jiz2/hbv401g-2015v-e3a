@@ -146,12 +146,12 @@ var MainSite = {
 				// Early quit if displayed all results
 				if(i >= MainSite.nrOfConcertRows) break;
 
-				var title = concertRes[i].eventdatename.slice(0,19);
-				if(concertRes[i].eventdatename.length>title.length)
+				var title = concertRes[i].eventDateName.slice(0,19);
+				if(concertRes[i].eventDateName.length>title.length)
 					 title += '...';
 				
 				str += '<tr><td>'
-					+ concertRes[i].dateofshow.split('T').join(' ')
+					+ concertRes[i].dateOfShow.split('T').join(' ')
 					+ '</td><td>'
 					+ title
 					+ '</td><td id="'
@@ -205,7 +205,7 @@ var MainSite = {
 		// ==========
 		var tvRes = Search.results[1];
 		var str = "";
-
+		
 		// No results
 		if(!tvRes){
 			$("button#moreTVRows").hide();
