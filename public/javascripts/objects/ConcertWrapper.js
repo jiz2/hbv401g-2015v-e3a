@@ -4,21 +4,19 @@
 
 var ConcertWrapper = {
 	
-	availableSeats: [],
-	pickedSeats: [],
+	seats: [],
 	cid: undefined,
-	bnr: '',
 	
 	getSeats: function(){
 		// Get Seats
 		/* $.ajax({
-			'url': '/book/available',
+			'url': '',
 			'type': 'GET',
-			'data': {cid: ConcertWrapper.cid},
+			//'data': {cid: ConcertWrapper.cid},
 			'dataType': 'json',
 			'success': function(response) {
 				//console.table(response);
-				ConcertWrapper.availableSeats = response;
+				ConcertWrapper.seats = response;
 				MainSite.displaySeats();
 			}
 		}); */
@@ -27,7 +25,7 @@ var ConcertWrapper = {
 	bookSeats: function(){
 		var cid = ConcertWrapper.cid;
 		console.log("Previously the cid was: " + ConcertWrapper.cid + ". Now it is " + this.cid);
-		var seats = ConcertWrapper.pickedSeats;
+		var seats = ConcertWrapper.seats;
 		// Book Seats
 		/* $.ajax({
 			'url': '/book/book',
@@ -36,7 +34,6 @@ var ConcertWrapper = {
 			'success': function(response) {
 				//console.log(response);
 				ConcertWrapper.bnr = response;
-				ConcertWrapper.pickedSeats = [];
 				MainSite.displayBnr();
 			}
 		}); */

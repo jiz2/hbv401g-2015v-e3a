@@ -128,59 +128,46 @@ var MainSite = {
 		var concertRes = Search.results[0];
 		var str = "";
 		
-		// No results
-		if(!concertRes){
-			$("button#moreConcertRows").hide();
+		// Display Concert results
+		for(var i = 0; i < concertRes.length; i++) {
+			
+			// Early quit if displayed all results
+			if(i >= MainSite.nrOfConcertRows) break;
+
+			var title = concertRes[i].eventDateName.slice(0,19);
+			if(concertRes[i].eventDateName.length>title.length)
+				 title += '...';
+			
 			str += '<tr><td>'
-				+ '----.--.-- --:--:--'
+				+ concertRes[i].dateOfShow.split('T').join(' ')
 				+ '</td><td>'
-				+ 'No results'
-				+ '</td><td></td></tr>';
-			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
-			
-		} else { 
-			
-			// Display Concert results
-			for(var i = 0; i < concertRes.length; i++) {
-				
-				// Early quit if displayed all results
-				if(i >= MainSite.nrOfConcertRows) break;
-
-				var title = concertRes[i].eventDateName.slice(0,19);
-				if(concertRes[i].eventDateName.length>title.length)
-					 title += '...';
-				
-				str += '<tr><td>'
-					+ concertRes[i].dateOfShow.split('T').join(' ')
-					+ '</td><td>'
-					+ title
-					+ '</td><td id="'
-					+ concertRes[i].id
-					+ '">'
-					+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
-					+ '<span class="glyphicon glyphicon-th"></span></button>'
-					+ '</td></tr>';
-			}
-			$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
-
-			// Attach View Seats Event Handler
-			$(".viewSeats").click(function(){
-				$("#seatTable").find('td .seatBtn span')
-					.removeClass('glyphicon-ban-circle')
-					.removeClass('glyphicon-remove-circle')
-					.addClass('glyphicon-ok-circle')
-					.parent()
-						.addClass('brn-primative')
-						.removeClass('btn-warning')
-						.removeClass('btn-danger')
-						.removeClass("active")
-						.attr("disabled", false);
-				$('#nrOfSeats').text(0);
-				ConcertWrapper.pickedSeats = [];
-				ConcertWrapper.cid = $(this).parent().attr('id');
-				//ConcertWrapper.getSeats();
-			});
+				+ title
+				+ '</td><td id="'
+				+ concertRes[i].id
+				+ '">'
+				+ '<button class="viewSeats btn btn-primary" type="button" data-toggle="modal" data-target="#viewSeats">'
+				+ '<span class="glyphicon glyphicon-th"></span></button>'
+				+ '</td></tr>';
 		}
+		$('tbody.CONCERTPROGRAMS').html(str); // Attach the HTML code
+
+		// Attach View Seats Event Handler
+		$(".viewSeats").click(function(){
+			$("#seatTable").find('td .seatBtn span')
+				.removeClass('glyphicon-ban-circle')
+				.removeClass('glyphicon-remove-circle')
+				.addClass('glyphicon-ok-circle')
+				.parent()
+					.addClass('brn-primative')
+					.removeClass('btn-warning')
+					.removeClass('btn-danger')
+					.removeClass("active")
+					.attr("disabled", false);
+			$('#nrOfSeats').text(0);
+			ConcertWrapper.pickedSeats = [];
+			ConcertWrapper.cid = $(this).parent().attr('id');
+			//ConcertWrapper.getSeats();
+		});
 
 		// Handle View More Button
 		// =======================
@@ -205,67 +192,56 @@ var MainSite = {
 		// ==========
 		var tvRes = Search.results[1];
 		var str = "";
-		
-		// No results
-		if(!tvRes){
-			$("button#moreTVRows").hide();
-			str += '<tr><td>'
-				+ '----.--.-- --:--:--'
-				+ '</td><td>'
-				+ 'No results'
-				+ '</td><td></td></tr>';
-			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
-		} else { 
-			// Display TV results
-			var db = [];
-			for(var key in localStorage) {
-				db.push(String(localStorage.getItem(key)));
-			};
-			for(var i = 0; i < tvRes.length; i++) {
-				// Early quit if displayed all results
-				if(i >= MainSite.nrOfTVRows) break;
-				
-				// Handle pre-checked downloads
-				var btnCol = '', dOrR = 'Download';
-				
-				if(db.indexOf(tvRes[i].title) >= 0){
-					btnCol = 'btn-warning';
-					dOrR = 'Remove';
-				}
-				
-				var title = tvRes[i].title.slice(0,19);
-				if(tvRes[i].title.length>title.length)
-					 title += '...';
-
-				str += '<tr><td>'
-					+ tvRes[i].startTime
-					+ '</td><td>'
-					+ title
-					+ '</td><td><button class="downloadButton btn btn-primary '
-					+ btnCol
-					+ '" id="'
-					+ tvRes[i].title
-					+ '" type="submit" value="'
-					+ dOrR
-					+'"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
+		 
+		// Display TV results
+		var db = [];
+		for(var key in localStorage) {
+			db.push(String(localStorage.getItem(key)));
+		};
+		for(var i = 0; i < tvRes.length; i++) {
+			// Early quit if displayed all results
+			if(i >= MainSite.nrOfTVRows) break;
+			
+			// Handle pre-checked downloads
+			var btnCol = '', dOrR = 'Download';
+			
+			if(db.indexOf(tvRes[i].title) >= 0){
+				btnCol = 'btn-warning';
+				dOrR = 'Remove';
 			}
-			$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
+			
+			var title = tvRes[i].title.slice(0,19);
+			if(tvRes[i].title.length>title.length)
+				 title += '...';
 
-			// Attach Book A Download Event Handler
-			$(".downloadButton").click(function(){
-				var title = $(this).attr('id');
-				if($(this).attr('value') === "Download"){
-					$(this).attr("value", "Remove");
-					localStorage.setItem(title, title);
-				}
-				else {
-					$(this).attr("value", "Download");
-					localStorage.removeItem(title);
-				}
-				$(this).toggleClass('btn-warning');
-				MainSite.displayDownloads();
-			});
+			str += '<tr><td>'
+				+ tvRes[i].startTime
+				+ '</td><td>'
+				+ title
+				+ '</td><td><button class="downloadButton btn btn-primary '
+				+ btnCol
+				+ '" id="'
+				+ tvRes[i].title
+				+ '" type="submit" value="'
+				+ dOrR
+				+'"><span class="glyphicon glyphicon-download-alt"></span></td></tr>';
 		}
+		$('tbody.TVPROGRAMS').html(str); // Attach the HTML code
+
+		// Attach Book A Download Event Handler
+		$(".downloadButton").click(function(){
+			var title = $(this).attr('id');
+			if($(this).attr('value') === "Download"){
+				$(this).attr("value", "Remove");
+				localStorage.setItem(title, title);
+			}
+			else {
+				$(this).attr("value", "Download");
+				localStorage.removeItem(title);
+			}
+			$(this).toggleClass('btn-warning');
+			MainSite.displayDownloads();
+		});
 		
 		// Handle View More Button
 		// =======================
@@ -298,7 +274,7 @@ var MainSite = {
 
 	displaySeats: function(){
 		//Make seats that are not available red, not clickable and switch the glyphicon to ban-circle
-		var aSeats = ConcertWrapper.availableSeats;
+		var aSeats = ConcertWrapper.seats;
 		//aSeats[0][0] = true; //For testing, remember to comment out!
 		var tbody = $("#seatTable > tr").each(function(){
 			var rowNr = $(this).index();
