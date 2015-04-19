@@ -68,10 +68,10 @@ var MainSite = {
 
 		$('#bookSeats').click(function(){
 			//console.table(ConcertWrapper.pickedSeats);
-//			$("#bnr").html("Generating your booking number...");
-			$("#bnr").html("Seat(s) booked!");
+			$("#bnr").html("Generating your booking number...");
+//			$("#bnr").html("Seat(s) booked!");
 			$(this).attr("disabled", true);
-//			ConcertWrapper.bookSeats();
+			ConcertWrapper.bookSeats();
 		});
 		
 		// Handle Search Catergory Dropdown
