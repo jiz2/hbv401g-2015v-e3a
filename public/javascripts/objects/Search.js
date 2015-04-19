@@ -21,23 +21,13 @@ var Search = {
 	},
 
 	searchConcert: function(query){
-		//"2015-04-17T20:30:00"
-		var date = new Date($('#advancedSearch #date').val());
-		var thisMonth = ""+(date.getMonth()+1);
-		if(thisMonth.length===1)
-			thisMonth = '0'+thisMonth;
-		date = date.getFullYear() + '-' + thisMonth;
+	
 		// Get results for Concerts
 		$.ajax({
-			'url': '/processConcert',
+			'url': 'http://apis.is/concerts',
 			'type': 'GET',
-			'data': {term: query, date: date},
 			'dataType': 'json',
 			'success': function(response) {
-				if(response==="Database not started"){
-					Search.searchConcert(query);
-					return;
-				}
 				Search.results[0] = response;
 				MainSite.displayConcertResults();
 			}
@@ -45,13 +35,11 @@ var Search = {
 	},
 
 	searchTV: function(query){
-		var station = $('#advancedSearch #stations option:selected').val();
-		var date = new Date($('#advancedSearch #date').val());
+	
 		// Get results for TV
 		$.ajax({
-			'url': '/processTV',
+			'url': 'http://apis.is/tv/ruv',
 			'type': 'GET',
-			'data': {title: query, stations: station, date: date},
 			'dataType': 'json',
 			'success': function(response) {
 				Search.results[1] = response;
