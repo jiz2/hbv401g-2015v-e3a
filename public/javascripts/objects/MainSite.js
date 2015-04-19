@@ -178,7 +178,7 @@ var MainSite = {
 				$('#nrOfSeats').text(0);
 				ConcertWrapper.pickedSeats = [];
 				ConcertWrapper.cid = $(this).parent().attr('id');
-				ConcertWrapper.getSeats();
+				//ConcertWrapper.getSeats();
 			});
 		}
 
@@ -328,7 +328,6 @@ var MainSite = {
 			.parent().addClass('btn-danger')
 				.attr("disabled", true);
 		$('#nrOfSeats').text(0);
-		//Remember: We could store them in a localstorage like we do with the TV downloads
 		$("#bPanel p").append(bnr);
 		$("#bnr").html("Your booking number is: <br>"+bnr);
 	},
