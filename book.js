@@ -90,6 +90,8 @@ exports.book = function(concertId, seatArr, callback) {
 		var count = 0;
 		function bookInDb(callback) {
 			return function(err, result) {
+				console.log(result, concertId, seatArr);
+
 				result[0].save({available:  bookingNumber}, function (err) {
 					if(err) callback(err,'');
 					count++;
@@ -103,7 +105,7 @@ exports.book = function(concertId, seatArr, callback) {
 
 		for (var i = 0; i < seatArr.length; i++)
 		{
-			seatsDB.find({concertid: concertId, rowno: seatArr[i][0], seatno: seatArr[i][1]}, bookInDb(callback));
+			seatsDB.find({concertid: concertId, rowno: seatArr[i][1], seatno: seatArr[i][0]}, bookInDb(callback));
 		}
 
 	} else
