@@ -4,6 +4,7 @@ var book = require('../book');
 
 router.get('/book', function(req, res, next) {
 	var cid = req.query['cid'].trim();
+
 	cid = parseInt(cid,10);
 	var seats = req.query['seats'];
 	var temp = seats;
@@ -45,15 +46,7 @@ router.get('/available', function(req, res, next) {
 module.exports = router;
 
 function strToArr(seatsStr){
-	if(typeof seatsStr != 'string'){
-		for(var i = 0; i<seatsStr.length; i++){
-			for(var j = 0; j<seatsStr[0].length; j++){
-				seatsStr[i][j] = parseInt(seatsStr[i][j],10);
-			}
-		}
-
-		return seatsStr;
-	}
+	if(typeof seatsStr != 'string') return seatsStr;
 	var seats = [];
 	for(var i = 0; i<seatsStr.length; i++){
 		console.log("ii",seats);

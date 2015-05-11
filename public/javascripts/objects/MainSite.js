@@ -331,7 +331,6 @@ var MainSite = {
 		//Remember: We could store them in a localstorage like we do with the TV downloads
 		$("#bPanel p").append(bnr);
 		$("#bnr").html("Your booking number is: <br>"+bnr);
-		//ConcertWrapper.getSeats();
 	},
 
 	sortBy: function(type,className){
